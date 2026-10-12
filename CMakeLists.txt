@@ -1,13 +1,28 @@
-#Ορίζουμε την ελάχιστη εκδοση για συμβατότητα
+#ΞµΞ»Ξ¬Ο‡ΞΉΟƒΟ„Ξ· Ξ­ΞΊΞ΄ΞΏΟƒΞ· CMake Ξ³ΞΉΞ± ΟƒΟ…ΞΌΞ²Ξ±Ο„ΟΟ„Ξ·Ο„Ξ±
 cmake_minimum_required(VERSION 3.20)
 project(image_search_project LANGUAGES CXX)
 
-#Επιβάλλει τη χρήση του προτύπου C++20
+# C++20Ξ ΟΟΟ„Ο…Ο€ΞΏ C++20
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE\_CXX\_STANDARD\_REQUIRED ON)
 
 
-#Εντοπισμός OpenCV
+#Ξ•Ξ½Ο„ΞΏΟ€ΞΉΟƒΞΌΟΟ‚ OpenCV
 find_package(OpenCV REQUIRED)
 
-#Δηλώνουμε που θα βρει 
+#Ξ”Ξ·Ξ»ΟΞ½ΞΏΟ…ΞΌΞµ Ο€ΞΏΟ… Ξ²ΟΞ―ΟƒΞΊΞµΟ„Ξ±ΞΉ ΞΏ Ο†Ξ±ΞΊΞµΞ»ΞΏΟ‚ include Ξ³ΞΉΞ± Ο„Ξ± header Ξ±ΟΟ‡ΞµΞΉΞ±
+include_directories(${CMAKE_SOURCE_DIR}/include)
+
+#Ξ’Ξ±Ξ¶ΞΏΟ…ΞΌΞµ Ο„Ξ± Warnings flag
+if(NOT MSVC) 
+    add_compile_options(-Wall -Wextra -Wpedantic) 
+endif()
+
+#Ξ”Ξ·Ξ»ΟΞ½ΞΏΟ…ΞΌΞµ Ο„ΞΏ Ο„ΞµΞ»ΞΉΞΊΟ Ξ•ΞΊΟ„ΞµΞ»Ξ­ΟƒΞΉΞΌΞΏ & Ο„Ξ± source files Ξ±Ο€ΞΏ Ο„Ξ± ΞΏΟ€ΞΏΞ―Ξ± Ξ±Ο€ΞΏΟ„ΞµΞ»ΞµΞ―Ο„Ξ±ΞΉ
+add_executable(image_search_project
+    src/main.cpp
+)
+
+
+#Ξ£ΟΞ½Ξ΄ΞµΟƒΞ· ΞΌΞµ OpenCV
+target_link_libraries(image_search_project PRIVATE ${OpenCV_LIBS})
