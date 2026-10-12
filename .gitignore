@@ -1,0 +1,15 @@
+data/
+hpatches/
+mirflickr/
+*.ppm
+*.jpg
+*.png
+*.tar.gz
+*.zip
+build/
+*.o
+*.exe
+search_app
+image_search
+output*.txt
+.vscode/
