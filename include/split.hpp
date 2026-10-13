@@ -31,10 +31,14 @@ public:
     //Επιστρέφει τα ονόματα των ακολουθιών για το συγκεκριμενο σύνολο (SetType)
     std::vector<std::string> getSequences(SetType type) const;
 
+    //Επιστρέφει το SetType στο οποίο ανήκει μια ακολουθία
+    SetType getSetType(const std::string& sequenceName) const;
 
     //βοηθητικές συναρτήσεις
     static SetType stringToSetType(const std::string& str);
+    static std::string setTypeToString(SetType type);
 
+    size_t totalSequences();
 
 private:
     //Δημιουργουμε ενα hash και ενα vector για να κραταμε τα δεδομενα του split

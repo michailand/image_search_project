@@ -16,6 +16,19 @@ namespace image_search {
         return SetType::UNKNOWN;
     }
 
+    std::string DatasetSplit::setTypeToString(SetType type){
+        switch(type){
+            case SetType::TRAIN: return "train";
+            case SetType::VALIDATION: return "validation";
+            case SetType::TEST: return "test";
+            default: return "unknown";
+        }
+    }
+
+    size_t DatasetSplit::totalSequences(){
+        return sequences_.size();
+    }
+
     bool DatasetSplit::loadFromFile(const std::string &filename){
         //ανοίγουμε το αρχείο split και ελεγχουμε αν το ανοιγμα εγινε σωστα 
         std::ifstream file(filename);
@@ -53,6 +66,14 @@ namespace image_search {
             }
         }
         return result;
+    }
+
+    SetType DatasetSplit::getSetType(const std::string& sequenceName ) const {
+        auto it=sequenceMap_.find(sequenceName);
+        if(it!=sequenceMap_.end()){
+            return it->second;
+        }
+        return SetType::UNKNOWN;
     }
 
 
