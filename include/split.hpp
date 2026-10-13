@@ -28,6 +28,9 @@ public:
     //διαβαζει το αρχειο split.txt και σε επιτυχια επιστρεφει 1 αλλιως 0
     bool loadFromFile(const std::string &filename);
 
+    //Επιστρέφει τα ονόματα των ακολουθιών για το συγκεκριμενο σύνολο (SetType)
+    std::vector<std::string> getSequences(SetType type) const;
+
 
     //βοηθητικές συναρτήσεις
     static SetType stringToSetType(const std::string& str);

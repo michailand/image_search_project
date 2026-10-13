@@ -42,4 +42,18 @@ namespace image_search {
         
         return true;
     }
+
+
+    std::vector<std::string> DatasetSplit::getSequences(SetType type) const{
+        std::vector<std::string> result;
+
+        for(const auto& seq: sequences_){
+            if(seq.setType== type){
+                result.push_back(seq.name);
+            }
+        }
+        return result;
+    }
+
+
 }
