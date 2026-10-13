@@ -21,6 +21,7 @@ endif()
 #Δηλώνουμε το τελικό Εκτελέσιμο & τα source files απο τα οποία αποτελείται
 add_executable(image_search_project
     src/main.cpp
+    src/split.cpp
 )
 
 
