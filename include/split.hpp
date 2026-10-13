@@ -38,7 +38,7 @@ public:
     static SetType stringToSetType(const std::string& str);
     static std::string setTypeToString(SetType type);
 
-    size_t totalSequences();
+    size_t totalSequences() const;
 
 private:
     //Δημιουργουμε ενα hash και ενα vector για να κραταμε τα δεδομενα του split

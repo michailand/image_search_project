@@ -25,7 +25,7 @@ namespace image_search {
         }
     }
 
-    size_t DatasetSplit::totalSequences(){
+    size_t DatasetSplit::totalSequences() const{
         return sequences_.size();
     }
 
