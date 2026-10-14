@@ -70,22 +70,45 @@ cv::Mat KMeans::fit(const cv::Mat& data){
     //Αρχικοπποίηση των κέντρων k (centroids)
     initializeCentroids(dataFloat);
 
+    //Πίνακας μεγέθους n(πλήθος SIFT Descriptors) ο οποίος περιέχει για τον καθε  Descriptors το πλησιεστερο του Κεντρο
+    std::vector<int> assignments(n,-1);
+    std::mt19937 rng(seed_);
+
+    std::cout<< "Ξεκινάμε το kmeans για κεντρα πλήθους Κ= "<< k_ << " και για Descriptors πληθους Point= "<<n<<"\n";
 
     //Υλοποίηση αλγορίθμου Lloyd
     //Θα τρεξουμε μεχρι maxIters_ φορές
     for (int iter = 0; iter < maxIters_; iter++) {
-        
+        int changedAssignments = 0;
+
+        //Δομή δεδομένων στην οποία θα αποθηκεύουμε τα νέα κέντρα
+        cv::Mat newCentroids= cv::Mat::zeros(k_,dims,CV_32F);
+        //Δομή στην οποία αποθηκεύουμε για το κάθε κέντρο πόσοι SIFT Descriptors ανήκουν στο cluster του
+        std::vector<int> clusterCounts(k_,0);
+
+
         //Για κάθε SIFT descriptor θα εξετάσουμε την απόσταση του απο κάθε κέντρο με σκοπό να το βάλουμε να ανήκει στο πλησιέστερο κέντρο
         for(int i=0;i<n;i++){
             const float* point= dataFloat.ptr<float>(i);
             float minDist= std::numeric_limits<float>::max(); // Παίρνουμε το μαξ που χωράει σε εναν float ωστε να κρατήσουμε στο τέλος και μετα τις συγκρισεις την πιο μικρή τιμη (απόσταστη από centroid) στη μεταβλήτη minDist
+            int bestCluster=0; // Εδώ θα αποθηκεύουμε το κοντινότερο κέντρο κάθε φορά
             
             //Μέτρηση απόστασης από ολα τα κέντρα πλήθους k
             for(int c=0;c<k_;c++){
                 float dist= squaredDistance(point, centroids_.ptr<float>(c), dims);
-                if(dist<minDist)
+                if(dist<minDist){
+                    minDist=min;
+                    bestCluster=c;
+                }
 
             }
+
+            //Κρατάμε το πιο κοντινό κέντρο για το καθε SIFT Descriptor
+            if(assignments[i]!=bestCluster){
+                assignments[i] = bestCluster;
+                changedAssignments++;
+            }
+            
         }
     }
 }
