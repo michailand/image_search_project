@@ -23,6 +23,7 @@ add_executable(image_search_project
     src/main.cpp
     src/split.cpp
     src/sift_extractor.cpp
+    src/kmeans.cpp
 )
 
 
