@@ -13,7 +13,7 @@ public:
     // k==πληθος κέντρων visual vocabulary
     // maxIters==πλήθος μέγιστου αριθμού επαναλήψεων για την οριστικοποίηση των k κέντρων
     // seed== το seed της γεννήτριας τυχαίων αριθμών
-    Kmeans(int k,int maxIters=30, unsigned int seed= 42);
+    KMeans(int k,int maxIters=30, unsigned int seed= 42);
 
     //Αλγόριθμος εκπαίδευσης για την δημιουργία k κέντρων
     cv::Mat fit(const cv::Mat& data);

@@ -97,7 +97,7 @@ cv::Mat KMeans::fit(const cv::Mat& data){
             for(int c=0;c<k_;c++){
                 float dist= squaredDistance(point, centroids_.ptr<float>(c), dims);
                 if(dist<minDist){
-                    minDist=min;
+                    minDist=dist;
                     bestCluster=c;
                 }
 
@@ -117,6 +117,19 @@ cv::Mat KMeans::fit(const cv::Mat& data){
             }
             clusterCounts[bestCluster]++;
         }
+
+
+        //Τωρα και αφού εχουμε αναθέσει όλα τα SIFT descriptors στο πιο κοντινό τους centroid και αφού έχουμε ήδη αθροίσει τις διαστασεις τους θα βρούμε το νέο centroid βρίσκοντας τον μεσο όρο όλων των SIFT descriptors του κάθε cluster   
+        for(int c=0;c<k_;c++){
+            if(clusterCounts[c]>0){
+
+
+            }
+            else{//Σε περίπτωση που το cluster ειναι άδειο τότε διαλέγουμε τυχαία ενα σημείο και το χρησιμοποιύμε ως το νεο κεντρο του cluster
+                
+            }
+        }
+
     }
 }
 
