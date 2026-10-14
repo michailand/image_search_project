@@ -2,6 +2,7 @@
 #include <opencv2/opencv.hpp>
 #include "split.hpp"
 #include "sift_extractor.hpp"
+#include "kmeans.hpp"
 
 int main(){
     std::cout << CV_VERSION << std::endl;
@@ -36,6 +37,11 @@ int main(){
             // 2. Τυχαία δειγματοληψία με όριο S = 500 και seed = 1
             cv::Mat sampledDesc = image_search::extractSIFTDescriptors(imgPath, 500, 1);
             std::cout << "Sampled descriptors (S=500, seed=1): " << sampledDesc.rows << "\n";
+
+            //3.Dokimi kmeans
+            image_search::KMeans kmeans(10,20,1);
+            cv::Mat centroids= kmeans.fit(sampledDesc);
+            std::cout << "Centroids matrix shape: " << centroids.rows<< " x " << centroids.cols << "\n";
         }
 
 
