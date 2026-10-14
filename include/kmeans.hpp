@@ -18,6 +18,11 @@ public:
     //Αλγόριθμος εκπαίδευσης για την δημιουργία k κέντρων
     cv::Mat fit(const cv::Mat& data);
 
+    //ΣΥναρτηση η οποία επιστρέφει τα centroids
+    const cv::Mat& getCentroids() const{
+        return centroids_;
+    }
+
 
 private:
 
