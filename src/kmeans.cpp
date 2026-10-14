@@ -45,4 +45,49 @@ void KMeans::initializeCentroids(const cv::Mat& data){
     }
 }
 
+
+cv::Mat KMeans::fit(const cv::Mat& data){
+
+    //Ελεγχος εισόδου δεδομένων
+    if(data.empty() || data.rows<k_){
+        std::cerr << "τα δεδομένα εισόδου τα οποία δόθηκαν για την δημιουργια kmeans ειναι είτε άδεια είτε λίγα σε πλήθος\n";
+        return cv::Mat();
+    }
+
+    cv::Mat dataFloat;
+    //Επειδή η opencv δουλευει με δεδομενα τυπου CV_32F πρεπει να το ελεγξουμε αλλιώς το κανουμε convert
+    if(data.type()!=CV_32F){
+        data.convertTo(dataFloat,CV_32F);
+    }
+    else{
+        dataFloat=data;
+    }
+
+        
+    int n=dataFloat.rows;
+    int dims= dataFloat.cols;
+
+    //Αρχικοπποίηση των κέντρων k (centroids)
+    initializeCentroids(dataFloat);
+
+
+    //Υλοποίηση αλγορίθμου Lloyd
+    //Θα τρεξουμε μεχρι maxIters_ φορές
+    for (int iter = 0; iter < maxIters_; iter++) {
+        
+        //Για κάθε SIFT descriptor θα εξετάσουμε την απόσταση του απο κάθε κέντρο με σκοπό να το βάλουμε να ανήκει στο πλησιέστερο κέντρο
+        for(int i=0;i<n;i++){
+            const float* point= dataFloat.ptr<float>(i);
+            float minDist= std::numeric_limits<float>::max(); // Παίρνουμε το μαξ που χωράει σε εναν float ωστε να κρατήσουμε στο τέλος και μετα τις συγκρισεις την πιο μικρή τιμη (απόσταστη από centroid) στη μεταβλήτη minDist
+            
+            //Μέτρηση απόστασης από ολα τα κέντρα πλήθους k
+            for(int c=0;c<k_;c++){
+                float dist= squaredDistance(point, centroids_.ptr<float>(c), dims);
+                if(dist<minDist)
+
+            }
+        }
+    }
+}
+
 }
