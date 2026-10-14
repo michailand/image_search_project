@@ -108,7 +108,14 @@ cv::Mat KMeans::fit(const cv::Mat& data){
                 assignments[i] = bestCluster;
                 changedAssignments++;
             }
-            
+
+            //Εδώ θα προσθέσουμε ολα τα διανύσματα μαζί ώστε μετά να διαιρέσουμε με το πλήθος των SIFT Descriptors που ανήκουν στη συστάδα αυτού του κέντρου και έτσι να βρω το νεό κέντρο του cluster
+            //Πρώτα παίρνω το row του πίνακα Mat στο οποίο ανήκει το νέο centroid το οποιο δημιουργουμε
+            float* newCentroidRow=newCentroids.ptr<float>(bestCluster);
+            for(int d=0;d<dims;d++){
+                newCentroidRow[d]+=point[d];
+            }
+            clusterCounts[bestCluster]++;
         }
     }
 }
