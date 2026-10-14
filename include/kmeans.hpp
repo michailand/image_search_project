@@ -17,7 +17,7 @@ private:
     unsigned int seed_;// Το seed που θα δώσουμε για την τυχαία αρχικόποιηση του kmeans
 
     //Αρχικοποίηση των Κ κέντρων με τυχαία επιλογή από τα δεδομένα μας με βάση το seed
-    void intializeCentroids(const cv::Mat& data);
+    void initializeCentroids(const cv::Mat& data);
 
     //βοηθητική συνάρτηση για υπολογισμό ευκλείδιας αποστάσης μεταξύ δύο διανυσμάτων με πλήθος ορισμάτων dims
     static float squaredDistance(const float* a,const float* b, int dims);
