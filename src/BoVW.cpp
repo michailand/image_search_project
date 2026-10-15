@@ -111,6 +111,15 @@ std::vector<float> BoVW::computeVector(const cv::Mat& descriptors) const{
         hist[bestCluster]+=1.0f; 
     }
 
+    //Τωρα θα κανω κανονικοποίηση ώστε το άθροισμα τους να βγαινει 1
+    for(int i=0;i<K;i++){
+        float res= hist[i]/descriptorRows;
+        hist[i]=res;
+    }
+
+    return hist;
+
+
 
 }
 
