@@ -14,6 +14,10 @@ public:
     //Μετατροπή των SIFT Descriptors σε διάνυσμα διάστασης KClusters. Ετσι καθε εικόνα θα αναπαρίσταται από ένα διάνυσμα KClusters διαστάσεων και θα μπορει να γινει ευκολα η αναζήτηση εικόνων με βάση την ομοιότητα των διανυσμάτων τους
     std::vector<float> computeVector(const cv::Mat& descriptors) const;
 
+    //Συναρτηση με την οποία θα αποθηκεύουμε το λεξικό σε ενα αρχειο ώστε να μην χρειαζεται να την τρεχουμε καθε φορα
+    bool saveVocabulary(const std::string& filename) const;
+    //Συνάρτηση για φορτωμα του λεξικου από το αρχείο στο οποίο το εχουμε αποθηκευσει
+
 
     //getter για το λεξικό
     const cv::Mat& getVocabulary() const{
