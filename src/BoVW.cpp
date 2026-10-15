@@ -8,6 +8,8 @@
 
 namespace image_search{
 
+
+//Η συνάρτηση buildVocabulary είναι υπεύθυνη για την δημιουργία του λεξικού μας. Αρχικά θα συλλέξει όλα τα SIFT Descriptors από τις εικόνες εκπαίδευσης και στη συνέχεια θα καλέσει την συνάρτηση kmeans για να δημιουργήσει το λεξικό μας.
 bool BoVW::buildVocabulary(const std::string& hpatchesDir,const std::vector<std::string>& trainSequences,int KClusters,int maxDescriptorPerImage,unsigned int seed,int maxIters ){
 
     //Pinakas ston opoio apothikeyo ta SIFT Descriptors olon ton eikonon
@@ -52,5 +54,16 @@ bool BoVW::buildVocabulary(const std::string& hpatchesDir,const std::vector<std:
 }
 
 
+std::vector<float> computeVector(const cv::Mat& descriptors) const{
+    //πλήθος των clusters που έχουμε στο λεξικό μας 
+    int K= vocabulary_.rows;
+    //Πινακας ο οποιος θα εχει ολα τα διανυσματα των εικονων με την μορφη του λεξικου vocabulary_ που φτιαξαμε πλήθους Κ λέξεων
+    std::vector<float> hist(K,0.0f);
+
+    //Αν το descriptors η το vocabulary_ ειναι άδειο τότε επιστρεφουμε αδειο vector hist
+    if(descriptors.empty() || vocabulary_.empty()){
+        return hist;
+    }
+}
 
 }
