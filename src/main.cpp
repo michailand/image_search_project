@@ -78,7 +78,16 @@ int main(){
         std::vector<float> imageVector= bovw.computeVector(sampleDescriptors);
         std::cout << "To imageVector exei size= " << imageVector.size() << "\n";
 
-        
+        float sumDims=0.0f;
+        std::cout << "To imageVector= [";
+        for(std::size_t i=0;i<imageVector.size();i++){
+            std::cout << imageVector[i] << " , ";
+            sumDims+= imageVector[i];
+        }
+        std::cout << "]\n";
+
+        std::cout << "To athroisma twn diastasewn tou imageVector= " << sumDims << "\n";
+
     }
     else{
         std::cerr << "Failed to load split.txt file \n";
