@@ -18,7 +18,9 @@ public:
 private:
     //Πίνακας στον οποίο θα αποθηκεύσουμε τα KMeans centroids που θα αποτελέσουν το λεξικό μας. Δηλαδη εδω μαζευονται τα centroids απο το σετ των εικονων για train. Αυτος ο πινακας θα χρησιμοποιηθεί για να μετατρέψουμε τα SIFT Descriptors σε διάνυσμα KClusters διαστάσεων για κάθε εικόνα.
     cv::Mat vocabulary_;
-};
+
+    //Παιρνει ως ορίσματα δυο διανυσματα (a & b) (vector) και το μέγεθος τους (dims) δηλαδ�� τις διαστάσεις του και επιστρέφει την απόσταση μεταξύ τους 
+    static float squaredDistance(const float* a,const float* b, int dims){
 
 
 
