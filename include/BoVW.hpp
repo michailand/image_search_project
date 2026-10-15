@@ -15,6 +15,11 @@ public:
     std::vector<float> computeVector(const cv::Mat& descriptors) const;
 
 
+    //getter για το λεξικό
+    const cv::Mat& getVocabulary() const{
+        return vocabulary_;
+    }
+
 private:
     //Πίνακας στον οποίο θα αποθηκεύσουμε τα KMeans centroids που θα αποτελέσουν το λεξικό μας. Δηλαδη εδω μαζευονται τα centroids απο το σετ των εικονων για train. Αυτος ο πινακας θα χρησιμοποιηθεί για να μετατρέψουμε τα SIFT Descriptors σε διάνυσμα KClusters διαστάσεων για κάθε εικόνα.
     cv::Mat vocabulary_;

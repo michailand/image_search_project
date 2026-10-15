@@ -3,6 +3,9 @@
 #include "split.hpp"
 #include "sift_extractor.hpp"
 #include "kmeans.hpp"
+#include "BoVW.hpp"
+#include <cmath>
+
 
 int main(){
     std::cout << CV_VERSION << std::endl;
@@ -44,7 +47,38 @@ int main(){
             std::cout << "Centroids matrix shape: " << centroids.rows<< " x " << centroids.cols << "\n";
         }
 
+        std::vector<std::string> testSequences= train;
 
+        // --- Δοκιμή BoVW ---
+        image_search::BoVW bovw;
+
+        bool built= bovw.buildVocabulary("data/hpatches-sequences-release",testSequences,100,500,1,30);
+
+        if(built){
+            std::cout << "Vocabulary built successfully with " << bovw.computeVector(cv::Mat()).size() << " dimensions.\n";
+        }
+        else{
+            std::cerr << "Failed to build vocabulary.\n";
+        }
+
+        const cv::Mat& vocabulary =bovw.getVocabulary();
+
+        std::cout << "To vocabulary ftiaxthke kai exei rows= " << vocabulary.rows << " kai cols= " << vocabulary.cols << "\n";
+
+        std::string sampleImgPath= "data/hpatches-sequences-release/" + train[0] + "/1.ppm";
+
+        std::cout << "Dokimi gia thn eikona: " << sampleImgPath << "\n";
+
+        std::cout<< "exagogi SIFT descriptors gia to sampleImgPath \n";
+        cv::Mat sampleDescriptors= image_search::extractSIFTDescriptors(sampleImgPath,500,1);
+
+        std::cout << "To sampleDescriptors exei rows= " << sampleDescriptors.rows << " kai cols= " << sampleDescriptors.cols << "\n";
+
+
+        std::vector<float> imageVector= bovw.computeVector(sampleDescriptors);
+        std::cout << "To imageVector exei size= " << imageVector.size() << "\n";
+
+        
     }
     else{
         std::cerr << "Failed to load split.txt file \n";
