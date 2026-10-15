@@ -65,6 +65,17 @@ int main(){
 
         std::cout << "To vocabulary ftiaxthke kai exei rows= " << vocabulary.rows << " kai cols= " << vocabulary.cols << "\n";
 
+        //Apothikeysi se arxeio toy vocabulary
+        std::string vocabFile= "test/vocabulary.bin";
+        bool storeVocab= bovw.saveVocabulary(vocabFile);
+        if(storeVocab){
+            std::cout << "To vocabulary apothikeythke sto arxeio: " << vocabFile << "\n";
+        }
+        else{
+            std::cerr << "Failed to save vocabulary to file: " << vocabFile << "\n";
+        }
+
+
         std::string sampleImgPath= "data/hpatches-sequences-release/" + train[0] + "/1.ppm";
 
         std::cout << "Dokimi gia thn eikona: " << sampleImgPath << "\n";
@@ -87,6 +98,9 @@ int main(){
         std::cout << "]\n";
 
         std::cout << "To athroisma twn diastasewn tou imageVector= " << sumDims << "\n";
+
+
+    
 
     }
     else{

@@ -123,4 +123,29 @@ std::vector<float> BoVW::computeVector(const cv::Mat& descriptors) const{
 
 }
 
+
+bool BoVW::saveVocabulary(const std::string& filename) const {
+    if(vocabulary_.empty()) {
+        std::cerr << "Προσοχή!!! Το Vocabulary ειναι αδειο.\n";
+        return false;
+    }
+
+    std::ofstream outFile(filename, std::ios::binary);
+    if(!outFile) {
+        std::cerr << "Προσοχή!!! Δεν μπορει να ανοιξει το αρχείο για αποθήκευση του Vocabulary: " << filename << "\n";
+        return false;
+    }
+
+    //Πρωτα θα αποθηκευσω τις διαστασεις του vocabulary_ (rows και cols) και μετα τα δεδομενα του vocabulary_
+    int rows =vocabulary_.rows;
+    int cols =vocabulary_.cols;
+    outFile.write(reinterpret_cast<const char*>(&rows), sizeof(int));
+    outFile.write(reinterpret_cast<const char*>(&cols), sizeof(int));
+    outFile.write(reinterpret_cast<const char*>(vocabulary_.data), rows * cols * sizeof(float));
+
+    return true;
+}
+
+
+
 }
