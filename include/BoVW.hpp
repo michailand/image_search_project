@@ -20,8 +20,11 @@ private:
     cv::Mat vocabulary_;
 
     //Παιρνει ως ορίσματα δυο διανυσματα (a & b) (vector) και το μέγεθος τους (dims) δηλαδ�� τις διαστάσεις του και επιστρέφει την απόσταση μεταξύ τους 
-    static float squaredDistance(const float* a,const float* b, int dims){
+    static float squaredDistance(const float* a,const float* b, int dims);
 
+
+
+};
 
 
 }
