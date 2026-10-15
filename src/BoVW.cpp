@@ -24,9 +24,31 @@ bool BoVW::buildVocabulary(const std::string& hpatchesDir,const std::vector<std:
        
             //Κλήση της συνάρτησης extractSIFTDescriptors για εξαγωγη έως και S decriptors με seed το οποιο το αλλαζουμε καθε φορα +1
             cv::Mat desc= extractSIFTDescriptors(imgPath,maxDescriptorPerImage,seed + processed);
+            //Αν δεν ειναι άδειο το αρχείο με τους descriptors τοτε το προωθω στο Mat allDescriptors
+            if(!desc.empty()){
+                allDescriptors.push_back(desc);
+            }
+
+            processed++;
+
+            if(processed== totalImages){
+                std::cout << "Τελος Συλλογης των SIFT Descriptors. Επεξεργάστηκαν συνολικά  "<< processed << " εικονες από τις συνολικά " << totalImages << " εικονες εκπαίδευσης\n";
+            }
             
         }
     }
+
+    if(allDescriptors.empty() || allDescriptors.rows < KClusters){
+        std::cerr << "Δεν βρέθηκαν SIFT Descriptors για τις εικόνες εκπαίδευσης. Ελέγξτε τα paths των εικόνων.\n";
+        return false;
+    }
+
+    //Τωρα θα καλέσω την συνάρτηση kmeans για να δημιουργήσω το λεξικό μου
+    std::cout << "Αρχίζει η διαδικασία KMeans για τη δημιουργία του λεξικού με " << KClusters << " clusters\n";
+    KMeans kmeans(KClusters,maxIters,seed);
+    vocabulary_ = kmeans.fit(allDescriptors);
+
+    return !vocabulary_.empty();
 }
 
 

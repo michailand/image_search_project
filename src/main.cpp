@@ -39,7 +39,7 @@ int main(){
             std::cout << "Sampled descriptors (S=500, seed=1): " << sampledDesc.rows << "\n";
 
             //3.Dokimi kmeans
-            image_search::KMeans kmeans(10,20,1);
+            image_search::KMeans kmeans(10,40,1);
             cv::Mat centroids= kmeans.fit(sampledDesc);
             std::cout << "Centroids matrix shape: " << centroids.rows<< " x " << centroids.cols << "\n";
         }
