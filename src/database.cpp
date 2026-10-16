@@ -66,7 +66,13 @@ Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mi
                 std::string imgPath= entry.path().string();
                 cv::Mat desc= extractSIFTDescriptors(imgPath);
 
-                if
+                //αρχικά ελέγχουμε αν η εικονα εχει descreiptors και αν ναι τοτε προχωραμε στην δημιουργια του BoVW vector της
+                // και αυξανουμε και το μετρητή mirflickrCount για να ξερουμε ποσες εικόνες θορύβου εχουμε προσθεσει στη βαση δεδομενων
+                if(!desc.empty()){
+                    std::vector<float> vec= bovw.computeVector(desc);
+                    std::string filename= entry.path().filename().string();
+                    mirflickrCount++;
+                }
             }
         }
     }
