@@ -22,7 +22,10 @@ public:
     bool loadOrBuild(const std::string& hpatchesDir, const std::string& mirflickDir, const DatasetSplit& split, SetType setType, int numMirflickr, BoVW& bovw, const std::string& cacheFilename );
 
     //Φορτωση της βάσης δεδομένων σε binary αρχείο
-    bool loadBinary(const std::string& filename); 
+    bool loadBinary(const std::string& filename);
+    
+    //Αποθηκευση της βάσης δεδομένων σε binary αρχείο
+    bool saveBinary(const std::string& filename) const;
 
 private:
     //Vector για την αποθηκευση των διανυσματων των εικόνων (BoVW vectors) και των αντίστοιχων ID τους.

@@ -96,11 +96,15 @@ Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mi
 }
 
 
+
+
 bool Database::loadBinary(const std::string& filename){
     std::ifstream in(filename, std::ios::binary);
     if(!in.is_open()){
         std::cerr<< "ΠΡΟΣΟΧΗ!!! Αδυναμία ανοίγματος αρχείου: "<< filename << "\n";
         return false;
     }
+
+
 
 }
