@@ -17,8 +17,9 @@ public:
     //Συναρτηση με την οποία θα αποθηκεύουμε το λεξικό σε ενα αρχειο ώστε να μην χρειαζεται να την τρεχουμε καθε φορα
     bool saveVocabulary(const std::string& filename) const;
     //Συνάρτηση για φορτωμα του λεξικου από το αρχείο στο οποίο το εχουμε αποθηκευσει
-    
 
+    //Συνάρτηση για φορτωμα του λεξικου απο το αρχειο βinary στο οποιο το εχουμε αποθηκευσει
+    bool loadVocabulary(const std::string& filename);
 
     //getter για το λεξικό
     const cv::Mat& getVocabulary() const{

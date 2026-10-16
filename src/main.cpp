@@ -66,7 +66,7 @@ int main(){
         std::cout << "To vocabulary ftiaxthke kai exei rows= " << vocabulary.rows << " kai cols= " << vocabulary.cols << "\n";
 
         //Apothikeysi se arxeio toy vocabulary
-        std::string vocabFile= "test/vocabulary.bin";
+        std::string vocabFile= "tests/vocabulary.bin";
         bool storeVocab= bovw.saveVocabulary(vocabFile);
         if(storeVocab){
             std::cout << "To vocabulary apothikeythke sto arxeio: " << vocabFile << "\n";
@@ -75,13 +75,32 @@ int main(){
             std::cerr << "Failed to save vocabulary to file: " << vocabFile << "\n";
         }
 
+        //Τεστ για να δω αν το loadVocabulary δουλευει σωστα. 
+        image_search::BoVW bovw2;
+        bool loadVocab2= bovw2.loadVocabulary(vocabFile);
+        if(!loadVocab2){
+            std::cerr<<"ΠΡΟΣΟΧΗ!!! Το loadVocabulary απέτυχε για το αρχείο: "<<vocabFile<<"\n";
+        }
+        bool storeVocab2= bovw2.saveVocabulary("tests/vocabulary2.bin");
+        if(!storeVocab2){
+            std::cerr<<"ΠΡΟΣΟΧΗ!!! Το saveVocabulary απέτυχε για το αρχείο: tests/vocabulary2.bin\n";
+        }   
+
+        //Ελεγχος των δυο binary αρχειων
+        int res= std::system("cmp tests/vocabulary.bin tests/vocabulary2.bin");
+        if(res==0){
+            std::cout << "Τα δυο αρχεία vocabulary.bin και vocabulary2.bin είναι ίδια.\n";
+        }
+        else{
+            std::cerr << "ΠΡΟΣΟΧΗ!!! Τα δυο αρχεία vocabulary.bin και vocabulary2.bin ΔΕΝ είναι ίδια.\n";
+        }
 
         std::string sampleImgPath= "data/hpatches-sequences-release/" + train[0] + "/1.ppm";
 
         std::cout << "Dokimi gia thn eikona: " << sampleImgPath << "\n";
 
         std::cout<< "exagogi SIFT descriptors gia to sampleImgPath \n";
-        cv::Mat sampleDescriptors= image_search::extractSIFTDescriptors(sampleImgPath,500,1);
+        cv::Mat sampleDescriptors= image_search::extractSIFTDescriptors(sampleImgPath);
 
         std::cout << "To sampleDescriptors exei rows= " << sampleDescriptors.rows << " kai cols= " << sampleDescriptors.cols << "\n";
 

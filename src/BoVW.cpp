@@ -123,7 +123,7 @@ std::vector<float> BoVW::computeVector(const cv::Mat& descriptors) const{
 
 }
 
-
+//Συναρτηση με την οποία θα αποθηκεύουμε το λεξικό σε ενα αρχειο ώστε να μην χρειαζεται να τρεχουμε καθε φορα τη δημιουργια λεξικου κατι το οποιο ειναι χρονοβορο
 bool BoVW::saveVocabulary(const std::string& filename) const {
     if(vocabulary_.empty()) {
         std::cerr << "Προσοχή!!! Το Vocabulary ειναι αδειο.\n";
@@ -146,6 +146,35 @@ bool BoVW::saveVocabulary(const std::string& filename) const {
     return true;
 }
 
+
+bool BoVW::loadVocabulary(const std::string& filename){
+    std::cout <<"Φορτώνεται το λεξικό από το αρχείο: "<<filename<<"\n";
+    
+    std::ifstream inFile(filename, std::ios::binary);
+
+    //Ελεγχος αν το αρχείο άνοιξε σωστά
+    if(!inFile.is_open()){
+        std::cerr<<"ΠΡΟΣΟΧΗ!!! Το αρχειο λεκξικου δεν ανοιξε σωστα: "<<filename<<"\n";
+        return false;
+    }
+
+    int rows=0;
+    int cols=0;
+    //διαβαζω τα πρωτα sizeof(int) και αποθηκευω τις διαστασεις του vocabulary_ 
+    inFile.read(reinterpret_cast<char*>(&rows),sizeof(int));
+    inFile.read(reinterpret_cast<char*>(&cols),sizeof(int));
+
+    //Τωρα θα διαβασω rows*cols*sizeof(float) bytes 
+    if(rows<=0 || cols<=0){
+        std::cerr<<"ΠΡΟΣΟΧΗ!!! Οι διαστασεις του λεξικου ειναι <=0 \n";
+        return false;
+    }
+
+    vocabulary_= cv::Mat(rows,cols,CV_32F);
+    inFile.read(reinterpret_cast<char*>(vocabulary_.data),rows*cols*sizeof(float));
+
+    return true;
+}
 
 
 }
