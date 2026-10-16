@@ -10,6 +10,11 @@
 
 namespace image_search{
 
+struct DatabaseItem {
+    std::string id; 
+    std::vector<float> vec;
+}; 
+
 class Database {
 public:
     
@@ -18,6 +23,10 @@ public:
 
     //Φορτωση της βάσης δεδομένων σε binary αρχείο
     bool loadBinary(const std::string& filename); 
+
+private:
+    //Vector για την αποθηκευση των διανυσματων των εικόνων (BoVW vectors) και των αντίστοιχων ID τους.
+    std::vector<DatabaseItem> items_;
 }
 
 }

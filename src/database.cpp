@@ -27,4 +27,6 @@ Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mi
     auto sequences= split.getSequences(setType);
 
     std::cout<< "Εναρξη δημιουργιας νεας βασης δεδομενων για " << sequences.size() << " ακολουθιες HPatches και θορυβο " << numMirflickr << " εικόνες θορύβου mirFlickr\n";  
+
+
 }
