@@ -72,6 +72,13 @@ Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mi
                     std::vector<float> vec= bovw.computeVector(desc);
                     std::string filename= entry.path().filename().string();
                     mirflickrCount++;
+
+                    items_.push_back({filename, vec});
+                    
+                    if(mirflickrCount % 1000==0 ){
+                        std::cout<< "Προστέθηκαν "<< mirflickrCount << " εικόνες θορύβου mirFlickr στη βαση δεδομενων\n";
+                        std::cout<< "Απομένουν "<< (numMirflickr - mirflickrCount) << " εικόνες θορύβου mirFlickr για προσθήκη στη βαση δεδομενων\n";
+                    }
                 }
             }
         }
