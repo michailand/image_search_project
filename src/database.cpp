@@ -26,7 +26,18 @@ Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mi
 
     auto sequences= split.getSequences(setType);
 
+    //αδειαζω το vector items_ για να δημιουργησω νεα βαση δεδομενων
+    items_.clear();
+
     std::cout<< "Εναρξη δημιουργιας νεας βασης δεδομενων για " << sequences.size() << " ακολουθιες HPatches και θορυβο " << numMirflickr << " εικόνες θορύβου mirFlickr\n";  
+
+    //ξεκιναμε με την προσθηκη των ακολουθιων HPatches (από Ι2 έως και Ι6)
+    for(const auto& seqName: sequences){
+        for(int imgIdx=2;imgIdx<=6;imgIdx++){
+            std::string imgPath= hpatchesDir+ "/" + seqName + "/" + std::to_string(imgIdx) + ".ppm";
+            
+        }
+    }
 
 
 }
