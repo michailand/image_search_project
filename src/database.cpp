@@ -30,7 +30,7 @@ Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mi
     items_.clear();
 
     std::cout<< "Εναρξη δημιουργιας νεας βασης δεδομενων για " << sequences.size() << " ακολουθιες HPatches και θορυβο " << numMirflickr << " εικόνες θορύβου mirFlickr\n";  
-
+    int hpatchesCount=0;
     //ξεκιναμε με την προσθηκη των ακολουθιων HPatches (από Ι2 έως και Ι6)
     for(const auto& seqName: sequences){
         for(int imgIdx=2;imgIdx<=6;imgIdx++){
@@ -46,9 +46,12 @@ Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mi
 
                 //Προσθηκη του νεου αντικειμενου στη βαση δεδομενων
                 items_.push_back({itemId, vec});
+                hpatchesCount++;
             }
         }
     }
+
+    std::cout<<"Φορτωθηκαν "<< hpatchesCount << " εικόνες απο τη βαση δεδομενων HPatches\n";
 
 
 }
