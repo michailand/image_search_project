@@ -4,7 +4,9 @@
 #include <fstream>
 #include <filesystem>
 
+namespace fs = std::filesystem;
 
+namespace image_search{
 
 Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mirflickDir, const DatasetSplit& split, SetType setType, int numMirflickr, BoVW& bovw, const std::string& cacheFilename ){
 
@@ -83,5 +85,15 @@ Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mi
             }
         }
     }
+    else{
+        std::cerr<< "ΠΡΟΣΟΧΗ!!! Ο φάκελος mirFlickr δεν βρέθηκε: "<< mirflickDir << "\n";
+    }
+
+    std::cout<<"Φορτωθηκαν συνολικα "<< items_.size() << " εικόνες στη βαση δεδομενων (HPatches + mirFlickr)\n";
+
+
+    //edo tha mpei kodikas gia apothikeysi ths bashs dedomenwn se binary arxeio 
+}
+
 
 }
