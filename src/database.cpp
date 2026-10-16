@@ -96,6 +96,21 @@ Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mi
 }
 
 
+bool Database::saveBinary(const std::string& filename) const{
+    std::ofstream out(filename, std::ios::binary);
+    if(!out.is_open()){
+        std::cerr<< "ΠΡΟΣΟΧΗ!!! Αδυναμία ανοίγματος αρχείου για αποθήκευση: "<< filename << "\n";
+        return false;
+    }
+
+    //plitos antikeimenon gia grapsimo
+    int totalItems= items_.size();
+    //Πρωτη θεση του αρχειου κραταει τα  metadata δηλαδη το μεγεθος του αρχειου
+    out.write(reinterpret_cast<const char*>(&totalItems), sizeof(int));
+
+    
+}
+    
 
 
 bool Database::loadBinary(const std::string& filename){
