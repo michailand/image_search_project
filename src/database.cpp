@@ -39,7 +39,12 @@ Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mi
             //ΕΞΑΓΩΓΗ SIFT descriptors για την εικονα ωστε μετα να μπορεσουμε να φτιαξουμε το BoVW vector της
             cv::Mat desc= extractSIFTDescriptors(imgPath);
 
+            //Παιρνουμε το BoVW vector για την εικονα
             std::vector<float> vec= bovw.computeVector(desc);
+            std::string itemId= seqName + "_" + std::to_string(imgIdx);
+
+            //Προσθηκη του νεου αντικειμενου στη βαση δεδομενων
+            items_.push_back({itemId, vec});
         }
     }
 
