@@ -34,8 +34,12 @@ Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mi
     //ξεκιναμε με την προσθηκη των ακολουθιων HPatches (από Ι2 έως και Ι6)
     for(const auto& seqName: sequences){
         for(int imgIdx=2;imgIdx<=6;imgIdx++){
+            //Για καθε ακολουθια φτιαχνουμε το path της εικονας
             std::string imgPath= hpatchesDir+ "/" + seqName + "/" + std::to_string(imgIdx) + ".ppm";
-            
+            //ΕΞΑΓΩΓΗ SIFT descriptors για την εικονα ωστε μετα να μπορεσουμε να φτιαξουμε το BoVW vector της
+            cv::Mat desc= extractSIFTDescriptors(imgPath);
+
+            std::vector<float> vec= bovw.computeVector(desc);
         }
     }
 
