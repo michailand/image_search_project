@@ -20,7 +20,11 @@ Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mi
         else{
             std::cerr<< "ΠΡΟΣΟΧΗ!!! Η προυπαρχουσα βαση δεδομενων ΔΕΝ φορτωθηκε επιτυχως απο το αρχειο: "<< cacheFilename<<"\n";
             std::cerr<< "Θα δημιουργηθει νεα βαση δεδομενων και θα αποθηκευτει στο αρχειο: "<< cacheFilename<<"\n";
-            
+
         }
     }
+
+    auto sequences= split.getSequences(setType);
+
+    std::cout<< "Εναρξη δημιουργιας νεας βασης δεδομενων για " << sequences.size() << " ακολουθιες HPatches και θορυβο " << numMirflickr << " εικόνες θορύβου mirFlickr\n";  
 }
