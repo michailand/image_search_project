@@ -53,5 +53,22 @@ Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mi
 
     std::cout<<"Φορτωθηκαν "<< hpatchesCount << " εικόνες απο τη βαση δεδομενων HPatches\n";
 
+    //Τωρα θα προσθεσουμε και τις εικόνες θορύβου mirFlickr
+    int mirflickrCount=0;
+    if(fs::exists(mirflickDir)){
+        for(const auto& entry : fs::directory_index_iterator(mirflickDir)){
+            //Ελεγχος αν εχουμε φτασει στο οριο των numMirflickr
+            if(mirflickrCount>= numMirflickr){
+                break;
+            }
+
+            if(entry.is_regular_file()){
+                std::string imgPath= entry.path().string();
+                cv::Mat desc= extractSIFTDescriptors(imgPath);
+
+                if
+            }
+        }
+    }
 
 }
