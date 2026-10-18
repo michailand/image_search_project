@@ -69,19 +69,20 @@ bool Database::loadOrBuild(const std::string& hpatchesDir, const std::string& mi
                 if(ext == ".jpg" || ext ==".JPG" || ext==".jpeg" || ext==".JPEG"){
                     std::string imgPath= entry.path().string();
                     cv::Mat desc= extractSIFTDescriptors(imgPath);
-                }
-                //αρχικά ελέγχουμε αν η εικονα εχει descreiptors και αν ναι τοτε προχωραμε στην δημιουργια του BoVW vector της
-                // και αυξανουμε και το μετρητή mirflickrCount για να ξερουμε ποσες εικόνες θορύβου εχουμε προσθεσει στη βαση δεδομενων
-                if(!desc.empty()){
-                    std::vector<float> vec= bovw.computeVector(desc);
-                    std::string filename= entry.path().filename().string();
-                    mirflickrCount++;
+                
+                    //αρχικά ελέγχουμε αν η εικονα εχει descreiptors και αν ναι τοτε προχωραμε στην δημιουργια του BoVW vector της
+                    // και αυξανουμε και το μετρητή mirflickrCount για να ξερουμε ποσες εικόνες θορύβου εχουμε προσθεσει στη βαση δεδομενων
+                    if(!desc.empty()){
+                        std::vector<float> vec= bovw.computeVector(desc);
+                        std::string filename= entry.path().filename().string();
+                        mirflickrCount++;
 
-                    items_.push_back({filename, vec});
-                    
-                    if(mirflickrCount % 1000==0 ){
-                        std::cout<< "Προστέθηκαν "<< mirflickrCount << " εικόνες θορύβου mirFlickr στη βαση δεδομενων\n";
-                        std::cout<< "Απομένουν "<< (numMirflickr - mirflickrCount) << " εικόνες θορύβου mirFlickr για προσθήκη στη βαση δεδομενων\n";
+                        items_.push_back({filename, vec});
+                        
+                        if(mirflickrCount % 1000==0 ){
+                            std::cout<< "Προστέθηκαν "<< mirflickrCount << " εικόνες θορύβου mirFlickr στη βαση δεδομενων\n";
+                            std::cout<< "Απομένουν "<< (numMirflickr - mirflickrCount) << " εικόνες θορύβου mirFlickr για προσθήκη στη βαση δεδομενων\n";
+                        }
                     }
                 }
             }
