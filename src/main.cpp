@@ -6,6 +6,8 @@
 #include "BoVW.hpp"
 #include <cmath>
 
+#include "database.hpp"
+#include <algorithm>
 
 int main(){
     std::cout << CV_VERSION << std::endl;
@@ -118,7 +120,11 @@ int main(){
 
         std::cout << "To athroisma twn diastasewn tou imageVector= " << sumDims << "\n";
 
+        //Δοκιμη για την δημιουργια της βασης δεδομενων
+        std::cout << "Dokimi gia thn dimiourgia ths bashs dedomenwn \n";
+        image_search::Database db;
 
+        bool dbCreated= db.loadOrBuild("data/hpatches-sequences-release","data/mirflickr",split,image_search::SetType::VALIDATION,1000,bovw,"tests/database.bin");
     
 
     }
