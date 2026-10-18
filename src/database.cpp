@@ -65,9 +65,11 @@ bool Database::loadOrBuild(const std::string& hpatchesDir, const std::string& mi
             }
 
             if(entry.is_regular_file()){
-                std::string imgPath= entry.path().string();
-                cv::Mat desc= extractSIFTDescriptors(imgPath);
-
+                std::string ext= entry.path().extension().string();
+                if(ext == ".jpg" || ext ==".JPG" || ext==".jpeg" || ext==".JPEG"){
+                    std::string imgPath= entry.path().string();
+                    cv::Mat desc= extractSIFTDescriptors(imgPath);
+                }
                 //αρχικά ελέγχουμε αν η εικονα εχει descreiptors και αν ναι τοτε προχωραμε στην δημιουργια του BoVW vector της
                 // και αυξανουμε και το μετρητή mirflickrCount για να ξερουμε ποσες εικόνες θορύβου εχουμε προσθεσει στη βαση δεδομενων
                 if(!desc.empty()){
