@@ -6,8 +6,19 @@
 
 namespace image_search{
 
+    //Δομη στην οποια θα κραταμε το αποτελεσμα της αναζητησης δηλαδη θα κραταμε το path της εικονας και την αποσταση της απο το query
+    struct SearchResult{
+        std::string id;
+        float distance;
+    }
+
     class ExactSearch {
     public:
+
+        //ο constructor θα παιρνει σαν ορισμα την βαση δεδομενων
+        ExactSearch(const Database& db);
+
+        //Synarthsh exantlitikis anazitisis
 
 
     private:
