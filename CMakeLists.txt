@@ -27,6 +27,7 @@ add_executable(image_search_project
     src/BoVW.cpp
     src/database.cpp
     src/exact_search.cpp
+    src/metrics.cpp
 )
 
 

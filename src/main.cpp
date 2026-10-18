@@ -9,7 +9,8 @@
 #include "database.hpp"
 #include <algorithm>
 #include "exact_search.hpp"
-
+#include "metrics.hpp"
+#include <chrono>
 
 int main(){
     std::cout << CV_VERSION << std::endl;
@@ -141,15 +142,19 @@ int main(){
             std::cerr << "ΠΡΟΣΟΧΗ!!! Η νεα βαση δεδομενων ΔΕΝ δημιουργηθηκε επιτυχως και ΔΕΝ αποθηκευτηκε στο αρχειο: tests/database.bin\n";
         }
 
-        // --- Test για Exact Search ---
-        std::cout << "\n=== Test Exact Search ===\n";
+  // --- Test Exact Search και Metrics ---
+        std::cout << "\n=== Test Exact Search + Metrics ===\n";
 
-        // Αρχικοποίηση του Exact Search με τη βάση που έχεις ήδη δημιουργήσει
         image_search::ExactSearch searcher(db);
+
+        // Συγκεντρωτικές μετρικές για τα validation queries
+        double totalRecall5 = 0.0;
+        double totalRecall10 = 0.0;
+        double totalAP10 = 0.0;
+        int evaluatedQueries = 0;
 
         // Εκτέλεση αναζήτησης για κάθε εικόνα του Validation set
         for (const auto& seq : val) {
-
             std::string queryPath =
                 "data/hpatches-sequences-release/" + seq + "/1.ppm";
 
@@ -166,7 +171,8 @@ int main(){
             }
 
             // Δημιουργία BoVW διανύσματος για το query
-            std::vector<float> queryVec = bovw.computeVector(descriptors);
+            std::vector<float> queryVec =
+                bovw.computeVector(descriptors);
 
             if (queryVec.empty()) {
                 std::cerr << "Σφάλμα: Το query vector είναι κενό.\n";
@@ -187,17 +193,48 @@ int main(){
             std::cout << "Top-" << results.size() << " results:\n";
 
             for (std::size_t i = 0; i < results.size(); ++i) {
-                std::cout << i + 1  << ". ID: " << results[i].id   << " | Distance: " << results[i].distance  << "\n";
+                std::cout << i + 1
+                          << ". ID: " << results[i].id
+                          << " | Distance: " << results[i].distance
+                          << "\n";
             }
 
             std::cout << "Search time: " << elapsed.count() << " ms\n";
+
+            // --- Υπολογισμός μετρικών για το συγκεκριμένο query ---
+            image_search::QueryMetrics metrics =
+                image_search::Metrics::evaluateQuery(seq, results);
+
+            std::cout << "Recall@5:  " << metrics.recall5 << "\n";
+            std::cout << "Recall@10: " << metrics.recall10 << "\n";
+            std::cout << "AP@10:     " << metrics.ap10 << "\n";
+
+            // Συγκέντρωση τιμών για τον τελικό μέσο όρο
+            totalRecall5 += metrics.recall5;
+            totalRecall10 += metrics.recall10;
+            totalAP10 += metrics.ap10;
+            evaluatedQueries++;
         }
 
-    }
-    else{
+        // --- Συνολικά αποτελέσματα Validation ---
+        std::cout << "\n=== Validation Metrics Summary ===\n";
+        std::cout << "Evaluated queries: " << evaluatedQueries << "\n";
+
+        if (evaluatedQueries > 0) {
+            std::cout << "Mean Recall@5:  "
+                      << totalRecall5 / evaluatedQueries << "\n";
+
+            std::cout << "Mean Recall@10: "
+                      << totalRecall10 / evaluatedQueries << "\n";
+
+            std::cout << "Mean AP@10:     "
+                      << totalAP10 / evaluatedQueries << "\n";
+        } else {
+            std::cout << "Δεν αξιολογήθηκε κανένα query.\n";
+        }
+    } else {
         std::cerr << "Failed to load split.txt file \n";
     }
 
-    
     return 0;
 }
