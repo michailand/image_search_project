@@ -104,10 +104,23 @@ bool Database::saveBinary(const std::string& filename) const{
     }
 
     //plitos antikeimenon gia grapsimo
-    int totalItems= items_.size();
+    size_t totalItems= items_.size();
     //Πρωτη θεση του αρχειου κραταει τα  metadata δηλαδη το μεγεθος του αρχειου
-    out.write(reinterpret_cast<const char*>(&totalItems), sizeof(int));
+    out.write(reinterpret_cast<const char*>(&totalItems), sizeof(size_t));
 
+    for (const auto& item : items_) {
+        // Γράφουμε το ID (μέγεθος string + χαρακτήρες)
+        size_t idSize = item.id.size();
+        out.write(reinterpret_cast<const char*>(&idSize), sizeof(size_t));
+        out.write(item.id.data(), idSize);
+
+        // Γράφουμε το διάνυσμα (μέγεθος vector + δεδομένα floats)
+        size_t vecSize = item.vec.size();
+        out.write(reinterpret_cast<const char*>(&vecSize), sizeof(size_t));
+        out.write(reinterpret_cast<const char*>(item.vec.data()), vecSize * sizeof(float));
+    }
+
+    return true;
     
 }
     
@@ -120,6 +133,30 @@ bool Database::loadBinary(const std::string& filename){
         return false;
     }
 
+    size_t totalItems = 0;
+    in.read(reinterpret_cast<char*>(&totalItems), sizeof(size_t));
+    if (totalItems == 0 || totalItems > 500000) return false;
+
+    items_.clear();
+    items_.resize(totalItems);
+
+    for (size_t i = 0; i < totalItems; ++i) {
+        size_t idSize = 0;
+        in.read(reinterpret_cast<char*>(&idSize), sizeof(size_t));
+        items_[i].id.resize(idSize);
+        in.read(items_[i].id.data(), idSize);
+
+        size_t vecSize = 0;
+        in.read(reinterpret_cast<char*>(&vecSize), sizeof(size_t));
+        items_[i].vec.resize(vecSize);
+        in.read(reinterpret_cast<char*>(items_[i].vec.data()), vecSize * sizeof(float));
+    }
+
+    return true;
+
+
+
+}
 
 
 }
