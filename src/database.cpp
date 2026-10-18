@@ -8,7 +8,7 @@ namespace fs = std::filesystem;
 
 namespace image_search{
 
-Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mirflickDir, const DatasetSplit& split, SetType setType, int numMirflickr, BoVW& bovw, const std::string& cacheFilename ){
+bool Database::loadOrBuild(const std::string& hpatchesDir, const std::string& mirflickDir, const DatasetSplit& split, SetType setType, int numMirflickr, BoVW& bovw, const std::string& cacheFilename ){
 
     //Ελεγχος αν υπαρχει ηδη η βαση δεδομενων σε binary αρχειο
     if(fs::exists(cacheFilename)){
@@ -58,7 +58,7 @@ Database::bool loadOrBuild(const std::string& hpatchesDir, const std::string& mi
     //Τωρα θα προσθεσουμε και τις εικόνες θορύβου mirFlickr
     int mirflickrCount=0;
     if(fs::exists(mirflickDir)){
-        for(const auto& entry : fs::directory_index_iterator(mirflickDir)){
+        for(const auto& entry : fs::directory_iterator(mirflickDir)){
             //Ελεγχος αν εχουμε φτασει στο οριο των numMirflickr
             if(mirflickrCount>= numMirflickr){
                 break;

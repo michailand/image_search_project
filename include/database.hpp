@@ -30,6 +30,6 @@ public:
 private:
     //Vector για την αποθηκευση των διανυσματων των εικόνων (BoVW vectors) και των αντίστοιχων ID τους.
     std::vector<DatabaseItem> items_;
-}
+};
 
 }

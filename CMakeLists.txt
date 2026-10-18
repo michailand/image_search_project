@@ -25,6 +25,7 @@ add_executable(image_search_project
     src/sift_extractor.cpp
     src/kmeans.cpp
     src/BoVW.cpp
+    src/database.cpp
 )
 
 
