@@ -27,6 +27,10 @@ public:
     //Αποθηκευση της βάσης δεδομένων σε binary αρχείο
     bool saveBinary(const std::string& filename) const;
 
+    //getter για το vector items_ που περιέχει τα BoVW vectors και τα αντίστοιχα ID τους
+    const std::vector<DatabaseItem>& getItems() const {
+        return items_;
+    }
 private:
     //Vector για την αποθηκευση των διανυσματων των εικόνων (BoVW vectors) και των αντίστοιχων ID τους.
     std::vector<DatabaseItem> items_;
