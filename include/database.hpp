@@ -31,6 +31,7 @@ public:
     const std::vector<DatabaseItem>& getItems() const {
         return items_;
     }
+
 private:
     //Vector για την αποθηκευση των διανυσματων των εικόνων (BoVW vectors) και των αντίστοιχων ID τους.
     std::vector<DatabaseItem> items_;

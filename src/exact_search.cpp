@@ -16,7 +16,27 @@ namespace image_search{
 
 
     std::vector<SearchResult> ExactSearch::search(const std::vector<float>& queryVec, int topK) const {
+        std::vector<SearchResult> results;
+        const auto& items= db_.getItems();
 
+
+        results.reserve(items.size());
+
+        //Ypologismos ths apostasths apo to query me kathe stoixeio ths vasis
+        for(const auto& item: items){
+            float dist= squareDistance(queryVec, item.vec);
+            results.push_back({item.id, dist});
+        }
+
+        //taxinomo gia na vro ta topK kontina stoixeia
+        int k= std::min(topK,static_cast<int>(results.size()));
+        std::partial_sort(results.begin(), results.begin() + k, results.end(),[](const SearchResult& a, const SearchResult& b) {
+            return a.distance < b.distance;
+        });
+
+    //Κρατάμε μόνο τα πρώτα K
+    results.resize(k);
+    return results;
     }
 
 
