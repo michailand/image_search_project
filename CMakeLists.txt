@@ -26,6 +26,7 @@ add_executable(image_search_project
     src/kmeans.cpp
     src/BoVW.cpp
     src/database.cpp
+    src/exact_search.cpp
 )
 
 
