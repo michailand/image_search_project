@@ -8,6 +8,8 @@
 
 #include "database.hpp"
 #include <algorithm>
+#include "exact_search.hpp"
+
 
 int main(){
     std::cout << CV_VERSION << std::endl;
@@ -137,6 +139,58 @@ int main(){
         }
         else{
             std::cerr << "ΠΡΟΣΟΧΗ!!! Η νεα βαση δεδομενων ΔΕΝ δημιουργηθηκε επιτυχως και ΔΕΝ αποθηκευτηκε στο αρχειο: tests/database.bin\n";
+        }
+
+        // --- Test για Exact Search ---
+        std::cout << "\n=== Test Exact Search ===\n";
+
+        // Αρχικοποίηση του Exact Search με τη βάση που έχεις ήδη δημιουργήσει
+        image_search::ExactSearch searcher(db);
+
+        // Εκτέλεση αναζήτησης για κάθε εικόνα του Validation set
+        for (const auto& seq : val) {
+
+            std::string queryPath =
+                "data/hpatches-sequences-release/" + seq + "/1.ppm";
+
+            std::cout << "\nQuery sequence: " << seq << "\n";
+            std::cout << "Query image: " << queryPath << "\n";
+
+            // Εξαγωγή SIFT descriptors
+            cv::Mat descriptors =
+                image_search::extractSIFTDescriptors(queryPath);
+
+            if (descriptors.empty()) {
+                std::cerr << "Σφάλμα: Δεν εξήχθησαν SIFT descriptors.\n";
+                continue;
+            }
+
+            // Δημιουργία BoVW διανύσματος για το query
+            std::vector<float> queryVec = bovw.computeVector(descriptors);
+
+            if (queryVec.empty()) {
+                std::cerr << "Σφάλμα: Το query vector είναι κενό.\n";
+                continue;
+            }
+
+            // Μέτρηση χρόνου αναζήτησης
+            auto start = std::chrono::steady_clock::now();
+
+            // Αναζήτηση των 10 κοντινότερων εικόνων
+            auto results = searcher.search(queryVec, 10);
+
+            auto end = std::chrono::steady_clock::now();
+
+            std::chrono::duration<double, std::milli> elapsed = end - start;
+
+            // Εκτύπωση αποτελεσμάτων
+            std::cout << "Top-" << results.size() << " results:\n";
+
+            for (std::size_t i = 0; i < results.size(); ++i) {
+                std::cout << i + 1  << ". ID: " << results[i].id   << " | Distance: " << results[i].distance  << "\n";
+            }
+
+            std::cout << "Search time: " << elapsed.count() << " ms\n";
         }
 
     }
