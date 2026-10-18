@@ -92,7 +92,16 @@ bool Database::loadOrBuild(const std::string& hpatchesDir, const std::string& mi
     std::cout<<"Φορτωθηκαν συνολικα "<< items_.size() << " εικόνες στη βαση δεδομενων (HPatches + mirFlickr)\n";
 
 
-    //edo tha mpei kodikas gia apothikeysi ths bashs dedomenwn se binary arxeio 
+    //edo tha mpei kodikas gia apothikeysi ths bashs dedomenwn se binary arxeio
+    bool saved= saveBinary(cacheFilename);
+    if(saved){
+        std::cout<< "Η νεα βαση δεδομενων αποθηκευτηκε επιτυχως στο αρχειο: "<< cacheFilename<<"\n";
+    }
+    else{
+        std::cerr<< "ΠΡΟΣΟΧΗ!!! Η νεα βαση δεδομενων ΔΕΝ αποθηκευτηκε επιτυχως στο αρχειο: "<< cacheFilename<<"\n";
+    } 
+
+    return !items_.empty();
 }
 
 
