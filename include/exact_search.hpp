@@ -10,7 +10,7 @@ namespace image_search{
     struct SearchResult{
         std::string id;
         float distance;
-    }
+    };
 
     class ExactSearch {
     public:
@@ -19,11 +19,13 @@ namespace image_search{
         ExactSearch(const Database& db);
 
         //Synarthsh exantlitikis anazitisis
-
+        std::vector<SearchResult> search(const std::vector<float>& queryVec, int topK=10) const;
 
     private:
         //Synartisi gia ton ypologismo ths eykleidias apostasis
         static float squareDistance(const std::vector<float>& a,const std::vector<float>& b);
+
+        const Database& db_;
     };
 
 }
