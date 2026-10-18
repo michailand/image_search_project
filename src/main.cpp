@@ -126,6 +126,18 @@ int main(){
 
         bool dbCreated= db.loadOrBuild("data/hpatches-sequences-release","data/mirflickr",split,image_search::SetType::VALIDATION,1000,bovw,"tests/database.bin");
     
+        if(dbCreated){
+            std::cout << "Η νεα βαση δεδομενων δημιουργηθηκε επιτυχως και αποθηκευτηκε στο αρχειο: tests/database.bin\n";
+            
+            const auto& items= db.getItems();
+            std::cout << "Η νεα βαση δεδομενων περιεχει συνολικα " << items.size() << " αντικείμενα (εικόνες)\n";   
+            for (size_t i = 0; i < std::min(size_t(3), items.size()); ++i) {
+            std::cout << " Item " << i << " -> ID: " << items[i].id  << " Vector size: " << items[i].vec.size() << "\n";
+        }
+        }
+        else{
+            std::cerr << "ΠΡΟΣΟΧΗ!!! Η νεα βαση δεδομενων ΔΕΝ δημιουργηθηκε επιτυχως και ΔΕΝ αποθηκευτηκε στο αρχειο: tests/database.bin\n";
+        }S
 
     }
     else{
