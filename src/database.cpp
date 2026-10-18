@@ -10,56 +10,56 @@ namespace image_search{
 
 bool Database::loadOrBuild(const std::string& hpatchesDir, const std::string& mirflickDir, const DatasetSplit& split, SetType setType, int numMirflickr, BoVW& bovw, const std::string& cacheFilename ){
 
-    //Ελεγχος αν υπαρχει ηδη η βαση δεδομενων σε binary αρχειο
+    //Ξ•Ξ»ΞµΞ³Ο‡ΞΏΟ‚ Ξ±Ξ½ Ο…Ο€Ξ±ΟΟ‡ΞµΞΉ Ξ·Ξ΄Ξ· Ξ· Ξ²Ξ±ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½ ΟƒΞµ binary Ξ±ΟΟ‡ΞµΞΉΞΏ
     if(fs::exists(cacheFilename)){
-        std::cout<< "Φορτωση της προυπαρχουσας βασης δεδομενων απο το αρχειο: "<< cacheFilename<<"\n";
+        std::cout<< "Ξ¦ΞΏΟΟ„Ο‰ΟƒΞ· Ο„Ξ·Ο‚ Ο€ΟΞΏΟ…Ο€Ξ±ΟΟ‡ΞΏΟ…ΟƒΞ±Ο‚ Ξ²Ξ±ΟƒΞ·Ο‚ Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½ Ξ±Ο€ΞΏ Ο„ΞΏ Ξ±ΟΟ‡ΞµΞΉΞΏ: "<< cacheFilename<<"\n";
         bool loadedDatabase= loadBinary(cacheFilename);
         if(loadedDatabase){
-            std::cout<< "Η προυπαρχουσα βαση δεδομενων φορτωθηκε επιτυχως απο το αρχειο: "<< cacheFilename<<"\n";
+            std::cout<< "Ξ— Ο€ΟΞΏΟ…Ο€Ξ±ΟΟ‡ΞΏΟ…ΟƒΞ± Ξ²Ξ±ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½ Ο†ΞΏΟΟ„Ο‰ΞΈΞ·ΞΊΞµ ΞµΟ€ΞΉΟ„Ο…Ο‡Ο‰Ο‚ Ξ±Ο€ΞΏ Ο„ΞΏ Ξ±ΟΟ‡ΞµΞΉΞΏ: "<< cacheFilename<<"\n";
             return true;
 
         }
         else{
-            std::cerr<< "ΠΡΟΣΟΧΗ!!! Η προυπαρχουσα βαση δεδομενων ΔΕΝ φορτωθηκε επιτυχως απο το αρχειο: "<< cacheFilename<<"\n";
-            std::cerr<< "Θα δημιουργηθει νεα βαση δεδομενων και θα αποθηκευτει στο αρχειο: "<< cacheFilename<<"\n";
+            std::cerr<< "Ξ Ξ΅ΞΞ£ΞΞ§Ξ—!!! Ξ— Ο€ΟΞΏΟ…Ο€Ξ±ΟΟ‡ΞΏΟ…ΟƒΞ± Ξ²Ξ±ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½ Ξ”Ξ•Ξ Ο†ΞΏΟΟ„Ο‰ΞΈΞ·ΞΊΞµ ΞµΟ€ΞΉΟ„Ο…Ο‡Ο‰Ο‚ Ξ±Ο€ΞΏ Ο„ΞΏ Ξ±ΟΟ‡ΞµΞΉΞΏ: "<< cacheFilename<<"\n";
+            std::cerr<< "ΞΞ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ·ΞΈΞµΞΉ Ξ½ΞµΞ± Ξ²Ξ±ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½ ΞΊΞ±ΞΉ ΞΈΞ± Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟ…Ο„ΞµΞΉ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞΉΞΏ: "<< cacheFilename<<"\n";
 
         }
     }
 
     auto sequences= split.getSequences(setType);
 
-    //αδειαζω το vector items_ για να δημιουργησω νεα βαση δεδομενων
+    //Ξ±Ξ΄ΞµΞΉΞ±Ξ¶Ο‰ Ο„ΞΏ vector items_ Ξ³ΞΉΞ± Ξ½Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ·ΟƒΟ‰ Ξ½ΞµΞ± Ξ²Ξ±ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½
     items_.clear();
 
-    std::cout<< "Εναρξη δημιουργιας νεας βασης δεδομενων για " << sequences.size() << " ακολουθιες HPatches και θορυβο " << numMirflickr << " εικόνες θορύβου mirFlickr\n";  
+    std::cout<< "Ξ•Ξ½Ξ±ΟΞΎΞ· Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³ΞΉΞ±Ο‚ Ξ½ΞµΞ±Ο‚ Ξ²Ξ±ΟƒΞ·Ο‚ Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½ Ξ³ΞΉΞ± " << sequences.size() << " Ξ±ΞΊΞΏΞ»ΞΏΟ…ΞΈΞΉΞµΟ‚ HPatches ΞΊΞ±ΞΉ ΞΈΞΏΟΟ…Ξ²ΞΏ " << numMirflickr << " ΞµΞΉΞΊΟΞ½ΞµΟ‚ ΞΈΞΏΟΟΞ²ΞΏΟ… mirFlickr\n";  
     int hpatchesCount=0;
-    //ξεκιναμε με την προσθηκη των ακολουθιων HPatches (από Ι2 έως και Ι6)
+    //ΞΎΞµΞΊΞΉΞ½Ξ±ΞΌΞµ ΞΌΞµ Ο„Ξ·Ξ½ Ο€ΟΞΏΟƒΞΈΞ·ΞΊΞ· Ο„Ο‰Ξ½ Ξ±ΞΊΞΏΞ»ΞΏΟ…ΞΈΞΉΟ‰Ξ½ HPatches (Ξ±Ο€Ο Ξ™2 Ξ­Ο‰Ο‚ ΞΊΞ±ΞΉ Ξ™6)
     for(const auto& seqName: sequences){
         for(int imgIdx=2;imgIdx<=6;imgIdx++){
-            //Για καθε ακολουθια φτιαχνουμε το path της εικονας
+            //Ξ“ΞΉΞ± ΞΊΞ±ΞΈΞµ Ξ±ΞΊΞΏΞ»ΞΏΟ…ΞΈΞΉΞ± Ο†Ο„ΞΉΞ±Ο‡Ξ½ΞΏΟ…ΞΌΞµ Ο„ΞΏ path Ο„Ξ·Ο‚ ΞµΞΉΞΊΞΏΞ½Ξ±Ο‚
             std::string imgPath= hpatchesDir+ "/" + seqName + "/" + std::to_string(imgIdx) + ".ppm";
-            //ΕΞΑΓΩΓΗ SIFT descriptors για την εικονα ωστε μετα να μπορεσουμε να φτιαξουμε το BoVW vector της
+            //Ξ•ΞΞ‘Ξ“Ξ©Ξ“Ξ— SIFT descriptors Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞµΞΉΞΊΞΏΞ½Ξ± Ο‰ΟƒΟ„Ξµ ΞΌΞµΟ„Ξ± Ξ½Ξ± ΞΌΟ€ΞΏΟΞµΟƒΞΏΟ…ΞΌΞµ Ξ½Ξ± Ο†Ο„ΞΉΞ±ΞΎΞΏΟ…ΞΌΞµ Ο„ΞΏ BoVW vector Ο„Ξ·Ο‚
             cv::Mat desc= extractSIFTDescriptors(imgPath);
 
             if(!desc.empty()){
-                //Παιρνουμε το BoVW vector για την εικονα
+                //Ξ Ξ±ΞΉΟΞ½ΞΏΟ…ΞΌΞµ Ο„ΞΏ BoVW vector Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞµΞΉΞΊΞΏΞ½Ξ±
                 std::vector<float> vec= bovw.computeVector(desc);
                 std::string itemId= seqName + "_" + std::to_string(imgIdx);
 
-                //Προσθηκη του νεου αντικειμενου στη βαση δεδομενων
+                //Ξ ΟΞΏΟƒΞΈΞ·ΞΊΞ· Ο„ΞΏΟ… Ξ½ΞµΞΏΟ… Ξ±Ξ½Ο„ΞΉΞΊΞµΞΉΞΌΞµΞ½ΞΏΟ… ΟƒΟ„Ξ· Ξ²Ξ±ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½
                 items_.push_back({itemId, vec});
                 hpatchesCount++;
             }
         }
     }
 
-    std::cout<<"Φορτωθηκαν "<< hpatchesCount << " εικόνες απο τη βαση δεδομενων HPatches\n";
+    std::cout<<"Ξ¦ΞΏΟΟ„Ο‰ΞΈΞ·ΞΊΞ±Ξ½ "<< hpatchesCount << " ΞµΞΉΞΊΟΞ½ΞµΟ‚ Ξ±Ο€ΞΏ Ο„Ξ· Ξ²Ξ±ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½ HPatches\n";
 
-    //Τωρα θα προσθεσουμε και τις εικόνες θορύβου mirFlickr
+    //Ξ¤Ο‰ΟΞ± ΞΈΞ± Ο€ΟΞΏΟƒΞΈΞµΟƒΞΏΟ…ΞΌΞµ ΞΊΞ±ΞΉ Ο„ΞΉΟ‚ ΞµΞΉΞΊΟΞ½ΞµΟ‚ ΞΈΞΏΟΟΞ²ΞΏΟ… mirFlickr
     int mirflickrCount=0;
     if(fs::exists(mirflickDir)){
         for(const auto& entry : fs::directory_iterator(mirflickDir)){
-            //Ελεγχος αν εχουμε φτασει στο οριο των numMirflickr
+            //Ξ•Ξ»ΞµΞ³Ο‡ΞΏΟ‚ Ξ±Ξ½ ΞµΟ‡ΞΏΟ…ΞΌΞµ Ο†Ο„Ξ±ΟƒΞµΞΉ ΟƒΟ„ΞΏ ΞΏΟΞΉΞΏ Ο„Ο‰Ξ½ numMirflickr
             if(mirflickrCount>= numMirflickr){
                 break;
             }
@@ -70,8 +70,8 @@ bool Database::loadOrBuild(const std::string& hpatchesDir, const std::string& mi
                     std::string imgPath= entry.path().string();
                     cv::Mat desc= extractSIFTDescriptors(imgPath);
                 
-                    //αρχικά ελέγχουμε αν η εικονα εχει descreiptors και αν ναι τοτε προχωραμε στην δημιουργια του BoVW vector της
-                    // και αυξανουμε και το μετρητή mirflickrCount για να ξερουμε ποσες εικόνες θορύβου εχουμε προσθεσει στη βαση δεδομενων
+                    //Ξ±ΟΟ‡ΞΉΞΊΞ¬ ΞµΞ»Ξ­Ξ³Ο‡ΞΏΟ…ΞΌΞµ Ξ±Ξ½ Ξ· ΞµΞΉΞΊΞΏΞ½Ξ± ΞµΟ‡ΞµΞΉ descreiptors ΞΊΞ±ΞΉ Ξ±Ξ½ Ξ½Ξ±ΞΉ Ο„ΞΏΟ„Ξµ Ο€ΟΞΏΟ‡Ο‰ΟΞ±ΞΌΞµ ΟƒΟ„Ξ·Ξ½ Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³ΞΉΞ± Ο„ΞΏΟ… BoVW vector Ο„Ξ·Ο‚
+                    // ΞΊΞ±ΞΉ Ξ±Ο…ΞΎΞ±Ξ½ΞΏΟ…ΞΌΞµ ΞΊΞ±ΞΉ Ο„ΞΏ ΞΌΞµΟ„ΟΞ·Ο„Ξ® mirflickrCount Ξ³ΞΉΞ± Ξ½Ξ± ΞΎΞµΟΞΏΟ…ΞΌΞµ Ο€ΞΏΟƒΞµΟ‚ ΞµΞΉΞΊΟΞ½ΞµΟ‚ ΞΈΞΏΟΟΞ²ΞΏΟ… ΞµΟ‡ΞΏΟ…ΞΌΞµ Ο€ΟΞΏΟƒΞΈΞµΟƒΞµΞΉ ΟƒΟ„Ξ· Ξ²Ξ±ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½
                     if(!desc.empty()){
                         std::vector<float> vec= bovw.computeVector(desc);
                         std::string filename= entry.path().filename().string();
@@ -80,8 +80,8 @@ bool Database::loadOrBuild(const std::string& hpatchesDir, const std::string& mi
                         items_.push_back({filename, vec});
                         
                         if(mirflickrCount % 1000==0 ){
-                            std::cout<< "Προστέθηκαν "<< mirflickrCount << " εικόνες θορύβου mirFlickr στη βαση δεδομενων\n";
-                            std::cout<< "Απομένουν "<< (numMirflickr - mirflickrCount) << " εικόνες θορύβου mirFlickr για προσθήκη στη βαση δεδομενων\n";
+                            std::cout<< "Ξ ΟΞΏΟƒΟ„Ξ­ΞΈΞ·ΞΊΞ±Ξ½ "<< mirflickrCount << " ΞµΞΉΞΊΟΞ½ΞµΟ‚ ΞΈΞΏΟΟΞ²ΞΏΟ… mirFlickr ΟƒΟ„Ξ· Ξ²Ξ±ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½\n";
+                            std::cout<< "Ξ‘Ο€ΞΏΞΌΞ­Ξ½ΞΏΟ…Ξ½ "<< (numMirflickr - mirflickrCount) << " ΞµΞΉΞΊΟΞ½ΞµΟ‚ ΞΈΞΏΟΟΞ²ΞΏΟ… mirFlickr Ξ³ΞΉΞ± Ο€ΟΞΏΟƒΞΈΞ®ΞΊΞ· ΟƒΟ„Ξ· Ξ²Ξ±ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½\n";
                         }
                     }
                 }
@@ -89,19 +89,19 @@ bool Database::loadOrBuild(const std::string& hpatchesDir, const std::string& mi
         }
     }
     else{
-        std::cerr<< "ΠΡΟΣΟΧΗ!!! Ο φάκελος mirFlickr δεν βρέθηκε: "<< mirflickDir << "\n";
+        std::cerr<< "Ξ Ξ΅ΞΞ£ΞΞ§Ξ—!!! Ξ Ο†Ξ¬ΞΊΞµΞ»ΞΏΟ‚ mirFlickr Ξ΄ΞµΞ½ Ξ²ΟΞ­ΞΈΞ·ΞΊΞµ: "<< mirflickDir << "\n";
     }
 
-    std::cout<<"Φορτωθηκαν συνολικα "<< items_.size() << " εικόνες στη βαση δεδομενων (HPatches + mirFlickr)\n";
+    std::cout<<"Ξ¦ΞΏΟΟ„Ο‰ΞΈΞ·ΞΊΞ±Ξ½ ΟƒΟ…Ξ½ΞΏΞ»ΞΉΞΊΞ± "<< items_.size() << " ΞµΞΉΞΊΟΞ½ΞµΟ‚ ΟƒΟ„Ξ· Ξ²Ξ±ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½ (HPatches + mirFlickr)\n";
 
 
     //edo tha mpei kodikas gia apothikeysi ths bashs dedomenwn se binary arxeio
     bool saved= saveBinary(cacheFilename);
     if(saved){
-        std::cout<< "Η νεα βαση δεδομενων αποθηκευτηκε επιτυχως στο αρχειο: "<< cacheFilename<<"\n";
+        std::cout<< "Ξ— Ξ½ΞµΞ± Ξ²Ξ±ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½ Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟ…Ο„Ξ·ΞΊΞµ ΞµΟ€ΞΉΟ„Ο…Ο‡Ο‰Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞΉΞΏ: "<< cacheFilename<<"\n";
     }
     else{
-        std::cerr<< "ΠΡΟΣΟΧΗ!!! Η νεα βαση δεδομενων ΔΕΝ αποθηκευτηκε επιτυχως στο αρχειο: "<< cacheFilename<<"\n";
+        std::cerr<< "Ξ Ξ΅ΞΞ£ΞΞ§Ξ—!!! Ξ— Ξ½ΞµΞ± Ξ²Ξ±ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½ Ξ”Ξ•Ξ Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟ…Ο„Ξ·ΞΊΞµ ΞµΟ€ΞΉΟ„Ο…Ο‡Ο‰Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞΉΞΏ: "<< cacheFilename<<"\n";
     } 
 
     return !items_.empty();
@@ -111,22 +111,22 @@ bool Database::loadOrBuild(const std::string& hpatchesDir, const std::string& mi
 bool Database::saveBinary(const std::string& filename) const{
     std::ofstream out(filename, std::ios::binary);
     if(!out.is_open()){
-        std::cerr<< "ΠΡΟΣΟΧΗ!!! Αδυναμία ανοίγματος αρχείου για αποθήκευση: "<< filename << "\n";
+        std::cerr<< "Ξ Ξ΅ΞΞ£ΞΞ§Ξ—!!! Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ξ³ΞΉΞ± Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·: "<< filename << "\n";
         return false;
     }
 
     //plitos antikeimenon gia grapsimo
     size_t totalItems= items_.size();
-    //Πρωτη θεση του αρχειου κραταει τα  metadata δηλαδη το μεγεθος του αρχειου
+    //Ξ ΟΟ‰Ο„Ξ· ΞΈΞµΟƒΞ· Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞΉΞΏΟ… ΞΊΟΞ±Ο„Ξ±ΞµΞΉ Ο„Ξ±  metadata Ξ΄Ξ·Ξ»Ξ±Ξ΄Ξ· Ο„ΞΏ ΞΌΞµΞ³ΞµΞΈΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞΉΞΏΟ…
     out.write(reinterpret_cast<const char*>(&totalItems), sizeof(size_t));
 
     for (const auto& item : items_) {
-        // Γράφουμε το ID (μέγεθος string + χαρακτήρες)
+        // Ξ“ΟΞ¬Ο†ΞΏΟ…ΞΌΞµ Ο„ΞΏ ID (ΞΌΞ­Ξ³ΞµΞΈΞΏΟ‚ string + Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞµΟ‚)
         size_t idSize = item.id.size();
         out.write(reinterpret_cast<const char*>(&idSize), sizeof(size_t));
         out.write(item.id.data(), idSize);
 
-        // Γράφουμε το διάνυσμα (μέγεθος vector + δεδομένα floats)
+        // Ξ“ΟΞ¬Ο†ΞΏΟ…ΞΌΞµ Ο„ΞΏ Ξ΄ΞΉΞ¬Ξ½Ο…ΟƒΞΌΞ± (ΞΌΞ­Ξ³ΞµΞΈΞΏΟ‚ vector + Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ξ± floats)
         size_t vecSize = item.vec.size();
         out.write(reinterpret_cast<const char*>(&vecSize), sizeof(size_t));
         out.write(reinterpret_cast<const char*>(item.vec.data()), vecSize * sizeof(float));
@@ -141,7 +141,7 @@ bool Database::saveBinary(const std::string& filename) const{
 bool Database::loadBinary(const std::string& filename){
     std::ifstream in(filename, std::ios::binary);
     if(!in.is_open()){
-        std::cerr<< "ΠΡΟΣΟΧΗ!!! Αδυναμία ανοίγματος αρχείου: "<< filename << "\n";
+        std::cerr<< "Ξ Ξ΅ΞΞ£ΞΞ§Ξ—!!! Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…: "<< filename << "\n";
         return false;
     }
 
