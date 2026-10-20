@@ -12,6 +12,27 @@
 #include "metrics.hpp"
 #include <chrono>
 
+
+// Προκειμένου να δεχομαστε ορισματα με χρηση flags απο την main θα φτιαξουμε μια συνάρτηση η οποια
+// θα διαβαζει την CLI και θα αποθηκευει σε ενα struct αυτα τα ορισματα
+
+struct Config{
+
+
+
+};
+
+
+Config parseArgs(int args, char** argv){
+
+    
+}
+
+
+
+
+
+
 int main(){
     std::cout << CV_VERSION << std::endl;
 
