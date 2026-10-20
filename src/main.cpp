@@ -69,6 +69,26 @@ Config parseArgs(int argc, char** argv){
         else if( (arg == "-mir") && (i+1<argc) ) cfg.mirflickrDir = argv[++i];
         else if( (arg == "-split") && (i+1<argc) ) cfg.splitFile = argv[++i];
         else if( (arg == "-vocab") && (i+1<argc) ) cfg.K = std::stoi(argv[++i]);
+        else if( (arg == "-S") && (i+1<argc) ) cfg.S = std::stoi(argv[++i]);
+        else if( (arg == "-D") && (i+1<argc) ) cfg.D = std::stoi(argv[++i]);
+        else if( (arg == "-set") && (i+1<argc) ) cfg.querySet = argv[++i];
+        else if( (arg == "-o") && (i+1<argc) ) cfg.outputFile = argv[++i];
+        else if( (arg == "-seed") && (i+1<argc) ) cfg.seed =std::stoi(argv[++i]);
+
+        //Αποθηκευετε η μεθοδος αναζητησης
+        else if(arg=="-exact") cfg.method= "exact";
+        else if(arg=="-ivfflat") cfg.method= "ivfflat";
+        else if(arg=="-ivfpq") cfg.method= "ivfpq";
+        else if(arg=="-lsh") cfg.method= "lsh";
+        else if(arg=="-hypercube") cfg.method= "hypercube";
+
+        //Αποθηκεύονται οι παραμετροι των μεθόδων
+        //LSH
+        else if((arg=="-k") && (i+1<argc)) cfg.lsh_k= std::stoi(argv[++i]);
+        else if((arg=="-L") && (i+1<argc)) cfg.lsh_L= std::stoi(argv[++i]);
+
+
+
 
 
     }
