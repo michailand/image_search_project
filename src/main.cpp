@@ -17,15 +17,31 @@
 // θα διαβαζει την CLI και θα αποθηκευει σε ενα struct αυτα τα ορισματα
 
 struct Config{
+    //Θα δώσουμε και default τιμές στις παραμέτρους
+    std::string hpatchesDir = "data/hpatches-sequences-release";
+    std::string mirflickrDir="data/mirflickr";
+    std::string splitFile= "split.txt";
+
+    int K=100;  // -vocab
+    int S=500; //-S
+    int D=1000; //-D
+
+    std::string querySet="validation"; //-set
+    std::string outputFile="output.txt"; //-o
+
+    int seed=1; //-seed
+
+    //Εδώ θα βαζουμε την μέθοδο που ζήτησε ο χρήστης
+    std::string method ="exact";
 
 
 
 };
 
-
+// Εδω θα υλοποιηθεί ο Parser της CLI
 Config parseArgs(int args, char** argv){
 
-    
+
 }
 
 
