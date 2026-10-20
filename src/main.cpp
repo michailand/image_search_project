@@ -35,18 +35,42 @@ struct Config{
     std::string method ="exact"; //Η μέϑοδος αναζήτησης επιλέγεται με μία από τις παραμέτρους
                                 //-exact -lsh -hypercube -ivfflat -ivfpq
 
+    //LSH flags
+    int lsh_k=4; //πλήϑος των συναρτήσεων hi που συνϑέτουν kάϑε συνάρτηση kαταkερματισμού g. 
+    int lsh_L=5; // πλήϑος των πινάkων kαταkερματισμού.
+    double lsh_w=0.05; //μήkος του kελιού επί της ευϑείας προβολής.
+
+    //Hypercube flags
+    int hc_kproj = 10; //διάσταση d′του υπερkύβου στον οποίο προβάλλονται τα σημεία.
+    double hc_w = 0.05; //μήkος του kελιού επί της ευϑείας προβολής. 
+    int hc_M = 500; //μέγιστο πλήϑος υποψήφιων σημείων που ελέγχονται.
+    int hc_probes = 10;// μέγιστο πλήϑος kορυφών του υπερkύβου που ελέγχονται.
+
+    // IVFFlat & IVFPQ Flags
+    int ivf_kclusters = 0; //πλήϑος συστάδων του ευρετηρίου.  το "0" σημαίνει υπολόγισε το ceil(sqrt(n))
+    int ivf_nprobe = 5; // πλήϑος των πλησιέστερων συστάδων που ελέγχονται kατά την αναζήτηση.
+    
+    //IVFPQ Flags
+    int pq_M = 16; //πλήϑος υποδιανυσμάτων του Product Quantization. Το K πρέπει να διαιρείται αkριβώς με το M. 
+    int pq_nbits = 8; //kάϑε υποχώρος συσταδοποιείται σε 2 nbits συστάδες.
 
 };
 
 // Εδω θα υλοποιηθεί ο Parser της CLI
-Config parseArgs(int args, char** argv){
+Config parseArgs(int argc, char** argv){
     //Εδω θα αποθηκευτεί το output
     Config cfg;
 
-    for(int i=0;i<args;i++){
+    for(int i=0;i<argc;i++){
         std::string arg=argv[i];
 
-        if(arg == "-hp")
+        //Πάντα θα ελέγχουμε αν το flag που εξετάζουμε ειναι το τελευταιο. Γιατι? Για να αποφυγουμε seg fault οταν παμε να διαβασουμε/ελέγξουμε αν ακολουθει μετά το flag τιμή 
+        if( (arg == "-hp") && (i+1<argc) ) cfg.hpatchesDir = argv[++i];
+        else if( (arg == "-mir") && (i+1<argc) ) cfg.mirflickrDir = argv[++i];
+        else if( (arg == "-split") && (i+1<argc) ) cfg.splitFile = argv[++i];
+        else if( (arg == "-vocab") && (i+1<argc) ) cfg.K = std::stoi(argv[++i]);
+
+
     }
 
 }
