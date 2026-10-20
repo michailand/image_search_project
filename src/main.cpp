@@ -106,8 +106,6 @@ Config parseArgs(int argc, char** argv){
         else if (arg == "-nbits" && i +1 < argc) cfg.pq_nbits = std::stoi(argv[++i]);
 
 
-
-
     }
     
     return cfg;
@@ -118,7 +116,12 @@ Config parseArgs(int argc, char** argv){
 
 
 
-int main(){
+int main(int argc, char** argv){
+    //Κλήση Parser για την συλλογη των flags απο CLI
+    std::cout<< "Κλήση του CLI Parser";
+    Config cfg= parseArgs(argc,argv);
+    std::cout<< "Λήξη του CLI Parser";
+
     std::cout << CV_VERSION << std::endl;
 
     image_search::DatasetSplit split;
