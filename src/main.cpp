@@ -87,12 +87,30 @@ Config parseArgs(int argc, char** argv){
         else if((arg=="-k") && (i+1<argc)) cfg.lsh_k= std::stoi(argv[++i]);
         else if((arg=="-L") && (i+1<argc)) cfg.lsh_L= std::stoi(argv[++i]);
 
+        else if((arg == "-w") && (i+ 1 < argc)){
+            cfg.lsh_w = std::stod(argv[i+1]);
+            cfg.hc_w = std::stod(argv[++i]);
+        }
+        else if((arg == "-M") && (i+ 1 < argc)){
+            cfg.hc_M = std::stoi(argv[i+1]);
+            cfg.pq_M = std::stoi(argv[++i]);
+        }
+
+        //hypercube
+        else if((arg == "-kproj") && (i+ 1 < argc)) cfg.hc_kproj=std::stoi(argv[++i]);
+        else if((arg == "-probes") && (i+ 1 < argc)) cfg.hc_probes=std::stoi(argv[++i]);
+
+        //IVFFlat & IVFPQ
+        else if (arg == "-kclusters" && i +1 < argc) cfg.ivf_kclusters = std::stoi(argv[++i]);
+        else if (arg == "-nprobe" && i +1 < argc) cfg.ivf_nprobe = std::stoi(argv[++i]);
+        else if (arg == "-nbits" && i +1 < argc) cfg.pq_nbits = std::stoi(argv[++i]);
 
 
 
 
     }
-
+    
+    return cfg;
 }
 
 
