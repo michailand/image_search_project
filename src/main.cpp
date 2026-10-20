@@ -18,29 +18,36 @@
 
 struct Config{
     //Θα δώσουμε και default τιμές στις παραμέτρους
-    std::string hpatchesDir = "data/hpatches-sequences-release";
-    std::string mirflickrDir="data/mirflickr";
-    std::string splitFile= "split.txt";
+    std::string hpatchesDir = "data/hpatches-sequences-release";  //kατάλογος του HPatches.
+    std::string mirflickrDir="data/mirflickr"; // kατάλογος του MIRFlickr-25K.
+    std::string splitFile= "split.txt"; // αρχείο με τον διαχωρισμό training, validation kαι test.
 
-    int K=100;  // -vocab
-    int S=500; //-S
-    int D=1000; //-D
+    int K=100;  // -vocab αριϑμός K των kέντρων του kmeans των SIFT descriptors.
+    int S=500; //-S μέγιστο πλήϑος SIFT descriptors ανά training image για την εkπαίδευση του k-means.
+    int D=1000; //-D πλήϑος ειkόνων MIRFlickr
 
-    std::string querySet="validation"; //-set
-    std::string outputFile="output.txt"; //-o
+    std::string querySet="validation"; //-set σύνολο queries.
+    std::string outputFile="output.txt"; //-o αρχείο εξόδου.
 
-    int seed=1; //-seed
+    int seed=1; //-seed φύτρο ψευδοτυχαίων αριϑμών.
 
     //Εδώ θα βαζουμε την μέθοδο που ζήτησε ο χρήστης
-    std::string method ="exact";
-
+    std::string method ="exact"; //Η μέϑοδος αναζήτησης επιλέγεται με μία από τις παραμέτρους
+                                //-exact -lsh -hypercube -ivfflat -ivfpq
 
 
 };
 
 // Εδω θα υλοποιηθεί ο Parser της CLI
 Config parseArgs(int args, char** argv){
+    //Εδω θα αποθηκευτεί το output
+    Config cfg;
 
+    for(int i=0;i<args;i++){
+        std::string arg=argv[i];
+
+        if(arg == "-hp")
+    }
 
 }
 
