@@ -124,8 +124,20 @@ int main(int argc, char** argv){
 
     std::cout << CV_VERSION << std::endl;
 
-    image_search::DatasetSplit split;
+    std::cout << "Εναρξη image_search project\n";
+    std::cout << "Ακολουθεί η παράθεση των παραμέτρων και των μεθόδων που ορίστηκαν από τον χρήστη\n";
+
+    std::cout << "Μέθοδος: " << cfg.method << " | QuerySet: " << cfg.querySet << "\n";
+    std::cout << "Παράμετροι: Vocab(K)=" << cfg.K << " | S=" << cfg.S << " | D=" << cfg.D << "\n\n";
+
+    std::cout << "Κλήση μεθόδου για το διάβασμα του αρχείου split\n";
+
     //Φορτωνουμε το split.txt και αποθηκευουμε τα sequences σε vector αναλογα τον τύπο (SetType) της ακολουθίας
+    image_search::DatasetSplit split;
+    
+    
+    
+    
     if(split.loadFromFile("split.txt")){
         auto train=split.getSequences(image_search::SetType::TRAIN);
         auto val=split.getSequences(image_search::SetType::VALIDATION);
