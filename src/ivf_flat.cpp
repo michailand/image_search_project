@@ -79,4 +79,7 @@ namespace image_search{
         std::cout << "[IVFFlat] To Inverted Index είναι έτοιμο. Τελος ενταξης των εικονων του λεξικου στις " << kclusters_ << " συστάδες\n";
     }
 
+
+    
+
 }

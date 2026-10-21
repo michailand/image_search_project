@@ -16,6 +16,9 @@ class IVFFlat {
         //constructor για την IVFFlat
         IVFFlat(const Database& db, int kclusters, int seed);
 
+        //Συνάρτηση για την αναζητηση IVFFlat η οποια δεχεται την εικονα (query ...1.ppm) , το μεγιστο απο τους cluster(nprobe) που θα ελεγξει, τις πιο ομοιες εικονες που θα βρει (Κ)
+        std::vector<SearchResult> search(std::vector<float>& queryVec, int nprobe, int topK = 10) const;
+
     private:
 
         //Εδω θα κραταμε την βαση δεδομενων με τις εικονες σε BovW μορφη, το πλήθος των clusters   που θελουμε να φτιαξουμε, τα ίδια τα clusters που φτιάξαμε
