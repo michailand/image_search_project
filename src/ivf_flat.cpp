@@ -8,7 +8,7 @@
 
 namespace image_search{
 
-    float IVFFlat::squareDistance(const std::vector<float>& a,const std::vector<float>& b){
+    float IVFFlat::squaredDistance(const std::vector<float>& a,const std::vector<float>& b){
         float sum= 0.0f;
         for(size_t i=0;i<a.size();i++){
             float diff= a[i]-b[i];
@@ -59,7 +59,8 @@ namespace image_search{
                 for (int j=0;j<K; j++){
                     centroidVec[j]= centroids_.at<float>(c,j);
                 }
-                squareDistance(items[i].vec,centroids)
+
+                // float dist= squaredDistance(items[i].vec,centroids_)
 
             }
         }
