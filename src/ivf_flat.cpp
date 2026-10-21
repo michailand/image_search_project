@@ -50,7 +50,19 @@ namespace image_search{
 
 
         //Αφου εχουμε τα νεα κεντρα του λεξικου θα ψαξουμε να βρουμε για καθε εικονα του λεξικου ποιο κεντρο εχει ποιο κοντινο της και θα την ενταξουμε σε αυτο
-        std::cout<< "Ενα"
+        std::cout<< "Εναρξη ενταξης των εικονων του λεξικου στις " << kclusters_ << " συστάδες\n";
+        for(int i=0; i<n; i++){// Gia oles tis eikones toy lexikoy( database db_) ypologise thn apostasi apo kathe centroids_
+            
+            for(int c=0;c<kclusters_; c++){
+                //θα μετατρεψω παλι τον πίνακα centroids_ απο Ματ σε βεκτορ για να μπορεσω να υπολογισω τις ευκλειδιες αποστασεις
+                std::vector<float> centroidVec(K);
+                for (int j=0;j<K; j++){
+                    centroidVec[j]= centroids_.at<float>(c,j);
+                }
+                squareDistance(items[i].vec,centroids)
+
+            }
+        }
     }
 
 }
