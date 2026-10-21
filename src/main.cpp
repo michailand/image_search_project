@@ -221,6 +221,12 @@ int main(int argc, char** argv){
 
         }
     }
+    else if (cfg.method == "ivfflat"){
+
+    }
+    else if (cfg.method == "ivfflat"){
+
+    }
 
 
     //--- Εκτύπωση των αποτελεσμάτων
