@@ -27,6 +27,16 @@ namespace image_search{
             kclusters_=static_cast<int>(std::ceil(std::sqrt(n)));
             std::cout << "[IVFFlat] Αυτόματος υπολογισμός kclusters: "<< kclusters_ << "\n";
         }
+
+        if(n==0){
+            std::cout<<"ΠΡΟΣΟΧΗ!!! Το πλήθος εικόνων της Database σου ειναι ΜΗΔΕΝΙΚΟ \n";
+            return;
+        }
+
+        //Επειδή τα διανύσματα του Database δεν ειναι τυπου Mat θα πρεπει να τα μετατρεψουμε σε Μat πριν εφαρμοστει ο αλγοριθμος K-means
+        for(int i=0;i<n;i++){
+            for(int j=0;j<)
+        }
     }
 
 }
