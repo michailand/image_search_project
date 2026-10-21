@@ -28,6 +28,7 @@ add_executable(image_search_project
     src/database.cpp
     src/exact_search.cpp
     src/metrics.cpp
+    src/ivf_flat.cpp
 )
 
 
