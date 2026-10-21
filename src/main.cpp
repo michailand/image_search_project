@@ -188,12 +188,15 @@ int main(int argc, char** argv){
 
     //--- Εκτέλεση της επιλεγμένης από τον χρηστη μεθόδου
     
-
+    //Μεταβλητές για τον υπολογισμο των μετρικών (κοινές για καθε μεθοδο)
+    float sumRecall5 = 0.0f, sumRecall10 = 0.0f, sumAP10 = 0.0f;
+    double sumSearchTimeMs = 0.0; //κραταει ποσο συνολικο χρονο χρειάζεται η μεθοδος exact search να βρει τις κοντινες εικονες για το καθε query του set
+    int numQueries = targetSet.size();
+    
+    //Μέθοδος Exact Search
     if(cfg.method == "exact"){
         std::cout<< "Εχει επιλεγει η μέθοδος Exact Search\n";
         std::cout<< "Εναρξη εκτέλεσης: Exact Search\n";
-
-        double sumSearchTimeMs = 0.0; //κραταει ποσο συνολικο χρονο χρειάζεται η μεθοδος exact search να βρει τις κοντινες εικονες για το καθε query του set
 
         image_search::ExactSearch searcher(db);
 
@@ -210,8 +213,24 @@ int main(int argc, char** argv){
             auto results = searcher.search(queryVec, 10);
             auto end = std::chrono::high_resolution_clock::now();
 
+            sumSearchTimeMs += std::chrono::duration<double, std::milli>(end - start).count();
+            image_search::QueryMetrics qm = image_search::Metrics::evaluateQuery(seq, results);
+            sumRecall5 += qm.recall5;
+            sumRecall10 += qm.recall10;
+            sumAP10 += qm.ap10;
+
         }
     }
+
+
+    //--- Εκτύπωση των αποτελεσμάτων
+    std::cout << "\n=== Τελικά Αποτελέσματα (" << cfg.method << ") ===\n";
+    std::cout << "Mean Recall@5:  " << (sumRecall5 / numQueries) << "\n";
+    std::cout << "Mean Recall@10: " << (sumRecall10 / numQueries) << "\n";
+    std::cout << "Mean AP@10:     " << (sumAP10 / numQueries) << "\n";
+    std::cout << "Average time:   " << (sumSearchTimeMs / numQueries) << " ms\n";
+    std::cout << "========================================\n";
+
 
 
     return 0;
