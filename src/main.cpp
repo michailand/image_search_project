@@ -187,6 +187,28 @@ int main(int argc, char** argv){
     }
 
     //--- Εκτέλεση της επιλεγμένης από τον χρηστη μεθόδου
+    
+
+    if(cfg.method == "exact"){
+        std::cout<< "Εχει επιλεγει η μέθοδος Exact Search\n";
+        std::cout<< "Εναρξη εκτέλεσης: Exact Search\n";
+
+        image_search::ExactSearch searcher(db);
+
+        //Για καθε sequence του set που μου δόθηκε θα παρω την εικονα με suffix 1.ppm, και θα βρω τις 10 πιο κοντινες-ομοιες σε αυτην με βαση το database που εχω φτιαξει  
+        for(const auto& seq: targetSet) {
+            std::string queryPath= cfg.hpatchesDir +"/" + seq + "/1.ppm";
+            //Τωρα θα βγαλω τους sift descriptors του query image (Επέλεξα να πάρω όλους τους sift desc της query εικονας)
+            cv::Mat desc =image_search::extractSIFTDescriptors(queryPath);
+            //Θα μετατρεψω την query εικονα σε vector με size οσα και τα centroids δηλαδη οσο το λεξικο
+            std::vector<float> queryVec= bovw.computeVector(desc);
+
+            auto start = std::chrono::high_resolution_clock::now();
+            auto results = searcher.search(queryVec, 10);
+            auto end = std::chrono::high_resolution_clock::now();
+
+        }
+    }
 
 
     return 0;
