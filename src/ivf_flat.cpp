@@ -37,7 +37,9 @@ namespace image_search{
         int K= items[0].vec.size(); // Πληθος διαστάσεων του καθε διανυσματος του λεξικού. Συνήθως δίνουμε 100 αλλα δεν ειναι απαραιτητο
         cv::Mat data(n,K,CV_32F);
         for(int i=0;i<n;i++){
-            for(int j=0;j<)
+            for(int j=0;j< K;j++){
+                data.at<float>(i,j)=items[i].vec[j];  // Δηλαδη παιρνει τους float απο το βεκτορ του databaseItem και τους αποθηκευει στο βεκτορ του map 
+            }
         }
     }
 
