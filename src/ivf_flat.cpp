@@ -53,6 +53,10 @@ namespace image_search{
         std::cout<< "Εναρξη ενταξης των εικονων του λεξικου στις " << kclusters_ << " συστάδες\n";
         for(int i=0; i<n; i++){// Gia oles tis eikones toy lexikoy( database db_) ypologise thn apostasi apo kathe centroids_
             
+            //Βοηθητικες τιμες για να βρουμε το κοντινοτερο κεντρο για το items[i] δηλαδη για την καθ εικονα της βασης δεδομενων
+            int bestCluster=-1;
+            float minDist= std::numeric_limits<float>::max();
+
             for(int c=0;c<kclusters_; c++){
                 //θα μετατρεψω παλι τον πίνακα centroids_ απο Ματ σε βεκτορ για να μπορεσω να υπολογισω τις ευκλειδιες αποστασεις
                 std::vector<float> centroidVec(K);
@@ -60,10 +64,19 @@ namespace image_search{
                     centroidVec[j]= centroids_.at<float>(c,j);
                 }
 
-                // float dist= squaredDistance(items[i].vec,centroids_)
+                float dist= squaredDistance(items[i].vec,centroidVec);
+                if(dist < minDist){
+                    minDist=dist;
+                    bestCluster=c;
+                }
 
             }
+
+            //αφου βρηκαμε ποιο ειναι το κοντινοτερο κέντρο του το προσθετουμε στο vector του αντιστοιχου κεντρου στο map index_
+            index_[bestCluster].push_back(items[i]);
         }
+
+        std::cout << "[IVFFlat] To Inverted Index είναι έτοιμο. Τελος ενταξης των εικονων του λεξικου στις " << kclusters_ << " συστάδες\n";\n";
     }
 
 }
