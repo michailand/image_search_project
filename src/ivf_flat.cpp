@@ -76,7 +76,7 @@ namespace image_search{
             index_[bestCluster].push_back(items[i]);
         }
 
-        std::cout << "[IVFFlat] To Inverted Index είναι έτοιμο. Τελος ενταξης των εικονων του λεξικου στις " << kclusters_ << " συστάδες\n";\n";
+        std::cout << "[IVFFlat] To Inverted Index είναι έτοιμο. Τελος ενταξης των εικονων του λεξικου στις " << kclusters_ << " συστάδες\n";
     }
 
 }

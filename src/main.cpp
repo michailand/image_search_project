@@ -12,6 +12,8 @@
 #include "metrics.hpp"
 #include <chrono>
 
+#include "ivf_flat.hpp"
+
 
 // Προκειμένου να δεχομαστε ορισματα με χρηση flags απο την main θα φτιαξουμε μια συνάρτηση η οποια
 // θα διαβαζει την CLI και θα αποθηκευει σε ενα struct αυτα τα ορισματα
@@ -220,9 +222,11 @@ int main(int argc, char** argv){
             sumAP10 += qm.ap10;
 
         }
-    }
+    }//Μέθοδος ivfflat
     else if (cfg.method == "ivfflat"){
-
+        std::cout<< "Εχει επιλεγει η μέθοδος ivfflat\n";
+        std::cout<< "Εναρξη εκτέλεσης: ivfflat\n";
+        image_search::IVFFlat(db,cfg.ivf_kclusters,cfg.seed);
     }
     else if (cfg.method == "ivfflat"){
 
