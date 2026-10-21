@@ -5,7 +5,7 @@
 #include <opencv2/opencv.hpp>
 #include "BoVW.hpp"
 #include "split.hpp"
-
+#include <cstddef>
 
 
 namespace image_search{
@@ -18,22 +18,27 @@ struct DatabaseItem {
 class Database {
 public:
     
-    //Συναρτηση για την φορτωση αν υπαρχει ηδη ή την δημιουργια της βασης δεδομενων. 
+    //Ξ£Ο…Ξ½Ξ±ΟΟ„Ξ·ΟƒΞ· Ξ³ΞΉΞ± Ο„Ξ·Ξ½ Ο†ΞΏΟΟ„Ο‰ΟƒΞ· Ξ±Ξ½ Ο…Ο€Ξ±ΟΟ‡ΞµΞΉ Ξ·Ξ΄Ξ· Ξ® Ο„Ξ·Ξ½ Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³ΞΉΞ± Ο„Ξ·Ο‚ Ξ²Ξ±ΟƒΞ·Ο‚ Ξ΄ΞµΞ΄ΞΏΞΌΞµΞ½Ο‰Ξ½. 
     bool loadOrBuild(const std::string& hpatchesDir, const std::string& mirflickDir, const DatasetSplit& split, SetType setType, int numMirflickr, BoVW& bovw, const std::string& cacheFilename );
 
-    //Φορτωση της βάσης δεδομένων σε binary αρχείο
+    //Ξ¦ΞΏΟΟ„Ο‰ΟƒΞ· Ο„Ξ·Ο‚ Ξ²Ξ¬ΟƒΞ·Ο‚ Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ο‰Ξ½ ΟƒΞµ binary Ξ±ΟΟ‡ΞµΞ―ΞΏ
     bool loadBinary(const std::string& filename);
     
-    //Αποθηκευση της βάσης δεδομένων σε binary αρχείο
+    //Ξ‘Ο€ΞΏΞΈΞ·ΞΊΞµΟ…ΟƒΞ· Ο„Ξ·Ο‚ Ξ²Ξ¬ΟƒΞ·Ο‚ Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ο‰Ξ½ ΟƒΞµ binary Ξ±ΟΟ‡ΞµΞ―ΞΏ
     bool saveBinary(const std::string& filename) const;
 
-    //getter για το vector items_ που περιέχει τα BoVW vectors και τα αντίστοιχα ID τους
+    //getter Ξ³ΞΉΞ± Ο„ΞΏ vector items_ Ο€ΞΏΟ… Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ Ο„Ξ± BoVW vectors ΞΊΞ±ΞΉ Ο„Ξ± Ξ±Ξ½Ο„Ξ―ΟƒΟ„ΞΏΞΉΟ‡Ξ± ID Ο„ΞΏΟ…Ο‚
     const std::vector<DatabaseItem>& getItems() const {
         return items_;
     }
 
+    //Ξ•Ο€ΞΉΟƒΟ„ΟΞµΟ†ΞµΞΉ Ο„ΞΏ size Ο„ΞΏΟ… database
+    std::size_t size() {
+        return items_.size();
+    }
+
 private:
-    //Vector για την αποθηκευση των διανυσματων των εικόνων (BoVW vectors) και των αντίστοιχων ID τους.
+    //Vector Ξ³ΞΉΞ± Ο„Ξ·Ξ½ Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟ…ΟƒΞ· Ο„Ο‰Ξ½ Ξ΄ΞΉΞ±Ξ½Ο…ΟƒΞΌΞ±Ο„Ο‰Ξ½ Ο„Ο‰Ξ½ ΞµΞΉΞΊΟΞ½Ο‰Ξ½ (BoVW vectors) ΞΊΞ±ΞΉ Ο„Ο‰Ξ½ Ξ±Ξ½Ο„Ξ―ΟƒΟ„ΞΏΞΉΟ‡Ο‰Ξ½ ID Ο„ΞΏΟ…Ο‚.
     std::vector<DatabaseItem> items_;
 };
 
