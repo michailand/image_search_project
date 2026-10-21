@@ -13,7 +13,8 @@ namespace image_search {
 
 class IVFFlat {
     public:
-
+        //constructor για την IVFFlat
+        IVFFlat(const Database& db, int kclusters, int seed);
 
     private:
 
