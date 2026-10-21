@@ -193,6 +193,8 @@ int main(int argc, char** argv){
         std::cout<< "Εχει επιλεγει η μέθοδος Exact Search\n";
         std::cout<< "Εναρξη εκτέλεσης: Exact Search\n";
 
+        double sumSearchTimeMs = 0.0; //κραταει ποσο συνολικο χρονο χρειάζεται η μεθοδος exact search να βρει τις κοντινες εικονες για το καθε query του set
+
         image_search::ExactSearch searcher(db);
 
         //Για καθε sequence του set που μου δόθηκε θα παρω την εικονα με suffix 1.ppm, και θα βρω τις 10 πιο κοντινες-ομοιες σε αυτην με βαση το database που εχω φτιαξει  
@@ -203,6 +205,7 @@ int main(int argc, char** argv){
             //Θα μετατρεψω την query εικονα σε vector με size οσα και τα centroids δηλαδη οσο το λεξικο
             std::vector<float> queryVec= bovw.computeVector(desc);
 
+            //Μετραμε  πόσο χρόνο χρειάζεται η αναζήτηση για να βρει τις 10 πιο κοντινές εικόνες.
             auto start = std::chrono::high_resolution_clock::now();
             auto results = searcher.search(queryVec, 10);
             auto end = std::chrono::high_resolution_clock::now();
