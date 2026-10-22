@@ -80,6 +80,56 @@ namespace image_search{
     }
 
 
-    
+    std::vector<SearchResult> IVFFlat::search(const std::vector<float>& queryVec, int nprobe, int topK) const {
+        int K=queryVec.size(); // Kratame τις διαστασεις του διανυσματος της εικονας 
+
+        //Θα υπολογισουμε την αποσταση της εικονας απο καθε κεντρο της βασης μας (kclusters_) και θα αποθηκευσουμε σε ενα βεκτορ τον αριθμο του κεντρου με την αντιστοιχη αποσταση απο αυτο
+        std::vector<std::pair<int, float>> clusterDistances; // {cluster_id, distance}
+        for(int c=0; c< kclusters_;c++){
+            std::vector<float> centroidVec(K);
+            for (int j =0; j< K; ++j) {
+                centroidVec[j] =centroids_.at<float>(c, j);
+            }
+            float dist = squaredDistance(queryVec, centroidVec);
+            clusterDistances.push_back({c, dist});
+        }
+
+        // Ταξινόμηση για να βρούμε τα nprobe καλύτερα κέντρα
+        int b = std::min(nprobe, kclusters_);
+        std::partial_sort(clusterDistances.begin(), clusterDistances.begin() + b, clusterDistances.end(), [](const std::pair<int, float>& a, const std::pair<int, float>& b) {
+            return a.second < b.second;
+        });
+
+
+        //Τωρα θα ψάξουμε μεσα στα nprobe καλύτερα κέντρα ολες τις εικονες που εχουν και θα υπολογισουμε την απόσταση κάθε εικόνας από το query και τα αποτελεσματα θα τα αποθηκευσουμε σε ενα βεκτορ (results)
+        std::vector<SearchResult> results;
+        for (int i =0; i< b; ++i) {
+            int clusterId = clusterDistances[i].first;
+            // Αν υπάρχει αυτό το cluster στο index_
+            auto it = index_.find(clusterId);
+            if (it != index_.end()) {
+                const auto& clusterItems = it->second;
+                // Εξαντλητική αναζήτηση μέσα στα items αυτού του cluster
+                for (const auto& item : clusterItems) {
+                    float dist = squaredDistance(queryVec, item.vec);
+                    results.push_back({item.id, dist});
+                }
+            }
+        }
+
+        //Αφου μαζεψαμε στο βεκτορ (results) ολα τα αποτελεσματα θα τα ταξινομησουμε για να παρουμε τα topK 
+        int k = std::min(topK, static_cast<int>(results.size()));
+        if (k > 0) {
+            std::partial_sort(results.begin(), results.begin() + k, results.end(),[](const SearchResult& a, const SearchResult& b) {
+                return a.distance < b.distance;
+            });
+
+            results.resize(k);
+        }
+
+        
+        return results;
+
+    }
 
 }
