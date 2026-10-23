@@ -61,11 +61,12 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
     coarse_centroids_= coarse_kmeans.fit(data);
     
     //Υπολογισμος των residuals δηλαδη της αποστασης της καθε εικόνας απο τα coarse centroids
-    std::cout<< "Εναρξη Υπολογισμού των residuals\n";
-
+    std::cout<< "Εναρξη Υπολογισμού των residuals και τοποθετηση εικόνων στα clusters των coarse centers\n";
+    std::vector<int> assignments(n);// Πίνακας ο οποιος αντιστοιχιζει εικονα-->coarse center που ανηκει
     //Για καθε εικονα (n)
     for(int i=0;i<n;i++){
         float minDist = std::numeric_limits<float>::max();
+        int bestCluster = -1;
         //Για καθε centroid(kclusters_)
         for(int c=0;c<kclusters_;c++){
             //Μετατρεπω το Mat των centroids σε vector ωστε να μπορεσω να βρω την ευκλειδια αποσταση απο ολες τις εικονες του database μου
@@ -75,11 +76,13 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
             }
 
             float dist=squaredDistance(items[i].vec, centroidVec);
-            if(dist<minDist){
+            if(dist<minDist){// Βρισκω σε ποιο centroid-cluster ανήκει η τρεχουσα εικονα
                 minDist=dist;
-                
+                bestCluster=c;
             }
         }
+        assignments[i]=bestCluster;
+
     }
 
 }
