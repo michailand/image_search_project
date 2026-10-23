@@ -22,7 +22,7 @@ float IVFPQ::squaredDistance(const std::vector<float>& a, const std::vector<floa
 IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db_(db), kclusters_(kclusters), M_(M), nbits_(nbits) {
 
     const auto& items= db_.getItems();
-    int n =items.size(); // πληθος των visual words
+    int n =items.size(); // πληθος των εικόνων με διανυσμα διαστάσεων οσο και τα visual words
 
     //Αν δεν δοθουν ποσα coarse clusters θελουμε θα υπολοστει η τετραγωνικη ριζα συμφωνα με την εκφωνηση
     if(kclusters_<=0){
@@ -31,7 +31,7 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
     }
 
     if(n==0){
-        std::cout << "Η βαση δεδομενων των BoVW (Visual Words) δεν εχει οριστει σωστα γιατι τα Visual Words δεν εχουν διαστασεις \n" ;
+        std::cout << "Η βαση δεδομενων των εικόνων BoVW είναι άδεια \n" ;
         return;
     }
 
