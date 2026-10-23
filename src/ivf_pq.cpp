@@ -128,7 +128,22 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
                 sub_residual[j]=residuals.at<float>(i,m*sub_dim_+ j);    
             } 
 
-            
+            //Τωρα για το m υποδιαστημα της εικονας θα βρω σε ποιο κεντρο του υπολεξικου ειναι πιο κοντα με brute force
+            int best_sub_cluster = -1;
+            float min_sub_dist = std::numeric_limits<float>::max();
+
+            for(int k=0;k<num_centroids_per_subspace_;k++){
+                std::vector<float> sub_centroid(sub_dim_);// μετατροπη του κεντρου του υπολεξικου απο Mat σε vector 
+                for(int j=0;j<sub_dim_;j++){
+                    sub_centroid[j]=sub_codebooks_[m].at<float>(k,j);
+                }
+
+                float dist = squaredDistance(sub_residual, sub_centroid);
+                if (dist < min_sub_dist) {
+                    min_sub_dist = dist;
+                    best_sub_cluster = k;
+                }
+            }
         }
     }
 }
