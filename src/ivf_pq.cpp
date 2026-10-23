@@ -6,6 +6,8 @@
 
 namespace image_search {
 
+
+
 float IVFPQ::squaredDistance(const std::vector<float>& a, const std::vector<float>& b) {
     float sum=0.0f;
     for (size_t i = 0; i< a.size();i++) {

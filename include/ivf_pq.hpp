@@ -9,6 +9,14 @@
 
 namespace image_search {
 
+//Δομή για να κρατάμε τα συμπιεσμένα διανύσματα των εικόνων PQ Codes
+struct PQItem{
+    std::string id;
+    std::vector<unit8_t> pq_code;
+};
+
+
+
 class IVFPQ {
 public:
 
