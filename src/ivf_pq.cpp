@@ -65,6 +65,7 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
 
     //Για καθε εικονα (n)
     for(int i=0;i<n;i++){
+        float minDist = std::numeric_limits<float>::max();
         //Για καθε centroid(kclusters_)
         for(int c=0;c<kclusters_;c++){
             //Μετατρεπω το Mat των centroids σε vector ωστε να μπορεσω να βρω την ευκλειδια αποσταση απο ολες τις εικονες του database μου
@@ -74,7 +75,10 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
             }
 
             float dist=squaredDistance(items[i].vec, centroidVec);
-            if()
+            if(dist<minDist){
+                minDist=dist;
+                
+            }
         }
     }
 
