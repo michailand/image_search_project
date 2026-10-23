@@ -72,6 +72,9 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
             for (int j= 0;j< K; ++j){
                 centroidVec[j] = coarse_centroids_.at<float>(c, j);
             }
+
+            float dist=squaredDistance(items[i].vec, centroidVec);
+            if()
         }
     }
 
