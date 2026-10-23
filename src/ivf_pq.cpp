@@ -119,6 +119,7 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
     std::cout << "[IVFPQ] Κωδικοποίηση (Συμπίεση) και χτίσιμο Inverted Index\n";
     //Για καθε εικονα
     for(int i=0;i<n;i++){
+        std::vector<uint8_t> pq_code(M_);// Το PQ code της εικονας
 
         //Για καθε υπολεξικο
         for(int m=0;m< M_;m++){
@@ -144,6 +145,7 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
                     best_sub_cluster = k;
                 }
             }
+            pq_code[m]=static_cast<uint8_t>(best_sub_cluster);
         }
     }
 }
