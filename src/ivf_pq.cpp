@@ -117,7 +117,17 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
     //μικροτερο διανυσμα που θα προκυψει θα το ενταξουμε στο κοντινοτερο κεντρο του αντιστοιχου υπολεξικου και ετσι
     //θα εχουμε φτιαξει το Inverted Index
     std::cout << "[IVFPQ] Κωδικοποίηση (Συμπίεση) και χτίσιμο Inverted Index\n";
-    
+    //Για καθε εικονα
+    for(int i=0;i<n;i++){
+
+        //Για καθε υπολεξικο
+        for(int m=0;m< M_;m++){
+            //Παιρνω από την εικονα τα υποδιαστηματα μήκους sub_dim_ απο οτν πινακα MAt και τα μετατρεπω σε float
+            for(int j=0;j<sub_dim_;j++){
+                
+            } 
+        }
+    }
 }
 
 
