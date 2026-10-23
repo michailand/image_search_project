@@ -35,8 +35,18 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
         return;
     }
 
+    //K ειναι το μεγεθος του διανύσματος των λεξεων στην database 
+    int K= items[0].vec.size();
+    
     //Θα κανουμε έλεγχο αν το residual μπορει να διαιρεθει ακριβώς με το Μ που δόθηκε. Αν οχι τοτε τερματισμός με ερρορ
-    int K= items[0].size 
+    if(K%M_ !=0 ){
+        std::cerr<< "[IVFPQ] Σφάλμα:Η διάσταση K (" << K << ") πρέπει να διαιρείται ακριβώς με το M ("<< M_<< ").\n";
+        exit(1);
+    }    
+
+    sub_dim_= K/ M_; // To μεγεθος που θα εχει το κάθε τμήμα του υπολεξικου
+    num_centroids_per_subspace_=1<<nbits_; // 2^nbits (π.χ. 256)
+
 
     
 
