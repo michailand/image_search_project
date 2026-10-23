@@ -162,7 +162,7 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
 std::vector<SearchResult> IVFPQ::search(const std::vector<float>& queryVec, int nprobe, int topK) const {
     int K= queryVec.size();
 
-    //Αρχικα θα βρω τις πιο κοντινες συσταδες στο query και θα κρατησω τις nprobe
+    //Αρχικα θα αποθηκευσω την αποσταση του query από ολα τα cluster του database
     std::vector<std::pair<int,float>> clusterDistances;
     for(int c=0;c< kclusters_;c++){
         std::vector<float> centroidVec(K);
@@ -172,6 +172,14 @@ std::vector<SearchResult> IVFPQ::search(const std::vector<float>& queryVec, int 
         float dist = squaredDistance(queryVec, centroidVec);
         clusterDistances.push_back({c, dist});
     }
+
+    //θα ταξινομησω τις αποστασεις και θα κρατησω τις nprobe πιο κοντινες
+    int b = std::min(nprobe, kclusters_);
+    std::partial_sort(clusterDistances.begin(), clusterDistances.begin() + b, clusterDistances.end(),[](const std::pair<int, float>& a, const std::pair<int, float>& b) {
+        return a.second < b.second;
+    });
+
+    std::vector<SearchResult> results;
 }
 
 
