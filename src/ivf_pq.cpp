@@ -122,10 +122,13 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
 
         //Για καθε υπολεξικο
         for(int m=0;m< M_;m++){
-            //Παιρνω από την εικονα τα υποδιαστηματα μήκους sub_dim_ απο οτν πινακα MAt και τα μετατρεπω σε float
+            //Παιρνω από την εικονα τα υποδιαστηματα μήκους sub_dim_ και πληθους M απο οτν πινακα MAt και τα μετατρεπω σε float και τα αποθηκευω σε ενα vector
+            std::vector<float> sub_residual(sub_dim_);
             for(int j=0;j<sub_dim_;j++){
-                
+                sub_residual[j]=residuals.at<float>(i,m*sub_dim_+ j);    
             } 
+
+            
         }
     }
 }
