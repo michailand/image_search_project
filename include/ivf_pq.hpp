@@ -19,7 +19,7 @@ struct PQItem{
 
 class IVFPQ {
 public:
-
+    IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed); //Αρχικοποιησει της μεθοδου IVFPQ και δημιουργια των 
 
 private:
     const Database& db_; // Η βαση με τα BoVW (Visual Words)
@@ -29,7 +29,10 @@ private:
     int num_centroids_per_subspace_; // Το πληθος των κέντρων του καθε Μ_ τμήματος (πχ nbits=8 => 2^nbits=256 κεντρα)
     int sub_dim_; // Διαστάσεις κάθε υποδιανύσματος
 
-    
+
+    // Inverted Index: Κάθε συστάδα (0...kclusters-1) έχει τα δικά της PQItems
+    std::map<int, std::vector<PQItem>> index_;
+
     static float squaredDistance(const std::vector<float>& a, const std::vector<float>& b);
 
 };
