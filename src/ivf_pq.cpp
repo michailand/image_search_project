@@ -105,6 +105,10 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
                 sub_data.at<float>(i,j)= residuals.at<float>(i,m*sub_dim_+j ); // i,m*sub_dim_+j--> Pointer arithmetic
             }
         }
+
+        KMeans sub_kmeans(num_centroids_per_subspace_,30,seed+m); // Αλλάζω seed για να αυξησω την τυχαιότητα
+        //Αποθηκευω στην καθε γραμμη του  vector τα κέντρα του καθε υπολεξικου. Αρα αν εχω 10 υπολεξικα και 256 κεντρα θα εχω τελικα εναν πινακα 10*256   
+        sub_codebooks_[m]=sub_kmeans.fit(sub_data);
     }
 
 
