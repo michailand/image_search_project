@@ -22,6 +22,9 @@ public:
 
 
 private:
+    const Database& db_; // Η βαση με τα BoVW (Visual Words)
+    int kclusters_; // Τα coarse clusters του db_ των Visual Words
+    int M_; // Το πληθος των τμηματων στο οποίο θα χωρίσω τα residuals(δηλαδη της απόστασης απο το coarse κεντρο της ) της καθε εικόνας 
 
     static float squaredDistance(const std::vector<float>& a, const std::vector<float>& b);
 
