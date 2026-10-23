@@ -99,9 +99,11 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
     sub_codebooks_.resize(M_);// Αρχικοποίηση του vector υπολεξικων (PQ)
 
     for(int m=0; m<M_; m++){
-
+        cv::Mat sub_data(n,sub_dim_,CV_32F);// Πίνακας Mat  ο οποιος θα βοηθησει στον υπολογισμό των kmeans
         for(int i=0;i<n;i++){
-            
+            for(int j=0;j<sub_dim_;j++){
+                sub_data.at<float>(i,j)= residuals.at<float>(i,m*sub_dim_+j ); // i,m*sub_dim_+j--> Pointer arithmetic
+            }
         }
     }
 
