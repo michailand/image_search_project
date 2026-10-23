@@ -63,6 +63,7 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
     //Υπολογισμος των residuals δηλαδη της αποστασης της καθε εικόνας απο τα coarse centroids
     std::cout<< "Εναρξη Υπολογισμού των residuals και τοποθετηση εικόνων στα clusters των coarse centers\n";
     std::vector<int> assignments(n);// Πίνακας ο οποιος αντιστοιχιζει εικονα-->coarse center που ανηκει
+    cv::Mat residuals(n,K,CV_32F);
     //Για καθε εικονα (n)
     for(int i=0;i<n;i++){
         float minDist = std::numeric_limits<float>::max();
@@ -83,7 +84,14 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
         }
         assignments[i]=bestCluster;
 
+        //Υπολογισμος του residual και αποθηκευση σε Mat 
+        for(int j=0;j<K;j++){
+            residuals.at<float>(i,j)=items[i].vec[j]- coarse_centroids_.at<float>(bestCluster,j);
+        }
+
     }
+
+    std::cout<<"Λήξη Υπολογισμού των residuals και ευρεσης των Coarse Centers\n";
 
 }
 
