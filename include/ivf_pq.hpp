@@ -20,8 +20,11 @@ struct PQItem{
 
 class IVFPQ {
 public:
+    //Δημιουργια της inverted list με την κληση του constructor
     IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed); //Αρχικοποιησει της μεθοδου IVFPQ και δημιουργια των 
 
+    //Συναρτηση για την αναζητηση των topK εικόνων του query
+    std::vector<SearchResult> search(const std::vector<float>& queryVec, int nprobe, int topK = 10) const; 
 private:
     const Database& db_; // Η βαση με όλες τις εικόνες με τα BoVW βάσει των  Visual Words
     int kclusters_; // Τα coarse clusters του db_ των Visual Words
