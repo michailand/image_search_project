@@ -22,7 +22,7 @@ public:
     IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed); //Αρχικοποιησει της μεθοδου IVFPQ και δημιουργια των 
 
 private:
-    const Database& db_; // Η βαση με τα BoVW (Visual Words)
+    const Database& db_; // Η βαση με όλες τις εικόνες με τα BoVW βάσει των  Visual Words
     int kclusters_; // Τα coarse clusters του db_ των Visual Words
     int M_; // Το πληθος των τμηματων στο οποίο θα χωρίσω τα residuals(δηλαδη της απόστασης απο το coarse κεντρο της ) της καθε εικόνας 
     int nbits_; //Το πληθος των κέντρων του καθε Μ_ τμήματος (πχ nbits=8 => 2^8=256 κεντρα)
