@@ -21,7 +21,13 @@ float IVFPQ::squaredDistance(const std::vector<float>& a, const std::vector<floa
 
 IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db_(db), kclusters_(kclusters), M_(M), nbits_(nbits) {
 
-    
+    const auto& items= db_.getItems();
+    int n =items.size();
+
+    //Αν δεν δοθουν ποσα coarse clusters θελουμε θα υπολοστει η τετραγωνικη ριζα συμφωνα με την εκφωνηση
+    if(kclusters_<=0){
+        kclusters_=static_cast<int>(std::ceil(std::sqrt(n)));
+    }
 
 
 
