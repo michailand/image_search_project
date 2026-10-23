@@ -22,20 +22,20 @@ float IVFPQ::squaredDistance(const std::vector<float>& a, const std::vector<floa
 IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db_(db), kclusters_(kclusters), M_(M), nbits_(nbits) {
 
     const auto& items= db_.getItems();
-    int n =items.size(); // ðëçèïò ôùí åéêüíùí ìå äéáíõóìá äéáóôÜóåùí ïóï êáé ôá visual words
+    int n =items.size(); // Ï€Î»Î·Î¸Î¿Ï‚ Ï„Ï‰Î½ ÎµÎ¹ÎºÏŒÎ½Ï‰Î½ Î¼Îµ Î´Î¹Î±Î½Ï…ÏƒÎ¼Î± Î´Î¹Î±ÏƒÏ„Î¬ÏƒÎµÏ‰Î½ Î¿ÏƒÎ¿ ÎºÎ±Î¹ Ï„Î± visual words
 
-    //Áí äåí äïèïõí ðïóá coarse clusters èåëïõìå èá õðïëïóôåé ç ôåôñáãùíéêç ñéæá óõìöùíá ìå ôçí åêöùíçóç
+    //Î‘Î½ Î´ÎµÎ½ Î´Î¿Î¸Î¿Ï…Î½ Ï€Î¿ÏƒÎ± coarse clusters Î¸ÎµÎ»Î¿Ï…Î¼Îµ Î¸Î± Ï…Ï€Î¿Î»Î¿ÏƒÏ„ÎµÎ¹ Î· Ï„ÎµÏ„ÏÎ±Î³Ï‰Î½Î¹ÎºÎ· ÏÎ¹Î¶Î± ÏƒÏ…Î¼Ï†Ï‰Î½Î± Î¼Îµ Ï„Î·Î½ ÎµÎºÏ†Ï‰Î½Î·ÏƒÎ·
     if(kclusters_<=0){
         kclusters_=static_cast<int>(std::ceil(std::sqrt(n)));
-        std::cout << "[IVFPQ] Áõôüìáôïò õðïëïãéóìüò kclusters: " << kclusters_ << "\n";
+        std::cout << "[IVFPQ] Î‘Ï…Ï„ÏŒÎ¼Î±Ï„Î¿Ï‚ Ï…Ï€Î¿Î»Î¿Î³Î¹ÏƒÎ¼ÏŒÏ‚ kclusters: " << kclusters_ << "\n";
     }
 
     if(n==0){
-        std::cout << "Ç âáóç äåäïìåíùí ôùí åéêüíùí BoVW åßíáé Üäåéá \n" ;
+        std::cout << "Î— Î²Î±ÏƒÎ· Î´ÎµÎ´Î¿Î¼ÎµÎ½Ï‰Î½ Ï„Ï‰Î½ ÎµÎ¹ÎºÏŒÎ½Ï‰Î½ BoVW ÎµÎ¯Î½Î±Î¹ Î¬Î´ÎµÎ¹Î± \n" ;
         return;
     }
 
-    //Èá êáíïõìå Ýëåã÷ï áí ôï residual ìðïñåé íá äéáéñåèåé áêñéâþò ìå ôï Ì ðïõ äüèçêå. Áí ï÷é ôïôå ôåñìáôéóìüò ìå åññïñ
+    //Î˜Î± ÎºÎ±Î½Î¿Ï…Î¼Îµ Î­Î»ÎµÎ³Ï‡Î¿ Î±Î½ Ï„Î¿ residual Î¼Ï€Î¿ÏÎµÎ¹ Î½Î± Î´Î¹Î±Î¹ÏÎµÎ¸ÎµÎ¹ Î±ÎºÏÎ¹Î²ÏŽÏ‚ Î¼Îµ Ï„Î¿ Îœ Ï€Î¿Ï… Î´ÏŒÎ¸Î·ÎºÎµ. Î‘Î½ Î¿Ï‡Î¹ Ï„Î¿Ï„Îµ Ï„ÎµÏÎ¼Î±Ï„Î¹ÏƒÎ¼ÏŒÏ‚ Î¼Îµ ÎµÏÏÎ¿Ï
     int K= items[0].size 
 
     

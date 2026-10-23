@@ -9,7 +9,7 @@
 
 namespace image_search {
 
-//Δομή για να κρατάμε τα συμπιεσμένα διανύσματα των εικόνων PQ Codes
+//Ξ”ΞΏΞΌΞ® Ξ³ΞΉΞ± Ξ½Ξ± ΞΊΟΞ±Ο„Ξ¬ΞΌΞµ Ο„Ξ± ΟƒΟ…ΞΌΟ€ΞΉΞµΟƒΞΌΞ­Ξ½Ξ± Ξ΄ΞΉΞ±Ξ½ΟΟƒΞΌΞ±Ο„Ξ± Ο„Ο‰Ξ½ ΞµΞΉΞΊΟΞ½Ο‰Ξ½ PQ Codes
 struct PQItem{
     std::string id;
     std::vector<unit8_t> pq_code;
@@ -19,18 +19,18 @@ struct PQItem{
 
 class IVFPQ {
 public:
-    IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed); //Αρχικοποιησει της μεθοδου IVFPQ και δημιουργια των 
+    IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed); //Ξ‘ΟΟ‡ΞΉΞΊΞΏΟ€ΞΏΞΉΞ·ΟƒΞµΞΉ Ο„Ξ·Ο‚ ΞΌΞµΞΈΞΏΞ΄ΞΏΟ… IVFPQ ΞΊΞ±ΞΉ Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³ΞΉΞ± Ο„Ο‰Ξ½ 
 
 private:
-    const Database& db_; // Η βαση με όλες τις εικόνες με τα BoVW βάσει των  Visual Words
-    int kclusters_; // Τα coarse clusters του db_ των Visual Words
-    int M_; // Το πληθος των τμηματων στο οποίο θα χωρίσω τα residuals(δηλαδη της απόστασης απο το coarse κεντρο της ) της καθε εικόνας 
-    int nbits_; //Το πληθος των κέντρων του καθε Μ_ τμήματος (πχ nbits=8 => 2^8=256 κεντρα)
-    int num_centroids_per_subspace_; // Το πληθος των κέντρων του καθε Μ_ τμήματος (πχ nbits=8 => 2^nbits=256 κεντρα)
-    int sub_dim_; // Διαστάσεις κάθε υποδιανύσματος
+    const Database& db_; // Ξ— Ξ²Ξ±ΟƒΞ· ΞΌΞµ ΟΞ»ΞµΟ‚ Ο„ΞΉΟ‚ ΞµΞΉΞΊΟΞ½ΞµΟ‚ ΞΌΞµ Ο„Ξ± BoVW Ξ²Ξ¬ΟƒΞµΞΉ Ο„Ο‰Ξ½  Visual Words
+    int kclusters_; // Ξ¤Ξ± coarse clusters Ο„ΞΏΟ… db_ Ο„Ο‰Ξ½ Visual Words
+    int M_; // Ξ¤ΞΏ Ο€Ξ»Ξ·ΞΈΞΏΟ‚ Ο„Ο‰Ξ½ Ο„ΞΌΞ·ΞΌΞ±Ο„Ο‰Ξ½ ΟƒΟ„ΞΏ ΞΏΟ€ΞΏΞ―ΞΏ ΞΈΞ± Ο‡Ο‰ΟΞ―ΟƒΟ‰ Ο„Ξ± residuals(Ξ΄Ξ·Ξ»Ξ±Ξ΄Ξ· Ο„Ξ·Ο‚ Ξ±Ο€ΟΟƒΟ„Ξ±ΟƒΞ·Ο‚ Ξ±Ο€ΞΏ Ο„ΞΏ coarse ΞΊΞµΞ½Ο„ΟΞΏ Ο„Ξ·Ο‚ ) Ο„Ξ·Ο‚ ΞΊΞ±ΞΈΞµ ΞµΞΉΞΊΟΞ½Ξ±Ο‚ 
+    int nbits_; //Ξ¤ΞΏ Ο€Ξ»Ξ·ΞΈΞΏΟ‚ Ο„Ο‰Ξ½ ΞΊΞ­Ξ½Ο„ΟΟ‰Ξ½ Ο„ΞΏΟ… ΞΊΞ±ΞΈΞµ Ξ_ Ο„ΞΌΞ®ΞΌΞ±Ο„ΞΏΟ‚ (Ο€Ο‡ nbits=8 => 2^8=256 ΞΊΞµΞ½Ο„ΟΞ±)
+    int num_centroids_per_subspace_; // Ξ¤ΞΏ Ο€Ξ»Ξ·ΞΈΞΏΟ‚ Ο„Ο‰Ξ½ ΞΊΞ­Ξ½Ο„ΟΟ‰Ξ½ Ο„ΞΏΟ… ΞΊΞ±ΞΈΞµ Ξ_ Ο„ΞΌΞ®ΞΌΞ±Ο„ΞΏΟ‚ (Ο€Ο‡ nbits=8 => 2^nbits=256 ΞΊΞµΞ½Ο„ΟΞ±)
+    int sub_dim_; // Ξ”ΞΉΞ±ΟƒΟ„Ξ¬ΟƒΞµΞΉΟ‚ ΞΊΞ¬ΞΈΞµ Ο…Ο€ΞΏΞ΄ΞΉΞ±Ξ½ΟΟƒΞΌΞ±Ο„ΞΏΟ‚
 
 
-    // Inverted Index: Κάθε συστάδα (0...kclusters-1) έχει τα δικά της PQItems
+    // Inverted Index: ΞΞ¬ΞΈΞµ ΟƒΟ…ΟƒΟ„Ξ¬Ξ΄Ξ± (0...kclusters-1) Ξ­Ο‡ΞµΞΉ Ο„Ξ± Ξ΄ΞΉΞΊΞ¬ Ο„Ξ·Ο‚ PQItems
     std::map<int, std::vector<PQItem>> index_;
 
     static float squaredDistance(const std::vector<float>& a, const std::vector<float>& b);
