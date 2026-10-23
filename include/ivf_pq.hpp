@@ -35,6 +35,8 @@ private:
     // Inverted Index: Κάθε συστάδα (0...kclusters-1) έχει τα δικά της PQItems
     std::map<int, std::vector<PQItem>> index_;
 
+    //Vector στον οποίο θα αποθηκευουμε τα κεντρα (μαλλον 256) του καθε τμήματος (Μ συνολο τμηματων)
+    std::vector<cv::Mat> sub_codebooks_;
     static float squaredDistance(const std::vector<float>& a, const std::vector<float>& b);
 
 };

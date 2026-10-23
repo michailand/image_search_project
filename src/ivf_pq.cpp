@@ -93,6 +93,20 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
 
     std::cout<<"Λήξη Υπολογισμού των residuals και ευρεσης των Coarse Centers\n";
 
+
+    //Τωρα θα γίνει η έυρεση των κεντρων ( συνηθως 256) του καθε υπολεξικου (συνολο M_ υπολεξικα) με την χρηση του Kmeans
+    std::cout<< "Εναρξη ευρεσης των κέντρων του κάθε υπολεξικού. Συνολο υπολεξικων (PQ):"<<M_ << " Συνολο κεντρων: " << num_centroids_per_subspace_ << "\n";
+    sub_codebooks_.resize(M_);// Αρχικοποίηση του vector υπολεξικων (PQ)
+
+    for(int m=0; m<M_; m++){
+
+        for(int i=0;i<n;i++){
+            
+        }
+    }
+
+
+
 }
 
 
