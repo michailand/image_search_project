@@ -47,8 +47,11 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
     sub_dim_= K/ M_; // To μεγεθος που θα εχει το κάθε τμήμα του υπολεξικου
     num_centroids_per_subspace_=1<<nbits_; // 2^nbits (π.χ. 256)
 
-
+    //Τωρα θα πρεπει να βρούμε τα coarse centers του database μας το οποιο περιέχεει τις εικονες σε μορφη BOVW 
+    std::cout<< "Εναρξη εκπαίδευσης- ευρεσης Coarse centers (Συνολο coarse centers= "<< kclusters_<< ") του database με χρηση Kmeans"
     
 
 }
+
+
 }
