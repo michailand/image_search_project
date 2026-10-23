@@ -20,7 +20,7 @@ float IVFPQ::squaredDistance(const std::vector<float>& a, const std::vector<floa
 
 
 IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db_(db), kclusters_(kclusters), M_(M), nbits_(nbits) {
-
+    std::cout << "[IVFPQ] Εναρξη δημιουργιας της δομής IVFPQ.\n";
     const auto& items= db_.getItems();
     int n =items.size(); // πληθος των εικόνων με διανυσμα διαστάσεων οσο και τα visual words
 
@@ -147,7 +147,14 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
             }
             pq_code[m]=static_cast<uint8_t>(best_sub_cluster);
         }
+        //για την καθε εικόνα δημιουργώ ενα PQItem και αποθηκευω τα στοιχεια της 
+        PQItem pq_item;
+        pq_item.id = items[i].id;
+        pq_item.pq_code = pq_code;
+        //Αποθηκευω το PQItem στο coarse center το οποιο ανηκει
+        index_[assignments[i]].push_back(pq_item);
     }
+    std::cout << "[IVFPQ] Η δομή IVFPQ είναι έτοιμη.\n";
 }
 
 
