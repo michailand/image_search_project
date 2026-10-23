@@ -49,7 +49,16 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
 
     //Τωρα θα πρεπει να βρούμε τα coarse centers του database μας το οποιο περιέχεει τις εικονες σε μορφη BOVW 
     std::cout<< "Εναρξη εκπαίδευσης- ευρεσης Coarse centers (Συνολο coarse centers= "<< kclusters_<< ") του database με χρηση Kmeans";
-    
+    cv::Mat data(n,K,CV_32F);
+    //Επειδή τα δεδομενα ειναι αποθηκευμενα σε μορφη DatabaseItem θα τα μετατρεψουμε σε Mat για να τα δουλεψει η kmeans.cpp
+    for(int i=0;i<n;i++){
+        for(int j=0;j<K;j++){
+            data.at<float>(i,j)=items[i].vec[j];
+        }
+    }
+    //τωρα που εχω μετατρεψει τις εικονες παλι σε μορφη Mat θα βρω τα centroids
+    KMeans coarse_kmeans(kclusters_,30,seed);
+    coarse_centroids_= coarse_kmeans.fit(data);
     
 
 }

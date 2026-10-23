@@ -6,6 +6,7 @@
 #include <opencv2/opencv.hpp>
 #include "database.hpp"
 #include "exact_search.hpp"
+#include "kmeans.hpp"
 
 namespace image_search {
 
@@ -29,6 +30,7 @@ private:
     int num_centroids_per_subspace_; // Το πληθος των κέντρων του καθε Μ_ τμήματος (πχ nbits=8 => 2^nbits=256 κεντρα)
     int sub_dim_; // Διαστάσεις κάθε υποδιανύσματος
 
+    cv::Mat coarse_centroids_; // Ta coarse centroids του Database db_
 
     // Inverted Index: Κάθε συστάδα (0...kclusters-1) έχει τα δικά της PQItems
     std::map<int, std::vector<PQItem>> index_;
