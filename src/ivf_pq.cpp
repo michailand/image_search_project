@@ -48,7 +48,7 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
     num_centroids_per_subspace_=1<<nbits_; // 2^nbits (π.χ. 256)
 
     //Τωρα θα πρεπει να βρούμε τα coarse centers του database μας το οποιο περιέχεει τις εικονες σε μορφη BOVW 
-    std::cout<< "Εναρξη εκπαίδευσης- ευρεσης Coarse centers (Συνολο coarse centers= "<< kclusters_<< ") του database με χρηση Kmeans";
+    std::cout<< "Εναρξη εκπαίδευσης- ευρεσης Coarse centers (Συνολο coarse centers= "<< kclusters_<< ") του database με χρηση Kmeans\n";
     cv::Mat data(n,K,CV_32F);
     //Επειδή τα δεδομενα ειναι αποθηκευμενα σε μορφη DatabaseItem θα τα μετατρεψουμε σε Mat για να τα δουλεψει η kmeans.cpp
     for(int i=0;i<n;i++){
@@ -60,6 +60,20 @@ IVFPQ::IVFPQ(const Database& db, int kclusters, int M, int nbits, int seed) : db
     KMeans coarse_kmeans(kclusters_,30,seed);
     coarse_centroids_= coarse_kmeans.fit(data);
     
+    //Υπολογισμος των residuals δηλαδη της αποστασης της καθε εικόνας απο τα coarse centroids
+    std::cout<< "Εναρξη Υπολογισμού των residuals\n";
+
+    //Για καθε εικονα (n)
+    for(int i=0;i<n;i++){
+        //Για καθε centroid(kclusters_)
+        for(int c=0;c<kclusters_;c++){
+            //Μετατρεπω το Mat των centroids σε vector ωστε να μπορεσω να βρω την ευκλειδια αποσταση απο ολες τις εικονες του database μου
+            std::vector<float> centroidVec(K);
+            for (int j= 0;j< K; ++j){
+                centroidVec[j] = coarse_centroids_.at<float>(c, j);
+            }
+        }
+    }
 
 }
 
