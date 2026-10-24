@@ -83,10 +83,12 @@ LSHSearch::LSHSearch(const Database& db, int k, int L, float w, int seed): db_(d
     for(const auto& item: items ){
         //Για ολα τα hash tables
         for(int l=0;l<L_;l++){
-            item.vec
-
+            unsigned int hash_val= families_[l].computeHash(item.vec);
+            hash_tables_[l][hash_val].push_back(item);
         }
     }
+
+    std::cout << "[LSH] Η δομή LSH είναι έτοιμη.\n";
 
 
 }
