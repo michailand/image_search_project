@@ -14,7 +14,7 @@ float LSHSearch::squaredDistance(const std::vector<float>& a, const std::vector<
     return sum;
 }
 
-
+//Συναρτηση για τον υπολογισμο του Hash Code για ένα διάνυσμα x
 unsigned int LSHFamily::computeHash(const std::vector<float>& x) const {
 
 }
