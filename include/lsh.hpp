@@ -22,7 +22,7 @@ struct LSHFunction{
 
 //Δομη η οποια κραταει μια ομαδα απο συναρτησεις hashing
 struct LSHFamily{
-    std::vector<LSHFunction> functions;
+    std::vector<LSHFunction> functions; // Vector το οποιο περιεχει όλες τις τυχαιες ευθειες πληθους k
     int k; // Μας δειχνει ποσες LSHFunction περιεχει η δομη
     float w;
 
