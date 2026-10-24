@@ -95,8 +95,22 @@ LSHSearch::LSHSearch(const Database& db, int k, int L, float w, int seed): db_(d
 
 
 // Διαδικασία Αναζήτησης LSH
+//Για καθε query εξετάζει μόνο τις εικόνες που βρίσκονται στα αντίστοιχα buckets των L hash tables. Στη συνέχεια, υπολογίζει τις αποστάσεις τους και κρατά τις topK πιο κοντινές.
 std::vector<SearchResult> LSHSearch::search(const std::vector<float>& queryVec, int topK) const {
-    
+    std::vector<SearchResult> results;
+
+    // Θα κρατήσουμε ένα map με τα IDs των εικόνων που έχουμε ήδη ελέγξει 
+    // για να μην υπολογίζουμε την απόσταση ξανά αν βρεθούν σε πολλαπλούς πίνακες
+    std::map<std::string, bool> checked_ids;
+
+    //Για καθε πίνακα L
+    for(int l=0;l<L_;l++){
+        //Βρίσκουμε το hash code του query για τον συγκεκριμενο πίνακα
+        unsigned int query_hash= families_[l].computeHash(queryVec);
+
+        //Από τον κουβά με αριθμό query_hash θα παρω το vector με τα DatabaseItem
+        auto it= hash_tables_[l].find(query_hash);
+    }
 }
 
 }
