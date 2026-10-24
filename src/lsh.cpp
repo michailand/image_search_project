@@ -52,6 +52,30 @@ LSHSearch::LSHSearch(const Database& db, int k, int L, float w, int seed): db_(d
     std::mt19937 gen(seed);
     std::normal_distribution<float> d_normal(0.0f, 1.0f); // Κανονική κατανομή N(0,1) για το v
     std::uniform_real_distribution<float> d_uniform(0.0f, w_); // Ομοιόμορφη κατανομή [0, w) για το t
+
+    //Δημιουργία των 
+    families_.resize(L_);
+    hash_tables_.resize(L_);
+
+    std::cout << "[LSH] Δημιουργία " << L_ << " Hash Tables με k=" << k_ << " και w=" << w_ << "...\n";
+
+    //Αρχικοποιώ τα struct LSHFamily πλήθους L_
+    for(int l=0;l<L_;l++){
+        families_[l].k=k_;
+        families_[l].w=w_;
+        families_[l].functions.resize(k_);
+
+        //Για κάθε L θα φτιάξουμε k συανρτήσεις προβολής (τυχαιες ευθειες)
+        for (int i= 0;i <k_;i++) {
+            families_[l].functions[i].v.resize(dim);
+            for (int j =0; j <dim;j++) {
+                families_[l].functions[i].v[j] = d_normal(gen);
+            }
+            families_[l].functions[i].t= d_uniform(gen);
+        }
+    }
+
+
 }
 
 }

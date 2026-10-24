@@ -41,6 +41,11 @@ private:
     int L_; // Ποσα hash tables εχουμε συνολικα 
     float w_;// Σε ποσα τμηματα διαιρουμε την προβολή
 
+    //Εχουμε L πληθος πίνακες (map) hash_tables_ οπου
+    //Κάθε πίνακας hash_tables_ (map) αντιστοιχίζει ένα hash code (uint) σε μια λίστα από DatabaseItems
+    std::vector<LSHFamily> families_;
+    std::vector<std::map<unsigned int, std::vector<DatabaseItem>>> hash_tables_;
+
     //βοηθητικη συναρτηση για ευρεση ευκλειδιας αποστασης
     static float squaredDistance(const std::vector<float>& a, const std::vector<float>& b);
 };
