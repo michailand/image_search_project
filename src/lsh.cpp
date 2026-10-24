@@ -16,7 +16,7 @@ float LSHSearch::squaredDistance(const std::vector<float>& a, const std::vector<
 
 //Συναρτηση για τον υπολογισμο του Hash Code για ένα διάνυσμα x
 unsigned int LSHFamily::computeHash(const std::vector<float>& x) const {
-
+    unsigned int hash_val=0;
     //Το Hash Code για να υπολογιστει θα πρεπει να υπολογισουμε την προβολή του δθανυσματος x πανω σε ολες τις τυχαιες ευθειες LSHFunction
     for(int i=0;i<k;i++){
         float dot_product=0.0f;// Εσωτερικο γινομενο -- προβολη x στην τυχαια ευθεια toy LSHFunction
