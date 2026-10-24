@@ -38,9 +38,20 @@ unsigned int LSHFamily::computeHash(const std::vector<float>& x) const {
 
 
 LSHSearch::LSHSearch(const Database& db, int k, int L, float w, int seed): db_(db), k_(k), L_(L), w_(w) {
+
+    //Παιρνουμε τα δεδομένα της βάσης
+    const auto& items= db_.getItems();
+    if(items.empty()){
+        std::cout<< "Η βαση με τις εικονες ειναι αδεια. Τερματισμος LSH\n";
+        return;
+    }
     
+    int dim= items[0].vec.size();// Διασταση BOVW διανυσματος
 
-
+    //Προετοιμάζουμε την παραγωγή τυχαίων αριθμών
+    std::mt19937 gen(seed);
+    std::normal_distribution<float> d_normal(0.0f, 1.0f); // Κανονική κατανομή N(0,1) για το v
+    std::uniform_real_distribution<float> d_uniform(0.0f, w_); // Ομοιόμορφη κατανομή [0, w) για το t
 }
 
 }
