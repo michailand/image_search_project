@@ -24,7 +24,7 @@ struct LSHFunction{
 struct LSHFamily{
     std::vector<LSHFunction> functions; // Vector το οποιο περιεχει όλες τις τυχαιες ευθειες πληθους k
     int k; // Μας δειχνει ποσες LSHFunction περιεχει η δομη
-    float w;
+    float w; // Σε ποσα τμηματα διαιρουμε την προβολή
 
     //Η συνάρτηση αυτή παίρνει το διάνυσμα μιας εικόνας, υπολογίζει το αποτέλεσμα κάθε συνάρτησης, Συνδυάζει τα αποτελέσματα και επιστρέφει έναν ενιαίο unsigned int.
     unsigned int computeHash(const std::vector<float>& x) const;
@@ -32,10 +32,14 @@ struct LSHFamily{
 };
 class LSHSearch {
 public:
-
+    LSHSearch(const Database& db, int k, int L, float w, int seed);
 
 
 private:
+    const Database& db_; // Βαση με τις εικονες σε μορφη BoVW
+    int k_; //πόσες συναρτήσεις προβολής θα συνδυάζουμε σε κάθε hash table.
+    int L_; // Ποσα hash tables εχουμε συνολικα 
+    float w_;// Σε ποσα τμηματα διαιρουμε την προβολή
 
     //βοηθητικη συναρτηση για ευρεση ευκλειδιας αποστασης
     static float squaredDistance(const std::vector<float>& a, const std::vector<float>& b);
