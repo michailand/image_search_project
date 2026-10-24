@@ -32,9 +32,11 @@ struct LSHFamily{
 };
 class LSHSearch {
 public:
+    //Constructor ο οποιος αρχικοποιεί την LSHSearch
     LSHSearch(const Database& db, int k, int L, float w, int seed);
-
-
+   
+    //Συναρτηση αναζήτησης 
+    std::vector<SearchResult> search(const std::vector<float>& queryVec, int topK = 10) const;
 private:
     const Database& db_; // Βαση με τις εικονες σε μορφη BoVW
     int k_; //πόσες συναρτήσεις προβολής θα συνδυάζουμε σε κάθε hash table.

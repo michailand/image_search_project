@@ -93,4 +93,10 @@ LSHSearch::LSHSearch(const Database& db, int k, int L, float w, int seed): db_(d
 
 }
 
+
+// Διαδικασία Αναζήτησης LSH
+std::vector<SearchResult> LSHSearch::search(const std::vector<float>& queryVec, int topK) const {
+    
+}
+
 }
