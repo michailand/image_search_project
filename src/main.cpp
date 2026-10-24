@@ -13,6 +13,7 @@
 #include <chrono>
 
 #include "ivf_flat.hpp"
+#include "ivf_pq.hpp"
 
 
 // Προκειμένου να δεχομαστε ορισματα με χρηση flags απο την main θα φτιαξουμε μια συνάρτηση η οποια
@@ -243,8 +244,29 @@ int main(int argc, char** argv){
             sumRecall5 += qm.recall5; sumRecall10 += qm.recall10; sumAP10 += qm.ap10;
         }
     }
-    else if (cfg.method == "ivfflat"){
+    else if (cfg.method == "ivfpq"){
+        std::cout << "=== Εκτέλεση: IVFPQ Search ===\n";
+        // Προσοχή: Ελέγχουμε αν το K (vocab) διαιρείται με το M
+        if (cfg.K % cfg.pq_M != 0) {
+            std::cerr << "Σφάλμα: Το K (" << cfg.K << ") πρέπει να διαιρείται ακριβώς με το M (" << cfg.pq_M << ").\n";
+            return 1;
+        }
+        
+        image_search::IVFPQ searcher(db, cfg.ivf_kclusters, cfg.pq_M, cfg.pq_nbits, cfg.seed);
 
+        for (const auto& seq : targetSet) {
+            std::string queryPath = cfg.hpatchesDir + "/" + seq + "/1.ppm";
+            cv::Mat desc = image_search::extractSIFTDescriptors(queryPath);
+            std::vector<float> queryVec = bovw.computeVector(desc);
+
+            auto start = std::chrono::high_resolution_clock::now();
+            auto results = searcher.search(queryVec, cfg.ivf_nprobe, 10); 
+            auto end = std::chrono::high_resolution_clock::now();
+            
+            sumSearchTimeMs += std::chrono::duration<double, std::milli>(end - start).count();
+            image_search::QueryMetrics qm = image_search::Metrics::evaluateQuery(seq, results);
+            sumRecall5 += qm.recall5; sumRecall10 += qm.recall10; sumAP10 += qm.ap10;
+        }
     }
 
 

@@ -179,7 +179,64 @@ std::vector<SearchResult> IVFPQ::search(const std::vector<float>& queryVec, int 
         return a.second < b.second;
     });
 
+    //vector που θα αποθηκεύσει τα αποτελέσματα αναζήτησης, δηλαδή το ID κάθε εικόνας και την προσεγγιστική απόστασή της από το query
     std::vector<SearchResult> results;
+
+    //Θα ψαξω σε ολες τις b (nprobe) συσταδες
+    for(int i=0;i<b;i++){
+        int clusterId = clusterDistances[i].first;
+        
+        auto it = index_.find(clusterId);
+        if (it == index_.end()) continue;
+
+        // Το residual του query: r(q) = q - c_j apo to trexon centroid
+        std::vector<float> r_q(K);
+        for (int j = 0; j < K; ++j) {
+            r_q[j] = queryVec[j] - coarse_centroids_.at<float>(clusterId, j);
+        }
+        // Κατασκευή του Look-Up Table (LUT) για αυτό το residual
+        // LUT[m][h] = distance(r_q_m, c_{m, h})
+        std::vector<std::vector<float>> LUT(M_, std::vector<float>(num_centroids_per_subspace_));
+        
+        for (int m = 0; m < M_; ++m) {
+            std::vector<float> r_q_m(sub_dim_);
+            for (int j = 0; j < sub_dim_; ++j) {
+                r_q_m[j] = r_q[m * sub_dim_ + j];
+            }
+
+            for (int h = 0; h < num_centroids_per_subspace_; ++h) {
+                std::vector<float> c_mh(sub_dim_);
+                for (int j = 0; j < sub_dim_; ++j) {
+                    c_mh[j] = sub_codebooks_[m].at<float>(h, j);
+                }
+                LUT[m][h] = squaredDistance(r_q_m, c_mh);
+            }
+        }
+
+        //Asymmetric Distance Computation (ADC) για τα στοιχεία της συστάδας
+        for (const auto& item : it->second) {
+            float adc_distance = 0.0f;
+            for (int m = 0; m < M_; ++m) {
+                int code = item.pq_code[m]; // Το συμπιεσμένο byte
+                adc_distance += LUT[m][code]; 
+            }
+            results.push_back({item.id, adc_distance});
+        }
+    }
+
+    //Ταξινόμηση αποτελεσμάτων (topK)
+    int k = std::min(topK, static_cast<int>(results.size()));
+    if (k > 0) {
+        std::partial_sort(results.begin(), results.begin() + k, results.end(), [](const SearchResult& a, const SearchResult& b) {
+            return a.distance < b.distance;
+        });
+        results.resize(k);
+    }
+
+    return results;
+
+
+
 }
 
 
