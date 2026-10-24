@@ -110,7 +110,31 @@ std::vector<SearchResult> LSHSearch::search(const std::vector<float>& queryVec, 
 
         //Από τον κουβά με αριθμό query_hash θα παρω το vector με τα DatabaseItem
         auto it= hash_tables_[l].find(query_hash);
+
+        //Αν υπάρχει ο κουβας με αριθμο query_hash
+        if(it !=hash_tables_[l].end()) {
+            
+            //pairno to vector me ta DatabaseItem
+            const auto& bucket_items=it->second;
+
+            //θα κανω για καθε DatabaseItem υπολογισμο ευκλειδιας αποστασης απο το query μου 
+            //και το αποτελεσμα θα το αποθηκευσω στο vector<SearchResult> results
+            for(const auto& item: bucket_items){
+                //αν βρω στο bucket εικονα την οποια εχω ηδη συγκρινει με το query σε αλλο L  τοτε την σκιπαρω
+                if (checked_ids.find(item.id) == checked_ids.end()) {
+                    float dist = squaredDistance(queryVec, item.vec);
+                    results.push_back({item.id, dist});
+                    checked_ids[item.id] = true;
+                }
+            }
+
+        
+        }
     }
+
+    
+
+
 }
 
 }
