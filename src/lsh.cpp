@@ -77,7 +77,16 @@ LSHSearch::LSHSearch(const Database& db, int k, int L, float w, int seed): db_(d
 
     //Αφού έχω αρχικοποιήσει τα πλήθους L struct LSHFamily
     //θα υπολογίσω και θα αποθηκευσω την προβολή όλων των διανυσμάτων τύπου BOVW όλων των εικόνων της βάσης πάνω στις ευθείες k όλων των hash tables πλήθους L
+    std::cout << "[LSH] Εισαγωγή " << items.size() << " διανυσμάτων στα Hash Tables\n";
     
+    //Για ολες τις εικονες
+    for(const auto& item: items ){
+        //Για ολα τα hash tables
+        for(int l=0;l<L_;l++){
+            item.vec
+
+        }
+    }
 
 
 }
