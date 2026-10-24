@@ -23,6 +23,11 @@ unsigned int LSHFamily::computeHash(const std::vector<float>& x) const {
         for(size_t j=0;j<x.size();j++){
             dot_product +=x[j] * functions[i].v[j];
         }
+
+        // h_i(x) = floor((v * x + t)/w)
+        int h_i = static_cast<int>(std::floor((dot_product +functions[i].t) /w));
+    
+    
     }
 }
 
