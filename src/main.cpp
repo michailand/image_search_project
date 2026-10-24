@@ -15,6 +15,8 @@
 #include "ivf_flat.hpp"
 #include "ivf_pq.hpp"
 
+#include "lsh.hpp"
+
 
 // Προκειμένου να δεχομαστε ορισματα με χρηση flags απο την main θα φτιαξουμε μια συνάρτηση η οποια
 // θα διαβαζει την CLI και θα αποθηκευει σε ενα struct αυτα τα ορισματα
@@ -267,6 +269,12 @@ int main(int argc, char** argv){
             image_search::QueryMetrics qm = image_search::Metrics::evaluateQuery(seq, results);
             sumRecall5 += qm.recall5; sumRecall10 += qm.recall10; sumAP10 += qm.ap10;
         }
+    }
+    else if (cfg.method == "lsh") {
+        std::cout << "=== Εκτέλεση: LSH Search ===\n";
+        
+        // Αρχικοποίηση LSHSearch
+        image_search::LSHSearch searcher(db, cfg.lsh_k, cfg.lsh_L, cfg.lsh_w, cfg.seed);
     }
 
 
