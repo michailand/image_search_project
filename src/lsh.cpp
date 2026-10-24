@@ -132,7 +132,16 @@ std::vector<SearchResult> LSHSearch::search(const std::vector<float>& queryVec, 
         }
     }
 
+    //Τελος θα ταξινομήσω το vector<SearchResult> results και θα κρατησω τα TopK αποτελεσματα
+    int k = std::min(topK, static_cast<int>(results.size()));
+    if (k > 0) {
+        std::partial_sort(results.begin(), results.begin() + k, results.end(), [](const SearchResult& a, const SearchResult& b) {
+            return a.distance < b.distance;
+        });
+        results.resize(k);
+    }
     
+    return results;
 
 
 }
