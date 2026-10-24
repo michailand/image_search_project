@@ -20,7 +20,8 @@ struct LSHFamily{
     int k; // Μας δειχνει ποσες LSHFunction περιεχει η δομη
     float w;
 
-    
+    //Η συνάρτηση αυτή παίρνει το διάνυσμα μιας εικόνας, υπολογίζει το αποτέλεσμα κάθε συνάρτησης, Συνδυάζει τα αποτελέσματα και επιστρέφει έναν ενιαίο unsigned int.
+    unsigned int computeHash(const std::vector<float>& x) const;
 
 };
 class LSHSearch {

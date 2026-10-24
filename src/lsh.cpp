@@ -14,4 +14,9 @@ float LSHSearch::squaredDistance(const std::vector<float>& a, const std::vector<
     return sum;
 }
 
+
+unsigned int LSHFamily::computeHash(const std::vector<float>& x) const {
+
+}
+
 }
