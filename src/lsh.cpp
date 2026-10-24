@@ -16,7 +16,7 @@ float LSHSearch::squaredDistance(const std::vector<float>& a, const std::vector<
 
 //Συναρτηση για τον υπολογισμο του Hash Code για ένα διάνυσμα x
 unsigned int LSHFamily::computeHash(const std::vector<float>& x) const {
-    unsigned int hash_val=0;
+    unsigned int hash_val=0; // Αριθμός bucket στον οποιο θα αποθηκευτει η εικόνα
     //Το Hash Code για να υπολογιστει θα πρεπει να υπολογισουμε την προβολή του δθανυσματος x πανω σε ολες τις τυχαιες ευθειες LSHFunction
     for(int i=0;i<k;i++){
         float dot_product=0.0f;// Εσωτερικο γινομενο -- προβολη x στην τυχαια ευθεια toy LSHFunction
@@ -27,8 +27,12 @@ unsigned int LSHFamily::computeHash(const std::vector<float>& x) const {
         // h_i(x) = floor((v * x + t)/w)
         int h_i = static_cast<int>(std::floor((dot_product +functions[i].t) /w));
     
-    
+        // Συνδυάζουμε τα αποτελέσματα των k συναρτήσεων σε ένα ενιαίο unsigned int (απλό hashing)
+        // Χρησιμοποιούμε μια τυχαία (αλλά σταθερή) μίξη, π.χ., τον αλγόριθμο FNV-1a ή μια απλή πρόσθεση/μετατόπιση
+        hash_val ^= (h_i + 0x9e3779b9 + (hash_val << 6) + (hash_val >> 2));   
     }
+
+    return hash_val;
 }
 
 }
