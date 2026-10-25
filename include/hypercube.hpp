@@ -28,6 +28,7 @@ private:
     int M_;
     int probes_;
     int seed_;
+    int vectorDim_; // διαστασεις του διανυσματος BoVW
 
 };
 

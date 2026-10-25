@@ -32,6 +32,11 @@ public:
         return items_;
     }
 
+    //Βοηθητικη συνάρτηση για να μας επιστρεφει το BoVW διανυσμα μιας εικονας της βασης
+    const std::vector<float>& getVector(std::size_t index) const{
+        return items_[index].vec;
+    }
+
     //Επιστρεφει το size του database
     std::size_t size() {
         return items_.size();
