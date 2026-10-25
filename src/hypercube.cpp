@@ -15,6 +15,23 @@ float HypercubeSearch::squaredDistance(const std::vector<float>& a, const std::v
     return sum;
 }
 
+//Συναρτηση για να υπολογιζουμε σε ποια κορυφή του υπερκύβου θα τοποθετηθεί ένα διάνυσμα BoVW.
+uint32_t HypercubeSearch::computeVertex(const std::vector<float>& x) const {
+    //Κορυφη του υπερκυβου στην οποια θα μπει το διάνυσμα BoVW
+    uint32_t vertex=0;
+
+    for(int i=0;i<kproj_; i++){
+       float dot_product = 0.0f;
+        for (size_t j = 0; j < x.size(); ++j) {
+            dot_product += x[j] * functions_[i].v[j];
+        } 
+    }
+
+
+}
+
+
+
 HypercubeSearch::HypercubeSearch(const Database& db, int kproj, float w, int M, int probes, int seed): db_(db),kproj_(kproj),w_(w),M_(M),probes_(probes) {
 
     const auto& items= db_.getItems();

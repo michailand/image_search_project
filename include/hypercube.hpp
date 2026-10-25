@@ -37,6 +37,9 @@ private:
 
     //Πινακας στον οποιο αποθηκευουμε τα τυχαια διανυσματα
     std::vector<HCFunction> functions_;
+
+    // Υπολογίζει την κορυφή (d' bits) στην οποία προβάλλεται το διάνυσμα x
+    uint32_t computeVertex(const std::vector<float>& x) const;
   
     //Βοηθητικη συναρτηση για τον υπολογισμο της ευκλειδιας αποστασης δυο διανυσματων
     static float squaredDistance(const std::vector<float>& a, const std::vector<float>& b);
