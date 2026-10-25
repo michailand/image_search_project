@@ -19,7 +19,7 @@ public:
     // M: Μέγιστος αριθμός υποψήφιων διανυσμάτων που συλλέγεις κατά την αναζήτηση
     // probes: Μέγιστος αριθμός κορυφών που επιχειρείς να εξετάσεις, συμπεριλαμβανομένης της κορυφής του query
     // seed: χρησιμοποιούμε ίδιο seed ωστε η αρχικοποιηση των τυχαιων παραμετρων να ειναι ιδια
-    HypercubeSearch(const Database& db, int kproj, double w, int M, int probes, int seed);
+    HypercubeSearch(const Database& db, int kproj, float w, int M, int probes, int seed);
 
 private:
     const Database& db_;
@@ -27,9 +27,9 @@ private:
     double w_;
     int M_;
     int probes_;
-    int seed_;
-    int vectorDim_; // διαστασεις του διανυσματος BoVW
-
+  
+    //Βοηθητικη συναρτηση για τον υπολογισμο της ευκλειδιας αποστασης δυο διανυσματων
+    static float squaredDistance(const std::vector<float>& a, const std::vector<float>& b);
 };
 
 }
