@@ -31,6 +31,11 @@ HypercubeSearch::HypercubeSearch(const Database& db, int kproj, float w, int M, 
     std::normal_distribution<float> d_normal(0.0f, 1.0f);
     std::uniform_real_distribution<float> d_uniform(0.0f, w_);
     std::uniform_int_distribution<uint32_t> d_salt(1u, 0xFFFFFFFFu);
+
+
+    //Επειδη kproj ειναι ο αριθμός των bits που χρησιμοποιεί ο Hypercube για να αντιστοιχίσει κάθε διάνυσμα σε μία κορυφή του υπερκύβου τοτε θα χρειαζομαστε kproj πληθος τυχαιων διανυσμάτων
+    //καθε εικονα προβαλλεται σε ενα διανυσμα και το εσωτερικο γινομενο (δηλαδη η προβολη) μετατρεπεται σε 1 bit . αρα αν kproj=3 τοτε θελω 3 bits αρα 3 τυχαια διανυσματα για την προβολη
+    //Αρχικοποιησει των kproj διανυσματων για την  προβολή
 }
 
 }

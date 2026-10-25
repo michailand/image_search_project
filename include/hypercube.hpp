@@ -30,10 +30,13 @@ public:
 
 private:
     const Database& db_;
-    int kproj_;
+    int kproj_; //αριθμός των bits που χρησιμοποιεί ο Hypercube για να αντιστοιχίσει κάθε διάνυσμα σε μία κορυφή του υπερκύβου. πχ αν kproj-=3 τοτε θα εχω συνολικα 8 κορυφες στον υπερκυβο
     double w_;
     int M_;
     int probes_;
+
+    //Πινακας στον οποιο αποθηκευουμε τα τυχαια διανυσματα
+    std::vector<HCFunction> functions_;
   
     //Βοηθητικη συναρτηση για τον υπολογισμο της ευκλειδιας αποστασης δυο διανυσματων
     static float squaredDistance(const std::vector<float>& a, const std::vector<float>& b);
