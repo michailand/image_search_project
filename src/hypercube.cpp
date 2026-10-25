@@ -45,6 +45,11 @@ HypercubeSearch::HypercubeSearch(const Database& db, int kproj, float w, int M, 
         functions_[i].t = d_uniform(gen);
         functions_[i].salt = d_salt(gen);
     }
+
+    //τωρα θα προβαλλουμε όλες τις εικόνες της βασης στον υπερκυβο
+    std::cout << "[Hypercube] Δημιουργία Υπερκύβου με kproj=" << kproj_ << ", w=" << w_ << ", M=" << M_ << ", probes=" << probes_ << "\n";
+
+
 }
 
 }
