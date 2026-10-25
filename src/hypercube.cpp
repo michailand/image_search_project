@@ -23,7 +23,7 @@ HypercubeSearch::HypercubeSearch(const Database& db, int kproj, float w, int M, 
         return;
     }
 
-    size_t dim= items[0].vec.size(); // Διαστασεις BoVW διανυσματων
+    size_t dim= items[0].vec.size(); // Διαστασεις BoVW διανυσματων. Θα μου χρειαστει να αρχικοποιησω τις τυχαιες ευθειες προβολης
 
 
     //Αρχικοποιηση της γεννητριας τυχαιων αριθμων. Σκοπος μας ειναι καθε φορα που αρχικοποιουμε να εχουμε ίδια αποτελεσματα  
@@ -36,6 +36,15 @@ HypercubeSearch::HypercubeSearch(const Database& db, int kproj, float w, int M, 
     //Επειδη kproj ειναι ο αριθμός των bits που χρησιμοποιεί ο Hypercube για να αντιστοιχίσει κάθε διάνυσμα σε μία κορυφή του υπερκύβου τοτε θα χρειαζομαστε kproj πληθος τυχαιων διανυσμάτων
     //καθε εικονα προβαλλεται σε ενα διανυσμα και το εσωτερικο γινομενο (δηλαδη η προβολη) μετατρεπεται σε 1 bit . αρα αν kproj=3 τοτε θελω 3 bits αρα 3 τυχαια διανυσματα για την προβολη
     //Αρχικοποιησει των kproj διανυσματων για την  προβολή
+    functions_.resize(kproj_);
+    for(int i=0;i<kproj_;i++){
+        functions_[i].v.resize(dim);
+        for(size_t j=0;j<dim;j++){
+            functions_[i].v[j] = d_normal(gen);
+        }
+        functions_[i].t = d_uniform(gen);
+        functions_[i].salt = d_salt(gen);
+    }
 }
 
 }
