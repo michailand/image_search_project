@@ -11,6 +11,13 @@
 
 namespace image_search {
 
+//Πρεπει να φτιάξουμε μια δομή για να κραταμε τα τυχαια διανύσματα πανω στα οποια θα προβαλλεται η BoVW εικονα
+struct HCFunction{
+    std::vector<float> v;//Τυχαιο διανυσμα με τιμες στο διαστημα (0,1)
+    float t; // Τυχαια μετατοπιση 
+    uint32_t  salt; //Τυχαιο salt για καλυτερο mapping
+} ;
+
 class HypercubeSearch{
 public:
     //Constructor της HypercubeSearch
