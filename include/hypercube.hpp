@@ -29,6 +29,8 @@ private:
     int probes_;
     int seed_;
 
-}
+};
 
 }
+
+#endif

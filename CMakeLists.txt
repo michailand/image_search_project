@@ -31,6 +31,7 @@ add_executable(image_search_project
     src/ivf_flat.cpp
     src/ivf_pq.cpp
     src/lsh.cpp
+    src/hypercube.cpp
 )
 
 
