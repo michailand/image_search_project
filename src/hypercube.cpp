@@ -26,19 +26,21 @@ uint32_t HypercubeSearch::computeVertex(const std::vector<float>& x) const {
         for (size_t j =0;j <x.size(); j++) {
             dot_product+= x[j] * functions_[i].v[j];
         } 
+    
+
+        // h_i(x) = floor((v * x + t) / w)
+        int h_i = static_cast<int>(std::floor((dot_product + functions_[i].t) / w_));
+
+        uint32_t mixed = static_cast<uint32_t>(h_i) ^ functions_[i].salt;
+        mixed ^= (mixed >> 16);
+        mixed *= 0x85ebca6b;
+        mixed ^= (mixed >> 13);
+        uint32_t bit = mixed & 1u;
+
+        vertex = (vertex << 1) | bit;
     }
 
-    // h_i(x) = floor((v * x + t) / w)
-    int h_i = static_cast<int>(std::floor((dot_product + functions_[i].t) / w_));
-
-    uint32_t mixed = static_cast<uint32_t>(h_i) ^ functions_[i].salt;
-    mixed ^= (mixed >> 16);
-    mixed *= 0x85ebca6b;
-    mixed ^= (mixed >> 13);
-    uint32_t bit = mixed & 1u;
-
-    vertex = (vertex << 1) | bit;
-
+    return vertex;
 }
 
 
@@ -77,7 +79,22 @@ HypercubeSearch::HypercubeSearch(const Database& db, int kproj, float w, int M, 
     //τωρα θα προβαλλουμε όλες τις εικόνες της βασης στον υπερκυβο
     std::cout << "[Hypercube] Δημιουργία Υπερκύβου με kproj=" << kproj_ << ", w=" << w_ << ", M=" << M_ << ", probes=" << probes_ << "\n";
 
+    for(const auto& item : items){
+        uint32_t vertex= computeVertex(item.vec);
+        hypercube_table_[vertex].push_back(item);
+    }
 
+    std::cout << "[Hypercube] Εισήχθησαν " << db_.size() << " διανύσματα σε " << hypercube_table_.size() << " ενεργές κορυφές.\n";
+
+}
+
+
+
+std::vector<SearchResult> HypercubeSearch::search(const std::vector<float>& queryVec, int topK) const {
+    std::vector<SearchResult> results;
+
+    //Βρισκουμε σε ποια κορυφη του υπερκυβου θα ανηκε το query 
+    uint32_t queryVertex= computeVertex(queryVec);
 }
 
 }

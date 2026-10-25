@@ -38,7 +38,7 @@ public:
     }
 
     //Επιστρεφει το size του database
-    std::size_t size() {
+    std::size_t size() const{
         return items_.size();
     }
 
