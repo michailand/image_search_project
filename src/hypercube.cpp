@@ -20,13 +20,24 @@ uint32_t HypercubeSearch::computeVertex(const std::vector<float>& x) const {
     //Κορυφη του υπερκυβου στην οποια θα μπει το διάνυσμα BoVW
     uint32_t vertex=0;
 
+    //Πρωτα βρίσκουμε το εσωτερικο γινομενο δηλαδη την προβολή του διάνυσματος BoVW στην ευθεια xs
     for(int i=0;i<kproj_; i++){
        float dot_product = 0.0f;
-        for (size_t j = 0; j < x.size(); ++j) {
-            dot_product += x[j] * functions_[i].v[j];
+        for (size_t j =0;j <x.size(); j++) {
+            dot_product+= x[j] * functions_[i].v[j];
         } 
     }
 
+    // h_i(x) = floor((v * x + t) / w)
+    int h_i = static_cast<int>(std::floor((dot_product + functions_[i].t) / w_));
+
+    uint32_t mixed = static_cast<uint32_t>(h_i) ^ functions_[i].salt;
+    mixed ^= (mixed >> 16);
+    mixed *= 0x85ebca6b;
+    mixed ^= (mixed >> 13);
+    uint32_t bit = mixed & 1u;
+
+    vertex = (vertex << 1) | bit;
 
 }
 
