@@ -50,7 +50,7 @@ private:
   
 
     // Παράγει αναδρομικά τις γειτονικές κορυφές σε απόσταση Hamming = dist
-    static void generateHammingNeighbors(uint32_t vertex, int kproj, int dist, int startBit,size_t maxProbes, std::vector<uint32_t>& outVertices);
+    static void generateHammingNeighbors(uint32_t vertex, int kproj, int dist, size_t maxProbes, std::vector<uint32_t>& outVertices);
 
     //Βοηθητικη συναρτηση για τον υπολογισμο της ευκλειδιας αποστασης δυο διανυσματων
     static float squaredDistance(const std::vector<float>& a, const std::vector<float>& b);

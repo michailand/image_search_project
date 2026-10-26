@@ -16,6 +16,7 @@
 #include "ivf_pq.hpp"
 
 #include "lsh.hpp"
+#include "hypercube.hpp"
 
 
 // Προκειμένου να δεχομαστε ορισματα με χρηση flags απο την main θα φτιαξουμε μια συνάρτηση η οποια
@@ -294,6 +295,27 @@ int main(int argc, char** argv){
             sumAP10 += qm.ap10;
         }
     
+    }
+    else if (cfg.method == "hypercube") {
+        std::cout << "=== Εκτέλεση: Hypercube Search ===\n";
+
+        image_search::HypercubeSearch searcher(db, cfg.hc_kproj, static_cast<float>(cfg.hc_w), cfg.hc_M, cfg.hc_probes, cfg.seed);
+
+        for (const auto& seq : targetSet) {
+            std::string queryPath = cfg.hpatchesDir + "/" + seq + "/1.ppm";
+            cv::Mat desc = image_search::extractSIFTDescriptors(queryPath);
+            std::vector<float> queryVec = bovw.computeVector(desc);
+
+            auto start = std::chrono::high_resolution_clock::now();
+            auto results = searcher.search(queryVec, 10);
+            auto end = std::chrono::high_resolution_clock::now();
+
+            sumSearchTimeMs += std::chrono::duration<double, std::milli>(end - start).count();
+            image_search::QueryMetrics qm = image_search::Metrics::evaluateQuery(seq, results);
+            sumRecall5 += qm.recall5;
+            sumRecall10 += qm.recall10;
+            sumAP10 += qm.ap10;
+        }
     }
 
 
