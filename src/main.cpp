@@ -238,7 +238,16 @@ int main(int argc, char** argv){
             sumAP10 += qm.ap10;
 
             //Εγγραφη ανά Query 
-            // outFile<< 
+            outFile<< methodNameForFile << "\n";
+            outFile << "Query: " << seq << "\n";
+            for (size_t i = 0; i < results.size(); ++i) {
+                outFile << "Rank-" << (i + 1) << ": " << results[i].id << "\n";
+            }
+            outFile << "Recall@5: " << qm.recall5 << "\n";
+            outFile << "Recall@10: " << qm.recall10 << "\n";
+            outFile << "AP@10: " << qm.ap10 << "\n";
+            outFile << "\n";
+
 
 
         }
