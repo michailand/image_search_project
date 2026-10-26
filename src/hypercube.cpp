@@ -93,12 +93,19 @@ HypercubeSearch::HypercubeSearch(const Database& db, int kproj, float w, int M, 
 //startBit: Από ποια θέση bit ξεκινάμε να εξετάζουμε ώστε να αποφεύγουμε διπλούς συνδυασμούς
 //maxProbes: Το μέγιστο πλήθος κορυφών που επιτρέπεται να αποθηκευτούν.
 //outVertices: Το vector στο οποίο αποθηκεύονται οι κορυφές που δημιουργούνται.
+//kproj: Το πλήθος των bits της κορυφής. Πχ αν είναι 4, έχουμε 2^4=16 κορυφές
 void HypercubeSearch::generateHammingNeighbors(uint32_t vertex, int kproj, int dist, int startBit,size_t maxProbes, std::vector<uint32_t>& outVertices) {
     //Συνθηκη τερματισμού αναδρομής
     if(outVertices.size() >= maxProbes){
         return;
     }
     
+    for(int bit=startBit; bit<=kproj-dist; bit++){
+        //Αντιστρεφουμε καθε φορα ενα bit ολο και πιο αριστερα 
+        uint32_t flipped= vertex^ (1u<<bit);
+        generateHammingNeighbors(flipped, kproj, dist - 1, bit + 1, maxProbes, outVertices);
+        if (outVertices.size() >= maxProbes) return;
+    }
 
 
 }
