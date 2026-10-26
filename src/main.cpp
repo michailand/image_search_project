@@ -387,9 +387,18 @@ int main(int argc, char** argv){
         }
     }
 
+    // Συνολικά στατιστικά στο τέλος του αρχείου
+    outFile << "...\n";
+    outFile << "Mean Recall@5: " << (sumRecall5 / numQueries) << "\n";
+    outFile << "Mean Recall@10: " << (sumRecall10 / numQueries) << "\n";
+    outFile << "mAP@10: " << (sumAP10 / numQueries) << "\n";
+    outFile << "Average query time: " << (sumSearchTimeMs / numQueries) << "\n";
+
+    outFile.close();
 
     //--- Εκτύπωση των αποτελεσμάτων
     std::cout << "\n=== Τελικά Αποτελέσματα (" << cfg.method << ") ===\n";
+    std::cout << "Αποθηκεύτηκαν στο: " << cfg.outputFile << "\n";
     std::cout << "Mean Recall@5:  " << (sumRecall5 / numQueries) << "\n";
     std::cout << "Mean Recall@10: " << (sumRecall10 / numQueries) << "\n";
     std::cout << "Mean AP@10:     " << (sumAP10 / numQueries) << "\n";
