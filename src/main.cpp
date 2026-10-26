@@ -17,7 +17,7 @@
 
 #include "lsh.hpp"
 #include "hypercube.hpp"
-
+#include <fstream>
 
 // Προκειμένου να δεχομαστε ορισματα με χρηση flags απο την main θα φτιαξουμε μια συνάρτηση η οποια
 // θα διαβαζει την CLI και θα αποθηκευει σε ενα struct αυτα τα ορισματα
@@ -192,6 +192,8 @@ int main(int argc, char** argv){
         return 1;
     }
 
+    std::ofstream outFile(cfg.outputFile);
+
     //--- Εκτέλεση της επιλεγμένης από τον χρηστη μεθόδου
     
     //Μεταβλητές για τον υπολογισμο των μετρικών (κοινές για καθε μεθοδο)
@@ -219,11 +221,16 @@ int main(int argc, char** argv){
             auto results = searcher.search(queryVec, 10);
             auto end = std::chrono::high_resolution_clock::now();
 
-            sumSearchTimeMs += std::chrono::duration<double, std::milli>(end - start).count();
+            double queryTime= std::chrono::duration<double, std::milli>(end - start).count();
+            sumSearchTimeMs += queryTime;
+
             image_search::QueryMetrics qm = image_search::Metrics::evaluateQuery(seq, results);
             sumRecall5 += qm.recall5;
             sumRecall10 += qm.recall10;
             sumAP10 += qm.ap10;
+
+            //Εγγραφη ανά Query 
+
 
         }
     }//Μέθοδος ivfflat
