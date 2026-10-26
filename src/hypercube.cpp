@@ -116,6 +116,12 @@ std::vector<SearchResult> HypercubeSearch::search(const std::vector<float>& quer
     uint32_t queryVertex= computeVertex(queryVec);
 
     //ΑΠοθηκευουμε σε vector το μεγιστο αριθμο ( probes_ ) των κορυφων που προκειται να εξετασουμε
+    std::vector<uint32_t> verticesToProbe;
+    verticesToProbe.reserve(probes_);
+
+    for (int dist = 0; dist <= kproj_ && verticesToProbe.size() < static_cast<size_t>(probes_);dist++){
+        generateHammingNeighbors(queryVertex, kproj_, dist, 0, static_cast<size_t>(probes_), verticesToProbe);
+    }
 
 }
 
