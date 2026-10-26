@@ -193,6 +193,10 @@ int main(int argc, char** argv){
     }
 
     std::ofstream outFile(cfg.outputFile);
+    if(!outFile.is_open()){
+        std::cerr << "Σφάλμα: Δεν ήταν δυνατό το άνοιγμα του αρχείου " << cfg.outputFile << "\n";
+        return 1;
+    }
 
     //--- Εκτέλεση της επιλεγμένης από τον χρηστη μεθόδου
     
@@ -200,6 +204,10 @@ int main(int argc, char** argv){
     float sumRecall5 = 0.0f, sumRecall10 = 0.0f, sumAP10 = 0.0f;
     double sumSearchTimeMs = 0.0; //κραταει ποσο συνολικο χρονο χρειάζεται η μεθοδος exact search να βρει τις κοντινες εικονες για το καθε query του set
     int numQueries = targetSet.size();
+
+    //Αποθηκευση του ονοματος της μεθοδου και μετατροπη σε κεφαλαια για αποθηκευση στο output αρχειο
+    std::string methodNameForFile =cfg.method;
+    std::transform(methodNameForFile.begin(),methodNameForFile.end(),methodNameForFile.begin(), ::toupper);
     
     //Μέθοδος Exact Search
     if(cfg.method == "exact"){
@@ -230,6 +238,7 @@ int main(int argc, char** argv){
             sumAP10 += qm.ap10;
 
             //Εγγραφη ανά Query 
+            // outFile<< 
 
 
         }
