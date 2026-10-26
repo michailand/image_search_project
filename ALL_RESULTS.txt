@@ -1,0 +1,136 @@
+==========================================
+ ΕΚΤΕΛΕΣΕΙΣ ΓΙΑ D = 1000 
+==========================================
+
+...
+Mean Recall@5: 0.73913
+Mean Recall@10: 0.808696
+mAP@10: 0.760169
+Average query time: 1.94706
+
+...
+Mean Recall@5: 0.686956
+Mean Recall@10: 0.747826
+mAP@10: 0.712874
+Average query time: 1.65842
+
+...
+Mean Recall@5: 0.66087
+Mean Recall@10: 0.721739
+mAP@10: 0.68099
+Average query time: 0.890981
+
+...
+Mean Recall@5: 0.73913
+Mean Recall@10: 0.808696
+mAP@10: 0.760169
+Average query time: 1.6072
+
+...
+Mean Recall@5: 0.721739
+Mean Recall@10: 0.8
+mAP@10: 0.728523
+Average query time: 11.8145
+
+==========================================
+ ΕΚΤΕΛΕΣΕΙΣ ΓΙΑ D = 5000 
+==========================================
+
+...
+Mean Recall@5: 0.713043
+Mean Recall@10: 0.782609
+mAP@10: 0.725966
+Average query time: 8.86323
+
+...
+Mean Recall@5: 0.686956
+Mean Recall@10: 0.747826
+mAP@10: 0.703068
+Average query time: 7.52853
+
+...
+Mean Recall@5: 0.46087
+Mean Recall@10: 0.495652
+mAP@10: 0.464517
+Average query time: 1.2006
+
+...
+Mean Recall@5: 0.713043
+Mean Recall@10: 0.782609
+mAP@10: 0.725966
+Average query time: 5.29782
+
+...
+Mean Recall@5: 0.643478
+Mean Recall@10: 0.695652
+mAP@10: 0.641211
+Average query time: 13.9656
+
+==========================================
+ ΕΚΤΕΛΕΣΕΙΣ ΓΙΑ D = 10000 
+==========================================
+
+...
+Mean Recall@5: 0.695652
+Mean Recall@10: 0.773913
+mAP@10: 0.717126
+Average query time: 17.5524
+
+...
+Mean Recall@5: 0.669565
+Mean Recall@10: 0.747826
+mAP@10: 0.69451
+Average query time: 13.7669
+
+...
+Mean Recall@5: 0.391304
+Mean Recall@10: 0.434783
+mAP@10: 0.403357
+Average query time: 1.44639
+
+...
+Mean Recall@5: 0.695652
+Mean Recall@10: 0.773913
+mAP@10: 0.717126
+Average query time: 7.11193
+
+...
+Mean Recall@5: 0.626087
+Mean Recall@10: 0.713044
+mAP@10: 0.65452
+Average query time: 12.8366
+
+==========================================
+ ΕΚΤΕΛΕΣΕΙΣ ΓΙΑ D = 25000 
+==========================================
+
+...
+Mean Recall@5: 0.678261
+Mean Recall@10: 0.73913
+mAP@10: 0.697029
+Average query time: 43.9874
+
+...
+Mean Recall@5: 0.66087
+Mean Recall@10: 0.713044
+mAP@10: 0.677609
+Average query time: 33.4329
+
+...
+Mean Recall@5: 0.321739
+Mean Recall@10: 0.365217
+mAP@10: 0.335169
+Average query time: 1.10413
+
+...
+Mean Recall@5: 0.669565
+Mean Recall@10: 0.730435
+mAP@10: 0.688333
+Average query time: 11.6485
+
+...
+Mean Recall@5: 0.617391
+Mean Recall@10: 0.66087
+mAP@10: 0.605859
+Average query time: 13.8877
+

@@ -1,0 +1,373 @@
+HYPERCUBE
+Query: i_bologna
+Rank-1: im4912.jpg
+Rank-2: im13537.jpg
+Rank-3: im8682.jpg
+Rank-4: im20228.jpg
+Rank-5: im2128.jpg
+Rank-6: im21351.jpg
+Rank-7: im7276.jpg
+Rank-8: im23098.jpg
+Rank-9: im14421.jpg
+Rank-10: im13177.jpg
+Recall@5: 0
+Recall@10: 0
+AP@10: 0
+
+HYPERCUBE
+Query: i_contruction
+Rank-1: i_contruction_3
+Rank-2: i_contruction_2
+Rank-3: i_contruction_4
+Rank-4: i_indiana_3
+Rank-5: i_contruction_5
+Rank-6: im7685.jpg
+Rank-7: i_indiana_4
+Rank-8: v_boat_2
+Rank-9: im22088.jpg
+Rank-10: im4018.jpg
+Recall@5: 0.8
+Recall@10: 0.8
+AP@10: 0.76
+
+HYPERCUBE
+Query: i_crownday
+Rank-1: i_crownday_5
+Rank-2: i_crownday_4
+Rank-3: im10251.jpg
+Rank-4: im6363.jpg
+Rank-5: im4936.jpg
+Rank-6: im15380.jpg
+Rank-7: im18538.jpg
+Rank-8: im7638.jpg
+Rank-9: im10132.jpg
+Rank-10: im8988.jpg
+Recall@5: 0.4
+Recall@10: 0.4
+AP@10: 0.4
+
+HYPERCUBE
+Query: i_fruits
+Rank-1: i_fruits_2
+Rank-2: i_fruits_3
+Rank-3: im6001.jpg
+Rank-4: im14530.jpg
+Rank-5: im21866.jpg
+Rank-6: im18031.jpg
+Rank-7: im2419.jpg
+Rank-8: im16220.jpg
+Rank-9: im24516.jpg
+Rank-10: im19397.jpg
+Recall@5: 0.4
+Recall@10: 0.4
+AP@10: 0.4
+
+HYPERCUBE
+Query: i_greenhouse
+Rank-1: im7212.jpg
+Rank-2: im3055.jpg
+Rank-3: v_cartooncity_6
+Rank-4: v_cartooncity_3
+Rank-5: v_cartooncity_5
+Rank-6: im11825.jpg
+Rank-7: v_dirtywall_4
+Rank-8: v_dirtywall_6
+Rank-9: v_dirtywall_2
+Rank-10: v_posters_4
+Recall@5: 0
+Recall@10: 0
+AP@10: 0
+
+HYPERCUBE
+Query: i_indiana
+Rank-1: i_indiana_2
+Rank-2: i_indiana_5
+Rank-3: i_indiana_6
+Rank-4: im20974.jpg
+Rank-5: im1.jpg
+Rank-6: im16771.jpg
+Rank-7: im15437.jpg
+Rank-8: im19631.jpg
+Rank-9: im4355.jpg
+Rank-10: im20368.jpg
+Recall@5: 0.6
+Recall@10: 0.6
+AP@10: 0.6
+
+HYPERCUBE
+Query: i_kions
+Rank-1: im18510.jpg
+Rank-2: im17859.jpg
+Rank-3: v_blueprint_3
+Rank-4: im18975.jpg
+Rank-5: v_dirtywall_5
+Rank-6: im12763.jpg
+Rank-7: im14345.jpg
+Rank-8: im14718.jpg
+Rank-9: im4393.jpg
+Rank-10: im15431.jpg
+Recall@5: 0
+Recall@10: 0
+AP@10: 0
+
+HYPERCUBE
+Query: i_salon
+Rank-1: i_salon_2
+Rank-2: i_salon_3
+Rank-3: im18852.jpg
+Rank-4: im16820.jpg
+Rank-5: im6985.jpg
+Rank-6: i_indiana_6
+Rank-7: i_indiana_5
+Rank-8: im17176.jpg
+Rank-9: im16771.jpg
+Rank-10: im18749.jpg
+Recall@5: 0.4
+Recall@10: 0.4
+AP@10: 0.4
+
+HYPERCUBE
+Query: i_ski
+Rank-1: i_ski_4
+Rank-2: v_posters_6
+Rank-3: i_ski_5
+Rank-4: im14825.jpg
+Rank-5: im20366.jpg
+Rank-6: im23845.jpg
+Rank-7: im2278.jpg
+Rank-8: im20880.jpg
+Rank-9: im20811.jpg
+Rank-10: i_ski_6
+Recall@5: 0.4
+Recall@10: 0.6
+AP@10: 0.393333
+
+HYPERCUBE
+Query: i_smurf
+Rank-1: i_smurf_4
+Rank-2: i_smurf_2
+Rank-3: i_smurf_3
+Rank-4: i_indiana_2
+Rank-5: im5664.jpg
+Rank-6: im3061.jpg
+Rank-7: i_indiana_5
+Rank-8: i_indiana_6
+Rank-9: im3547.jpg
+Rank-10: im16533.jpg
+Recall@5: 0.6
+Recall@10: 0.6
+AP@10: 0.6
+
+HYPERCUBE
+Query: i_village
+Rank-1: i_village_5
+Rank-2: v_dirtywall_4
+Rank-3: i_indiana_5
+Rank-4: i_indiana_2
+Rank-5: i_indiana_6
+Rank-6: v_dirtywall_3
+Rank-7: v_dirtywall_6
+Rank-8: im1.jpg
+Rank-9: v_busstop_3
+Rank-10: im22549.jpg
+Recall@5: 0.2
+Recall@10: 0.2
+AP@10: 0.2
+
+HYPERCUBE
+Query: v_blueprint
+Rank-1: v_blueprint_2
+Rank-2: v_blueprint_4
+Rank-3: v_blueprint_3
+Rank-4: v_blueprint_5
+Rank-5: im18621.jpg
+Rank-6: v_dirtywall_5
+Rank-7: i_greenhouse_5
+Rank-8: im2477.jpg
+Rank-9: im19987.jpg
+Rank-10: im1294.jpg
+Recall@5: 0.8
+Recall@10: 0.8
+AP@10: 0.8
+
+HYPERCUBE
+Query: v_boat
+Rank-1: v_boat_2
+Rank-2: v_boat_3
+Rank-3: v_boat_4
+Rank-4: v_posters_2
+Rank-5: v_boat_6
+Rank-6: i_indiana_4
+Rank-7: v_boat_5
+Rank-8: i_indiana_3
+Rank-9: v_posters_3
+Rank-10: v_posters_5
+Recall@5: 0.8
+Recall@10: 1
+AP@10: 0.902857
+
+HYPERCUBE
+Query: v_busstop
+Rank-1: v_busstop_6
+Rank-2: v_busstop_2
+Rank-3: v_busstop_5
+Rank-4: v_busstop_4
+Rank-5: v_busstop_3
+Rank-6: v_dirtywall_2
+Rank-7: v_dirtywall_3
+Rank-8: v_dirtywall_4
+Rank-9: v_dirtywall_6
+Rank-10: im10919.jpg
+Recall@5: 1
+Recall@10: 1
+AP@10: 1
+
+HYPERCUBE
+Query: v_cartooncity
+Rank-1: v_cartooncity_4
+Rank-2: v_cartooncity_2
+Rank-3: v_cartooncity_3
+Rank-4: v_cartooncity_6
+Rank-5: v_cartooncity_5
+Rank-6: v_dirtywall_6
+Rank-7: v_dirtywall_3
+Rank-8: v_dirtywall_2
+Rank-9: v_dirtywall_4
+Rank-10: im14044.jpg
+Recall@5: 1
+Recall@10: 1
+AP@10: 1
+
+HYPERCUBE
+Query: v_charing
+Rank-1: im3773.jpg
+Rank-2: im15429.jpg
+Rank-3: im12978.jpg
+Rank-4: im8213.jpg
+Rank-5: im8468.jpg
+Rank-6: im23607.jpg
+Rank-7: im6399.jpg
+Rank-8: im4404.jpg
+Rank-9: im16451.jpg
+Rank-10: im15919.jpg
+Recall@5: 0
+Recall@10: 0
+AP@10: 0
+
+HYPERCUBE
+Query: v_courses
+Rank-1: v_courses_2
+Rank-2: v_courses_5
+Rank-3: v_courses_6
+Rank-4: im9612.jpg
+Rank-5: im2584.jpg
+Rank-6: im7296.jpg
+Rank-7: im15766.jpg
+Rank-8: v_charing_4
+Rank-9: im18119.jpg
+Rank-10: im14733.jpg
+Recall@5: 0.6
+Recall@10: 0.6
+AP@10: 0.6
+
+HYPERCUBE
+Query: v_dirtywall
+Rank-1: v_dirtywall_2
+Rank-2: v_busstop_2
+Rank-3: v_busstop_6
+Rank-4: v_busstop_3
+Rank-5: v_busstop_5
+Rank-6: v_busstop_4
+Rank-7: v_dirtywall_3
+Rank-8: v_dirtywall_4
+Rank-9: v_dirtywall_6
+Rank-10: im10919.jpg
+Recall@5: 0.2
+Recall@10: 0.8
+AP@10: 0.421032
+
+HYPERCUBE
+Query: v_maskedman
+Rank-1: im13972.jpg
+Rank-2: im23952.jpg
+Rank-3: im11633.jpg
+Rank-4: im8477.jpg
+Rank-5: im13359.jpg
+Rank-6: im4188.jpg
+Rank-7: im2153.jpg
+Rank-8: im23479.jpg
+Rank-9: im11009.jpg
+Rank-10: im14261.jpg
+Recall@5: 0
+Recall@10: 0
+AP@10: 0
+
+HYPERCUBE
+Query: v_posters
+Rank-1: v_posters_4
+Rank-2: v_cartooncity_5
+Rank-3: v_cartooncity_3
+Rank-4: v_cartooncity_6
+Rank-5: i_indiana_6
+Rank-6: i_indiana_5
+Rank-7: v_cartooncity_4
+Rank-8: v_cartooncity_2
+Rank-9: v_dirtywall_6
+Rank-10: i_indiana_2
+Recall@5: 0.2
+Recall@10: 0.2
+AP@10: 0.2
+
+HYPERCUBE
+Query: v_soldiers
+Rank-1: v_soldiers_6
+Rank-2: i_indiana_3
+Rank-3: i_indiana_4
+Rank-4: v_boat_5
+Rank-5: v_boat_4
+Rank-6: im22088.jpg
+Rank-7: i_contruction_2
+Rank-8: im9834.jpg
+Rank-9: v_boat_2
+Rank-10: v_boat_3
+Recall@5: 0.2
+Recall@10: 0.2
+AP@10: 0.2
+
+HYPERCUBE
+Query: v_there
+Rank-1: im7504.jpg
+Rank-2: im8651.jpg
+Rank-3: im11977.jpg
+Rank-4: im12112.jpg
+Rank-5: im16329.jpg
+Rank-6: im14861.jpg
+Rank-7: im568.jpg
+Rank-8: im22351.jpg
+Rank-9: im10727.jpg
+Rank-10: im15370.jpg
+Recall@5: 0
+Recall@10: 0
+AP@10: 0
+
+HYPERCUBE
+Query: v_weapons
+Rank-1: v_weapons_2
+Rank-2: v_weapons_3
+Rank-3: v_posters_2
+Rank-4: v_boat_2
+Rank-5: v_posters_3
+Rank-6: v_posters_5
+Rank-7: v_boat_3
+Rank-8: i_indiana_4
+Rank-9: i_indiana_3
+Rank-10: v_boat_6
+Recall@5: 0.4
+Recall@10: 0.4
+AP@10: 0.4
+
+...
+Mean Recall@5: 0.391304
+Mean Recall@10: 0.434783
+mAP@10: 0.403357
+Average query time: 1.44639
