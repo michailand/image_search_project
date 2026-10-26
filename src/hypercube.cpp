@@ -88,13 +88,28 @@ HypercubeSearch::HypercubeSearch(const Database& db, int kproj, float w, int M, 
 
 }
 
+//Με αυτη τη συνάρτηση θα βρουμε τις γειτονικές κορυφές του Hypercube που απέχουν συγκεκριμένο αριθμό bits από την αρχική κορυφή, δηλαδή έχουν συγκεκριμένη απόσταση Hamming
+//dist: Πόσα bits θέλουμε να αντιστρέψουμε. Για παραδειγμα αν dist = 2 ψάχνουμε κορυφές που διαφέρουν σε ακριβώς 2 bits.
+//startBit: Από ποια θέση bit ξεκινάμε να εξετάζουμε ώστε να αποφεύγουμε διπλούς συνδυασμούς
+//maxProbes: Το μέγιστο πλήθος κορυφών που επιτρέπεται να αποθηκευτούν.
+//outVertices: Το vector στο οποίο αποθηκεύονται οι κορυφές που δημιουργούνται.
+void HypercubeSearch::generateHammingNeighbors(uint32_t vertex, int kproj, int dist, int startBit,size_t maxProbes, std::vector<uint32_t>& outVertices) {
+    //Συνθηκη τερματισμού αναδρομής
+    if(outVertices.size() >= maxProbes){
+        return;
+    }
+    
 
 
+}
 std::vector<SearchResult> HypercubeSearch::search(const std::vector<float>& queryVec, int topK) const {
     std::vector<SearchResult> results;
 
     //Βρισκουμε σε ποια κορυφη του υπερκυβου θα ανηκε το query 
     uint32_t queryVertex= computeVertex(queryVec);
+
+    //ΑΠοθηκευουμε σε vector το μεγιστο αριθμο ( probes_ ) των κορυφων που προκειται να εξετασουμε
+
 }
 
 }
