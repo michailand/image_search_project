@@ -237,7 +237,7 @@ int main(int argc, char** argv){
             sumRecall10 += qm.recall10;
             sumAP10 += qm.ap10;
 
-            //Εγγραφη ανά Query 
+            //Εγγραφη στο output αρχειο ανά Query 
             outFile<< methodNameForFile << "\n";
             outFile << "Query: " << seq << "\n";
             for (size_t i = 0; i < results.size(); ++i) {
@@ -271,6 +271,7 @@ int main(int argc, char** argv){
             image_search::QueryMetrics qm = image_search::Metrics::evaluateQuery(seq, results);
             sumRecall5 += qm.recall5; sumRecall10 += qm.recall10; sumAP10 += qm.ap10;
 
+            //Εγγραφη στο output αρχειο ανά Query 
             outFile << methodNameForFile << "\n";
             outFile << "Query: " << seq << "\n";
             for (size_t i = 0; i < results.size(); ++i) {
@@ -305,6 +306,7 @@ int main(int argc, char** argv){
             image_search::QueryMetrics qm = image_search::Metrics::evaluateQuery(seq, results);
             sumRecall5 += qm.recall5; sumRecall10 += qm.recall10; sumAP10 += qm.ap10;
 
+            //Εγγραφη στο output αρχειο ανά Query 
             outFile << methodNameForFile << "\n";
             outFile << "Query: " << seq << "\n";
             for (size_t i = 0; i < results.size(); ++i) {
@@ -338,6 +340,17 @@ int main(int argc, char** argv){
             sumRecall5 += qm.recall5; 
             sumRecall10 += qm.recall10; 
             sumAP10 += qm.ap10;
+
+            //Εγγραφη στο output αρχειο ανά Query 
+            outFile << methodNameForFile << "\n";
+            outFile << "Query: " << seq << "\n";
+            for (size_t i = 0; i < results.size(); ++i) {
+                outFile << "Rank-" << (i + 1) << ": " << results[i].id << "\n";
+            }
+            outFile << "Recall@5: " << qm.recall5 << "\n";
+            outFile << "Recall@10: " << qm.recall10 << "\n";
+            outFile << "AP@10: " << qm.ap10 << "\n";
+            outFile << "\n";
         }
     
     }
@@ -360,6 +373,17 @@ int main(int argc, char** argv){
             sumRecall5 += qm.recall5;
             sumRecall10 += qm.recall10;
             sumAP10 += qm.ap10;
+
+            //Εγγραφη στο output αρχειο ανά Query 
+            outFile << methodNameForFile << "\n";
+            outFile << "Query: " << seq << "\n";
+            for (size_t i = 0; i < results.size(); ++i) {
+                outFile << "Rank-" << (i + 1) << ": " << results[i].id << "\n";
+            }
+            outFile << "Recall@5: " << qm.recall5 << "\n";
+            outFile << "Recall@10: " << qm.recall10 << "\n";
+            outFile << "AP@10: " << qm.ap10 << "\n";
+            outFile << "\n";
         }
     }
 
