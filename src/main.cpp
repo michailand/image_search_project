@@ -270,6 +270,16 @@ int main(int argc, char** argv){
             sumSearchTimeMs += std::chrono::duration<double, std::milli>(end - start).count();
             image_search::QueryMetrics qm = image_search::Metrics::evaluateQuery(seq, results);
             sumRecall5 += qm.recall5; sumRecall10 += qm.recall10; sumAP10 += qm.ap10;
+
+            outFile << methodNameForFile << "\n";
+            outFile << "Query: " << seq << "\n";
+            for (size_t i = 0; i < results.size(); ++i) {
+                outFile << "Rank-" << (i + 1) << ": " << results[i].id << "\n";
+            }
+            outFile << "Recall@5: " << qm.recall5 << "\n";
+            outFile << "Recall@10: " << qm.recall10 << "\n";
+            outFile << "AP@10: " << qm.ap10 << "\n";
+            outFile << "\n";
         }
     }
     else if (cfg.method == "ivfpq"){
@@ -294,6 +304,16 @@ int main(int argc, char** argv){
             sumSearchTimeMs += std::chrono::duration<double, std::milli>(end - start).count();
             image_search::QueryMetrics qm = image_search::Metrics::evaluateQuery(seq, results);
             sumRecall5 += qm.recall5; sumRecall10 += qm.recall10; sumAP10 += qm.ap10;
+
+            outFile << methodNameForFile << "\n";
+            outFile << "Query: " << seq << "\n";
+            for (size_t i = 0; i < results.size(); ++i) {
+                outFile << "Rank-" << (i + 1) << ": " << results[i].id << "\n";
+            }
+            outFile << "Recall@5: " << qm.recall5 << "\n";
+            outFile << "Recall@10: " << qm.recall10 << "\n";
+            outFile << "AP@10: " << qm.ap10 << "\n";
+            outFile << "\n";
         }
     }
     else if (cfg.method == "lsh") {
